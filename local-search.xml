@@ -11,6 +11,20 @@
     <content type="html"><![CDATA[<p>题目：判断一个数是否是回文数，12321是，但负数肯定不是，简单来说，排除负数后，判断整数反转后是否等于自身即可</p><h2 id="具体代码如下（java）："><a href="#具体代码如下（java）：" class="headerlink" title="具体代码如下（java）："></a>具体代码如下（java）：</h2><pre><code class="hljs java"><span class="hljs-function">Public <span class="hljs-keyword">boolean</span> <span class="hljs-title">huiwen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>&#123;       <span class="hljs-keyword">if</span>(x&lt;<span class="hljs-number">10</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;       <span class="hljs-keyword">int</span> copyx=x,reverse=<span class="hljs-number">0</span>;       <span class="hljs-keyword">while</span>(copyx!=<span class="hljs-number">0</span>)&#123;           reverse=reverse*<span class="hljs-number">10</span>+copyx%<span class="hljs-number">10</span>;           copyx/=<span class="hljs-number">10</span>;       &#125;       <span class="hljs-keyword">return</span> x==reverse;   &#125;</code></pre>]]></content>
     
     
+    <categories>
+      
+      <category>java算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>java</tag>
+      
+      <tag>习题</tag>
+      
+    </tags>
     
   </entry>
   
@@ -24,6 +38,20 @@
     <content type="html"><![CDATA[<p>题目：将整数按位反转，注意若反转后数溢出则返回0</p><h2 id="具体代码如下（java）："><a href="#具体代码如下（java）：" class="headerlink" title="具体代码如下（java）："></a>具体代码如下（java）：</h2><pre><code class="hljs java"><span class="hljs-function">Public <span class="hljs-keyword">int</span> <span class="hljs-title">reverse</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>&#123;    <span class="hljs-keyword">long</span> res = <span class="hljs-number">0</span>;    <span class="hljs-keyword">for</span>(;x!=<span class="hljs-number">0</span>;x/=<span class="hljs-number">10</span>)        res = res*<span class="hljs-number">10</span>+x%<span class="hljs-number">10</span>;    <span class="hljs-keyword">return</span> res&gt;Integer.MAX_VALUE||res&lt;Integer.MIN_VALUE?<span class="hljs-number">0</span>;(<span class="hljs-keyword">int</span>) res;&#125;循环部分等价于    <span class="hljs-keyword">while</span>(x!=<span class="hljs-number">0</span>)&#123;        res=res*<span class="hljs-number">10</span>+x%<span class="hljs-number">10</span>;        x=x/<span class="hljs-number">10</span>;    &#125;</code></pre><p><strong>Integer.MAX_VALUE和Integer.MIN_VALUE分别是整数int的最大和最小值</strong></p>]]></content>
     
     
+    <categories>
+      
+      <category>java算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>java</tag>
+      
+      <tag>习题</tag>
+      
+    </tags>
     
   </entry>
   
@@ -37,6 +65,20 @@
     <content type="html"><![CDATA[<p>题目：将罗马数字字符串转换为数字，当小字符在大字符前的时候，结果为大数减小数，如IV=4,IV=9</p><h2 id="具体代码如下（java）："><a href="#具体代码如下（java）：" class="headerlink" title="具体代码如下（java）："></a>具体代码如下（java）：</h2><pre><code class="hljs java"><span class="hljs-function">Public <span class="hljs-keyword">int</span> <span class="hljs-title">romantoInt</span><span class="hljs-params">(String s)</span></span>&#123;    Map&lt;Character,Integer&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();    map.put(<span class="hljs-string">&#x27;I&#x27;</span>,<span class="hljs-number">1</span>);    map.put(<span class="hljs-string">&#x27;V&#x27;</span>,<span class="hljs-number">5</span>);    map.put(<span class="hljs-string">&#x27;X&#x27;</span>,<span class="hljs-number">10</span>);    map.put(<span class="hljs-string">&#x27;L&#x27;</span>,<span class="hljs-number">50</span>);    map.put(<span class="hljs-string">&#x27;C&#x27;</span>,<span class="hljs-number">100</span>);    map.put(<span class="hljs-string">&#x27;D&#x27;</span>,<span class="hljs-number">500</span>);    map.put(<span class="hljs-string">&#x27;M&#x27;</span>,<span class="hljs-number">1000</span>);    <span class="hljs-keyword">int</span> len = s.length();    <span class="hljs-keyword">int</span> sum = map.get(s.charAt(len-<span class="hljs-number">1</span>));    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=len-<span class="hljs-number">2</span>;i&gt;=<span class="hljs-number">0</span>;--i)&#123;        <span class="hljs-keyword">if</span>(map.get(s.charAt(i))&lt;map.get(s.charAt(i+!)))&#123;            sum=sum-map.get(s.charAt(i));        &#125;<span class="hljs-keyword">else</span>        &#123;            sum=sum+map.get(s.charAt(i));        &#125;    &#125;    <span class="hljs-keyword">return</span> sum;&#125;</code></pre>]]></content>
     
     
+    <categories>
+      
+      <category>java算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>java</tag>
+      
+      <tag>习题</tag>
+      
+    </tags>
     
   </entry>
   
@@ -50,6 +92,20 @@
     <content type="html"><![CDATA[<p>题目：两数求和返回下标，例如[2,7,11,15],目标值target=9，结果返回[0,1]</p><h2 id="具体代码如下（java）："><a href="#具体代码如下（java）：" class="headerlink" title="具体代码如下（java）："></a>具体代码如下（java）：</h2><pre><code class="hljs java"> Public <span class="hljs-keyword">int</span> [] towsum(<span class="hljs-keyword">int</span>[] nums,<span class="hljs-keyword">int</span> target)&#123; <span class="hljs-keyword">int</span> len = nums.length;​HashMap&lt;Integer,Integer&gt; map= <span class="hljs-keyword">new</span> HashMap&lt;&gt;();​<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i&lt;len;++i)&#123;​<span class="hljs-keyword">final</span> Integer value = map.get(nums[i]);​<span class="hljs-keyword">if</span>(value!=<span class="hljs-keyword">null</span>)&#123;​<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;value,i&#125;;​&#125;​map.put(target-nums[i],i);​&#125;​<span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;&#125;</code></pre><p><strong>使用哈希表，键存target-nums[i]差值，值存相对应下标，若遍历时已存在，则返回目标对应值和当前下标</strong></p>]]></content>
     
     
+    <categories>
+      
+      <category>java算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>java</tag>
+      
+      <tag>习题</tag>
+      
+    </tags>
     
   </entry>
   
@@ -63,6 +119,20 @@
     <content type="html"><![CDATA[<h1 id="图神经网络综述"><a href="#图神经网络综述" class="headerlink" title="图神经网络综述"></a>图神经网络综述</h1><h2 id="GNN简介与起源"><a href="#GNN简介与起源" class="headerlink" title="GNN简介与起源"></a>GNN简介与起源</h2><h2 id="GNN与传统NN区别"><a href="#GNN与传统NN区别" class="headerlink" title="GNN与传统NN区别"></a>GNN与传统NN区别</h2><h2 id="GNN分类"><a href="#GNN分类" class="headerlink" title="GNN分类"></a>GNN分类</h2><h2 id="GNN模型概览"><a href="#GNN模型概览" class="headerlink" title="GNN模型概览"></a>GNN模型概览</h2><h3 id="Original-GNN"><a href="#Original-GNN" class="headerlink" title="Original GNN"></a>Original GNN</h3><h3 id="GNN-Variants"><a href="#GNN-Variants" class="headerlink" title="GNN Variants"></a>GNN Variants</h3><h3 id="GNN的General-Framework"><a href="#GNN的General-Framework" class="headerlink" title="GNN的General Framework"></a>GNN的General Framework</h3><h2 id="GNN应用"><a href="#GNN应用" class="headerlink" title="GNN应用"></a>GNN应用</h2><h3 id="结构化场景"><a href="#结构化场景" class="headerlink" title="结构化场景"></a>结构化场景</h3><h3 id="非结构化场景"><a href="#非结构化场景" class="headerlink" title="非结构化场景"></a>非结构化场景</h3><h3 id="其他场景"><a href="#其他场景" class="headerlink" title="其他场景"></a>其他场景</h3><p>（以上部分按照[Graph Neural Networks: A Review of Methods and Applications]进行编排书写，后面按照其参考文献逐步抽取）</p><hr><hr><h2 id="GNN模型论文"><a href="#GNN模型论文" class="headerlink" title="GNN模型论文"></a>GNN模型论文</h2><blockquote><p>此部分按照[The Graph Neural Network Model]综述论文书写，对GNN模型有较为详细介绍</p></blockquote><h2 id="GCN模型论文"><a href="#GCN模型论文" class="headerlink" title="GCN模型论文"></a>GCN模型论文</h2><blockquote><p>此部分按照[Semi-Supervised Classification with Graph Convolutional Networks]文章介绍书写，另外还有一篇博客可学习<a href="http://xtf615.com/2019/02/24/gcn/">http://xtf615.com/2019/02/24/gcn/</a></p></blockquote><h3 id="GCN演变"><a href="#GCN演变" class="headerlink" title="GCN演变"></a>GCN演变</h3><h3 id="详细GCN论文模型"><a href="#详细GCN论文模型" class="headerlink" title="详细GCN论文模型"></a>详细GCN论文模型</h3><h2 id="DCNN模型论文"><a href="#DCNN模型论文" class="headerlink" title="DCNN模型论文"></a>DCNN模型论文</h2><blockquote><p>此部分按照[Diffusion-Convolutional Neural Networks]的模型发展进行描述</p></blockquote><h2 id="Tree-LSTM模型论文"><a href="#Tree-LSTM模型论文" class="headerlink" title="Tree-LSTM模型论文"></a>Tree-LSTM模型论文</h2><h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="关于不动点定理"><a href="#关于不动点定理" class="headerlink" title="关于不动点定理"></a>关于不动点定理</h3><h3 id="关于递归求导"><a href="#关于递归求导" class="headerlink" title="关于递归求导"></a>关于递归求导</h3><h3 id="关于切比雪夫多项式"><a href="#关于切比雪夫多项式" class="headerlink" title="关于切比雪夫多项式"></a>关于切比雪夫多项式</h3><h3 id="关于图Fourier变换"><a href="#关于图Fourier变换" class="headerlink" title="关于图Fourier变换"></a>关于图Fourier变换</h3><h3 id="关于RNN系列模型"><a href="#关于RNN系列模型" class="headerlink" title="关于RNN系列模型"></a>关于RNN系列模型</h3><h2 id="灵光"><a href="#灵光" class="headerlink" title="灵光"></a>灵光</h2>]]></content>
     
     
+    <categories>
+      
+      <category>深度学习</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>GNN</tag>
+      
+      <tag>GCN</tag>
+      
+    </tags>
     
   </entry>
   

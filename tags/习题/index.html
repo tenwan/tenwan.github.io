@@ -17,25 +17,9 @@
   <meta name="description" content="">
   <meta name="author" content="刘金博">
   <meta name="keywords" content="">
-  <title>leetcode题解--两数求和 - 代码也牵牛</title>
+  <title>标签 - 习题 - 代码也牵牛</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-  
 
 
 
@@ -63,7 +47,7 @@
 
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -162,46 +146,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="leetcode题解--两数求和">
+            <span class="h2" id="subtitle" title="标签 - 习题">
               
             </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-11-25 16:31" pubdate>
-        2020年11月25日 下午
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      133 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      2
-       分钟
-    </span>
-  
-
-  
-  
-</div>
 
             
           </div>
@@ -214,117 +161,58 @@
 
   <main>
     
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+  <p class="h4">共计 4 篇文章</p>
+  <hr>
+  
+  
+    
       
+      <p class="h5">2020</p>
+    
+    <a href="/2020/11/25/%E5%88%A4%E6%96%AD%E5%9B%9E%E6%96%87%E6%95%B0/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">leetcode题解--判断回文数</span>
+      <time style="float: right;">11-25</time>
+    </a>
+  
+    
+    <a href="/2020/11/25/%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">leetcode题解--整数反转</span>
+      <time style="float: right;">11-25</time>
+    </a>
+  
+    
+    <a href="/2020/11/25/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">leetcode题解--罗马数字转换</span>
+      <time style="float: right;">11-25</time>
+    </a>
+  
+    
+    <a href="/2020/11/25/%E4%B8%A4%E6%95%B0%E6%B1%82%E5%92%8C/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">leetcode题解--两数求和</span>
+      <time style="float: right;">11-25</time>
+    </a>
+  
+</div>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">leetcode题解--两数求和</h1>
-            
-            <div class="markdown-body">
-              <p>题目：两数求和返回下标，例如[2,7,11,15],目标值target=9，结果返回[0,1]</p>
-<h2 id="具体代码如下（java）："><a href="#具体代码如下（java）：" class="headerlink" title="具体代码如下（java）："></a>具体代码如下（java）：</h2><pre><code class="hljs java"> Public <span class="hljs-keyword">int</span> [] towsum(<span class="hljs-keyword">int</span>[] nums,<span class="hljs-keyword">int</span> target)&#123;
 
- 	<span class="hljs-keyword">int</span> len = nums.length;
 
-​	HashMap&lt;Integer,Integer&gt; map= <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
 
-​	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i&lt;len;++i)&#123;
 
-​			<span class="hljs-keyword">final</span> Integer value = map.get(nums[i]);
-
-​			<span class="hljs-keyword">if</span>(value!=<span class="hljs-keyword">null</span>)&#123;
-
-​				<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;value,i&#125;;
-
-​			&#125;
-
-​			map.put(target-nums[i],i);
-
-​	&#125;
-
-​	<span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
-
-&#125;</code></pre>
-<p><strong>使用哈希表，键存target-nums[i]差值，值存相对应下标，若遍历时已存在，则返回目标对应值和当前下标</strong></p>
-
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/java%E7%AE%97%E6%B3%95/">java算法</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/java/">java</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E4%B9%A0%E9%A2%98/">习题</a>
-                    
-                  </div>
-                
               </div>
-              
-                <p class="note note-warning">本博客所有文章除特别声明外，大部分为学习心得，欢迎与博主联系讨论</p>
-              
-              
-                <div class="post-prevnext row">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2020/11/25/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">leetcode题解--罗马数字转换</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2020/11/25/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BB%BC%E8%BF%B0/">
-                        <span class="hidden-mobile">图神经网络综述</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
             </div>
-
-            
-          </article>
+          </div>
         </div>
       </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
     
 
     
@@ -411,15 +299,9 @@
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
 
 
 
