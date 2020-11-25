@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="刘金博">
   <meta name="keywords" content="">
-  <title>leetcode题解--两数求和 - 代码也牵牛</title>
+  <title>leetcode题解--罗马数字转换 - 代码也牵牛</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="leetcode题解--两数求和">
+            <span class="h2" id="subtitle" title="leetcode题解--罗马数字转换">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-11-25 16:31" pubdate>
-        2020年11月25日 下午
+      <time datetime="2020-11-25 19:50" pubdate>
+        2020年11月25日 晚上
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      133 字
+      162 字
     </span>
   
 
@@ -224,34 +224,33 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">leetcode题解--两数求和</h1>
+            <h1 style="display: none">leetcode题解--罗马数字转换</h1>
             
             <div class="markdown-body">
-              <p>题目：两数求和返回下标，例如[2,7,11,15],目标值target=9，结果返回[0,1]</p>
-<h2 id="具体代码如下（java）："><a href="#具体代码如下（java）：" class="headerlink" title="具体代码如下（java）："></a>具体代码如下（java）：</h2><pre><code class="hljs java"> Public <span class="hljs-keyword">int</span> [] towsum(<span class="hljs-keyword">int</span>[] nums,<span class="hljs-keyword">int</span> target)&#123;
-
- 	<span class="hljs-keyword">int</span> len = nums.length;
-
-​	HashMap&lt;Integer,Integer&gt; map= <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
-
-​	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i&lt;len;++i)&#123;
-
-​			<span class="hljs-keyword">final</span> Integer value = map.get(nums[i]);
-
-​			<span class="hljs-keyword">if</span>(value!=<span class="hljs-keyword">null</span>)&#123;
-
-​				<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;value,i&#125;;
-
-​			&#125;
-
-​			map.put(target-nums[i],i);
-
-​	&#125;
-
-​	<span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
-
+              <p>题目：将罗马数字字符串转换为数字，当小字符在大字符前的时候，结果为大数减小数，如IV=4,IV=9</p>
+<h2 id="具体代码如下（java）："><a href="#具体代码如下（java）：" class="headerlink" title="具体代码如下（java）："></a>具体代码如下（java）：</h2><pre><code class="hljs java"><span class="hljs-function">Public <span class="hljs-keyword">int</span> <span class="hljs-title">romantoInt</span><span class="hljs-params">(String s)</span></span>&#123;
+    Map&lt;Character,Integer&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+    map.put(<span class="hljs-string">&#x27;I&#x27;</span>,<span class="hljs-number">1</span>);
+    map.put(<span class="hljs-string">&#x27;V&#x27;</span>,<span class="hljs-number">5</span>);
+    map.put(<span class="hljs-string">&#x27;X&#x27;</span>,<span class="hljs-number">10</span>);
+    map.put(<span class="hljs-string">&#x27;L&#x27;</span>,<span class="hljs-number">50</span>);
+    map.put(<span class="hljs-string">&#x27;C&#x27;</span>,<span class="hljs-number">100</span>);
+    map.put(<span class="hljs-string">&#x27;D&#x27;</span>,<span class="hljs-number">500</span>);
+    map.put(<span class="hljs-string">&#x27;M&#x27;</span>,<span class="hljs-number">1000</span>);
+    <span class="hljs-keyword">int</span> len = s.length();
+    <span class="hljs-keyword">int</span> sum = map.get(s.charAt(len-<span class="hljs-number">1</span>));
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=len-<span class="hljs-number">2</span>;i&gt;=<span class="hljs-number">0</span>;--i)&#123;
+        <span class="hljs-keyword">if</span>(map.get(s.charAt(i))&lt;map.get(s.charAt(i+!)))&#123;
+            sum=sum-map.get(s.charAt(i));
+        &#125;<span class="hljs-keyword">else</span>
+        &#123;
+            sum=sum+map.get(s.charAt(i));
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> sum;
 &#125;</code></pre>
-<p><strong>使用哈希表，键存target-nums[i]差值，值存相对应下标，若遍历时已存在，则返回目标对应值和当前下标</strong></p>
+
+
 
             </div>
             <hr>
@@ -268,9 +267,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/11/25/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2/">
+                      <a href="/2020/11/25/%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">leetcode题解--罗马数字转换</span>
+                        <span class="hidden-mobile">leetcode题解--整数反转</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -278,8 +277,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/11/25/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BB%BC%E8%BF%B0/">
-                        <span class="hidden-mobile">图神经网络综述</span>
+                      <a href="/2020/11/25/%E4%B8%A4%E6%95%B0%E6%B1%82%E5%92%8C/">
+                        <span class="hidden-mobile">leetcode题解--两数求和</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
