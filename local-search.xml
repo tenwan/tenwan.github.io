@@ -13,7 +13,7 @@
     
     <categories>
       
-      <category>Java基础</category>
+      <category>Java知识</category>
       
     </categories>
     
@@ -81,7 +81,7 @@
   
   
   <entry>
-    <title>Hashmap</title>
+    <title>HashMap</title>
     <link href="/2020/11/26/Hashmap/"/>
     <url>/2020/11/26/Hashmap/</url>
     
