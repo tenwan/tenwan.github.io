@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>红黑树总结</title>
+    <link href="/2020/11/28/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%80%BB%E7%BB%93/"/>
+    <url>/2020/11/28/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%80%BB%E7%BB%93/</url>
+    
+    <content type="html"><![CDATA[<h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><blockquote><p>什么是二叉查找树（BST）？</p><ol><li><p><strong>左</strong>子树上所有结点的值均<strong>小于或等于</strong>它的根结点的值</p></li><li><p><strong>右</strong>子树上所有结点的值均<strong>大于或等于</strong>它的根结点的值。</p></li><li><p>左、右子树也分别为二叉排序树。</p><p>基于二分查找建树。但存在插入之后节点不平衡情况，由此引入红黑树。</p></li></ol></blockquote><p>红黑树是一种自平衡的二叉查找树，其具有如下特性：</p><ol><li>节点是红色或黑色</li><li>根节点是黑色</li><li>每个叶子节点都是黑色的空节点（NIL节点）。</li><li>每个红色节点的两个子节点都是黑色。即从叶子到根不可能有两个连续的红色节点</li><li>从任意节点到其每个叶子的所有路径都包含相同数目黑色节点。</li></ol><p>典型红黑树如图：</p><p><img src="/img/hongheishu.png"> </p><p>由上述构建规则限制，保证了红黑树从根到叶子的最长路径不会超过最短路径的2倍。</p><h2 id="红黑树的调整"><a href="#红黑树的调整" class="headerlink" title="红黑树的调整"></a>红黑树的调整</h2><p>当插入和删除节点时，红黑树规则会被打破，此时要对其进行调整，以满足条件。调整有两种方法：<strong>变色</strong>和<strong>旋转</strong>，而旋转又分为左旋转和右旋转。</p><h3 id="红黑树的左旋和右旋"><a href="#红黑树的左旋和右旋" class="headerlink" title="红黑树的左旋和右旋"></a>红黑树的左旋和右旋</h3><p>左旋即<strong>逆时针</strong>旋转红黑树的两个节点，使得父节点被自己的右孩子取代，而自己成为自己的左孩子，如图：</p><p><img src="/img/hongheishuzuoxuan.png"></p><p>右旋即<strong>顺时针</strong>旋转红黑树的两个节点，使得父节点被自己的左孩子取代，而自己成为自己的右孩子。如图：</p><p><img src="/img/hongheishuyouxuan.png"></p><p> 实际使用中，变色和旋转视情况混合使用。</p><h3 id="红黑树的应用"><a href="#红黑树的应用" class="headerlink" title="红黑树的应用"></a>红黑树的应用</h3><p>在JDK的集合类TreeMap和TreeSet底层都是红黑树实现。在Java8中，HashMap也用到了红黑树.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Java基础</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数据结构</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>对偶</title>
     <link href="/2020/11/27/%E5%AF%B9%E5%81%B6/"/>
     <url>/2020/11/27/%E5%AF%B9%E5%81%B6/</url>

@@ -17,9 +17,25 @@
   <meta name="description" content="">
   <meta name="author" content="刘金博">
   <meta name="keywords" content="">
-  <title>分类 - xiaoliu‘s sapce</title>
+  <title>红黑树总结 - xiaoliu‘s sapce</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
 
 
 
@@ -47,7 +63,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -141,14 +157,59 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/test2.jpg') no-repeat center center;
+         style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="分类">
+            <span class="h2" id="subtitle" title="红黑树总结">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-28 16:34" pubdate>
+        2020年11月28日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      470 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      4
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
 
             
           </div>
@@ -161,248 +222,114 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">红黑树总结</h1>
+            
+            <div class="markdown-body">
+              <h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><blockquote>
+<p>什么是二叉查找树（BST）？</p>
+<ol>
+<li><p><strong>左</strong>子树上所有结点的值均<strong>小于或等于</strong>它的根结点的值</p>
+</li>
+<li><p><strong>右</strong>子树上所有结点的值均<strong>大于或等于</strong>它的根结点的值。</p>
+</li>
+<li><p>左、右子树也分别为二叉排序树。</p>
+<p>基于二分查找建树。但存在插入之后节点不平衡情况，由此引入红黑树。</p>
+</li>
+</ol>
+</blockquote>
+<p>红黑树是一种自平衡的二叉查找树，其具有如下特性：</p>
+<ol>
+<li>节点是红色或黑色</li>
+<li>根节点是黑色</li>
+<li>每个叶子节点都是黑色的空节点（NIL节点）。</li>
+<li>每个红色节点的两个子节点都是黑色。即从叶子到根不可能有两个连续的红色节点</li>
+<li>从任意节点到其每个叶子的所有路径都包含相同数目黑色节点。</li>
+</ol>
+<p>典型红黑树如图：</p>
+<p><img src="/img/hongheishu.png" srcset="/img/loading.gif"> </p>
+<p>由上述构建规则限制，保证了红黑树从根到叶子的最长路径不会超过最短路径的2倍。</p>
+<h2 id="红黑树的调整"><a href="#红黑树的调整" class="headerlink" title="红黑树的调整"></a>红黑树的调整</h2><p>当插入和删除节点时，红黑树规则会被打破，此时要对其进行调整，以满足条件。调整有两种方法：<strong>变色</strong>和<strong>旋转</strong>，而旋转又分为左旋转和右旋转。</p>
+<h3 id="红黑树的左旋和右旋"><a href="#红黑树的左旋和右旋" class="headerlink" title="红黑树的左旋和右旋"></a>红黑树的左旋和右旋</h3><p>左旋即<strong>逆时针</strong>旋转红黑树的两个节点，使得父节点被自己的右孩子取代，而自己成为自己的左孩子，如图：</p>
+<p><img src="/img/hongheishuzuoxuan.png" srcset="/img/loading.gif"></p>
+<p>右旋即<strong>顺时针</strong>旋转红黑树的两个节点，使得父节点被自己的左孩子取代，而自己成为自己的右孩子。如图：</p>
+<p><img src="/img/hongheishuyouxuan.png" srcset="/img/loading.gif"></p>
+<p> 实际使用中，变色和旋转视情况混合使用。</p>
+<h3 id="红黑树的应用"><a href="#红黑树的应用" class="headerlink" title="红黑树的应用"></a>红黑树的应用</h3><p>在JDK的集合类TreeMap和TreeSet底层都是红黑树实现。在Java8中，HashMap也用到了红黑树.</p>
 
-
-
-
-
-
-<div class="category-list">
-  
-  
-  
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckhxdk1a40000iwvx3m7j2a1g" role="tab" data-toggle="collapse" href="#collapse-ckhxdk1a40000iwvx3m7j2a1g"
-        aria-expanded="false"
-      >
-        java算法
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/java%E7%AE%97%E6%B3%95/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>4</span>
-      </a>
-      <div class="category-collapse">
-        
-          
-  <div id="collapse-ckhxdk1a40000iwvx3m7j2a1g" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckhxdk1a40000iwvx3m7j2a1g">
-    
-    
-    
-      
-      
-        <a href="/2020/11/25/%E5%88%A4%E6%96%AD%E5%9B%9E%E6%96%87%E6%95%B0/" class="list-group-item list-group-item-action">
-          <span class="category-post">leetcode题解--判断回文数</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2020/11/25/%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/" class="list-group-item list-group-item-action">
-          <span class="category-post">leetcode题解--整数反转</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2020/11/25/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2/" class="list-group-item list-group-item-action">
-          <span class="category-post">leetcode题解--罗马数字转换</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2020/11/25/%E4%B8%A4%E6%95%B0%E6%B1%82%E5%92%8C/" class="list-group-item list-group-item-action">
-          <span class="category-post">leetcode题解--两数求和</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckhxe37bf000194vx20hhhwqw" role="tab" data-toggle="collapse" href="#collapse-ckhxe37bf000194vx20hhhwqw"
-        aria-expanded="false"
-      >
-        随笔
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/%E9%9A%8F%E7%AC%94/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>2</span>
-      </a>
-      <div class="category-collapse">
-        
-          
-  <div id="collapse-ckhxe37bf000194vx20hhhwqw" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckhxe37bf000194vx20hhhwqw">
-    
-    
-    
-      
-      
-        <a href="/2020/11/27/%E5%AF%B9%E5%81%B6/" class="list-group-item list-group-item-action">
-          <span class="category-post">对偶</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2020/11/25/%E3%80%8A%E4%B9%9D%E9%9B%B6%E3%80%8B%EF%BC%88%E5%A4%96%E4%B8%A4%E9%A6%96%EF%BC%89/" class="list-group-item list-group-item-action">
-          <span class="category-post">《九零》（外两首）</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckhyndocx0001xovxebs214fn" role="tab" data-toggle="collapse" href="#collapse-ckhyndocx0001xovxebs214fn"
-        aria-expanded="false"
-      >
-        Java知识
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/Java%E7%9F%A5%E8%AF%86/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>2</span>
-      </a>
-      <div class="category-collapse">
-        
-          
-  <div id="collapse-ckhyndocx0001xovxebs214fn" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckhyndocx0001xovxebs214fn">
-    
-    
-    
-      
-      
-        <a href="/2020/11/27/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" class="list-group-item list-group-item-action">
-          <span class="category-post">java垃圾回收机制</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2020/11/26/Hashmap/" class="list-group-item list-group-item-action">
-          <span class="category-post">Hashmap</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckhxdk1ad000ciwvx789gg3e5" role="tab" data-toggle="collapse" href="#collapse-ckhxdk1ad000ciwvx789gg3e5"
-        aria-expanded="false"
-      >
-        深度学习
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse">
-        
-          
-  <div id="collapse-ckhxdk1ad000ciwvx789gg3e5" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckhxdk1ad000ciwvx789gg3e5">
-    
-    
-    
-      
-      
-        <a href="/2020/11/25/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BB%BC%E8%BF%B0/" class="list-group-item list-group-item-action">
-          <span class="category-post">图神经网络综述</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-cki1g6dsu0001r0vx60uc9yt8" role="tab" data-toggle="collapse" href="#collapse-cki1g6dsu0001r0vx60uc9yt8"
-        aria-expanded="false"
-      >
-        Java基础
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse">
-        
-          
-  <div id="collapse-cki1g6dsu0001r0vx60uc9yt8" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-cki1g6dsu0001r0vx60uc9yt8">
-    
-    
-    
-      
-      
-        <a href="/2020/11/28/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%80%BB%E7%BB%93/" class="list-group-item list-group-item-action">
-          <span class="category-post">红黑树总结</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-</div>
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，大部分为学习心得，欢迎与博主联系讨论</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/27/%E5%AF%B9%E5%81%B6/">
+                        <span class="hidden-mobile">对偶</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -489,9 +416,15 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
 
 
 
