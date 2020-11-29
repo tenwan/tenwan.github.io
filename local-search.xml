@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>leetcode题解--跳水板拼凑</title>
+    <link href="/2020/11/29/leetcode-%E8%B7%B3%E6%B0%B4%E6%9D%BF/"/>
+    <url>/2020/11/29/leetcode-%E8%B7%B3%E6%B0%B4%E6%9D%BF/</url>
+    
+    <content type="html"><![CDATA[<h1 id="跳水板拼凑"><a href="#跳水板拼凑" class="headerlink" title="跳水板拼凑"></a>跳水板拼凑</h1><p>题目:有两块板子，长度为x和y，假设有k块，输出所有可能的拼凑长度，例如x=1,y=2,k=3，输出[3,4,5,6]</p><p>本题可看成首项为k<em>x，末项为k</em>y，公差为y-x的等差数列，每用长的替换短的，都是加一次公差，项数为k+1.</p><p>代码如下:</p><pre><code class="hljs java">Public <span class="hljs-keyword">int</span> [] result(<span class="hljs-keyword">int</span> shorter,<span class="hljs-keyword">int</span> longer,<span class="hljs-keyword">int</span> k)&#123;    <span class="hljs-keyword">if</span>(k==<span class="hljs-number">0</span>)&#123;        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">0</span>];    &#125;    <span class="hljs-keyword">if</span>(shorter==longer)&#123;        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;shorter*k&#125;;    &#125;    <span class="hljs-keyword">int</span>[] ans=<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[k+<span class="hljs-number">1</span>];    <span class="hljs-keyword">int</span> sx = k*shorter;    <span class="hljs-keyword">int</span> delta = longer-shorter;    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i =<span class="hljs-number">0</span>;i&lt;=k;i++)&#123;        ans[i]=sx+i*delta;    &#125;    <span class="hljs-keyword">return</span> ans;&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>java算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>java</tag>
+      
+      <tag>习题</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>红黑树总结</title>
     <link href="/2020/11/28/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%80%BB%E7%BB%93/"/>
     <url>/2020/11/28/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%80%BB%E7%BB%93/</url>
