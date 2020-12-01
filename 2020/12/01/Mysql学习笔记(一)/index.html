@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="刘金博">
   <meta name="keywords" content="">
-  <title>leetcode题解--括号匹配 - xiaoliu‘s sapce</title>
+  <title>Mysql学习笔记(一) - xiaoliu‘s sapce</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="leetcode题解--括号匹配">
+            <span class="h2" id="subtitle" title="Mysql学习笔记(一)">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-11-30 21:27" pubdate>
-        2020年11月30日 晚上
+      <time datetime="2020-12-01 12:18" pubdate>
+        2020年12月1日 中午
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      146 字
+      2.1k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      22
        分钟
     </span>
   
@@ -232,34 +232,130 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">leetcode题解--括号匹配</h1>
+            <h1 style="display: none">Mysql学习笔记(一)</h1>
             
             <div class="markdown-body">
-              <h1 id="括号匹配"><a href="#括号匹配" class="headerlink" title="括号匹配"></a>括号匹配</h1><blockquote>
-<p>可以考虑使用数组来模拟栈操作，另外让top=1，省去判断栈空，和数组越界的问题</p>
-<p>在遇到）时，判断栈顶是否是（，以此类推</p>
+              <h1 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h1><h2 id="事务的基本要素"><a href="#事务的基本要素" class="headerlink" title="事务的基本要素"></a>事务的基本要素</h2><blockquote>
+<p>原子性,一致性,隔离性,持久性——-ACID</p>
 </blockquote>
-<p>代码如下:</p>
-<pre><code class="hljs java"><span class="hljs-function">Public <span class="hljs-keyword">boolean</span> <span class="hljs-title">isvalid</span><span class="hljs-params">(String s)</span></span>&#123;
-    <span class="hljs-keyword">char</span>[] stack = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[s.length()+<span class="hljs-number">1</span>];
-    <span class="hljs-keyword">int</span> top=<span class="hljs-number">1</span>;
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">char</span> c:s.toCharArray())&#123;
-        <span class="hljs-keyword">if</span>(c==<span class="hljs-string">&#x27;(&#x27;</span>||c==<span class="hljs-string">&#x27;[&#x27;</span>||c==<span class="hljs-string">&#x27;&#123;&#x27;</span>)&#123;
-            stack[top++]=c;
-        &#125;
-        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(c==<span class="hljs-string">&#x27;）&#x27;</span>&amp;&amp;stack[--top]!=<span class="hljs-string">&#x27;(&#x27;</span>)&#123;
-            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
-        &#125;
-        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(c==<span class="hljs-string">&#x27;]&#x27;</span>&amp;&amp;stack[--top]!=<span class="hljs-string">&#x27;[&#x27;</span>)&#123;
-            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
-        &#125;
-        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(c==<span class="hljs-string">&#x27;&#123;&#x27;</span>&amp;&amp;stack[--top]!=<span class="hljs-string">&#x27;&#125;&#x27;</span>)&#123;
-            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
-        &#125;
-    &#125;
-    <span class="hljs-keyword">return</span> top==<span class="hljs-number">1</span>;
-&#125;</code></pre>
-
+<ol>
+<li>原子性(atomicity),即事务是一个原子操作单元,对数据的修改,要么全部执行,要么全部不执行</li>
+<li>一致性(consistency),即事务开始与结束前,数据库的完整性约束未被破坏</li>
+<li>隔离性(isolation),即同一时间,只允许一个事务请求同一数据,不同事务间没有任何干扰</li>
+<li>持久性(durability),即事务完成后,事务对数据库的所有更新将被保存到数据库,不能回滚</li>
+</ol>
+<h2 id="事务的并发问题"><a href="#事务的并发问题" class="headerlink" title="事务的并发问题"></a>事务的并发问题</h2><blockquote>
+<p>脏读,不可重复读,幻读</p>
+</blockquote>
+<ol>
+<li><p>脏读,即事务A读取了事务B更新的数据,然后B进行了回滚,那A读取到的数据是脏数据</p>
+</li>
+<li><p>不可重复读,即事务A多次读取同一数据,事务B在A多次读取过程中,对数据做了更新并提交,导致A多次读取的内容不一致</p>
+</li>
+<li><p>幻读,即事务A读取了事务B已提交的新增数据.也是重复读取不一致.</p>
+<blockquote>
+<p>幻读是新增数据,不可重复读是更改数据.</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="Mysql事务的隔离级别"><a href="#Mysql事务的隔离级别" class="headerlink" title="Mysql事务的隔离级别"></a>Mysql事务的隔离级别</h2><blockquote>
+<p>读未提交:可以读到未提交的内容,可能产生脏读,不可重复读,幻读</p>
+<p>不可重复读(读提交):只能读到已提交的内容</p>
+<p>可重复读:查询事务启动时,不允许进行更改操作了,为Mysql的默认隔离级别</p>
+<p>串行化: 数据库最高隔离级别,事务必须一个一个排队执行,按串行化顺序</p>
+<ol>
+<li>为何出现脏读?   select操作没有规矩</li>
+<li>为何出现不可重复读?  update操作没有规矩</li>
+<li>为何出现幻读?   insert和delete没有规矩</li>
+</ol>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">事务隔离级别</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">读未提交</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td align="center">不可重复读(读提交)</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td align="center">可重复读</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td align="center">串行化</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+</tr>
+</tbody></table>
+<h2 id="sql语句执行顺序"><a href="#sql语句执行顺序" class="headerlink" title="sql语句执行顺序"></a>sql语句执行顺序</h2><p>from</p>
+<p>where</p>
+<p>group by</p>
+<p>having</p>
+<p>select</p>
+<p>order by</p>
+<h2 id="Mysql的存储引擎"><a href="#Mysql的存储引擎" class="headerlink" title="Mysql的存储引擎"></a>Mysql的存储引擎</h2><h3 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h3><p>是基于聚簇索引建立的,其支持事务,外键,并且通过MVCC来支持高并发以及索引数据一体存储.Mysql5.5.8版本后成为默认存储引擎</p>
+<h3 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h3><p>为5.1版本前的默认引擎,支持全文检索,压缩,空间函数,但不支持事务和行级锁,一般用在大量查询少量插入的场景,且不支持外键,其索引和数据是分开存储的</p>
+<h2 id="Mysql的逻辑结构"><a href="#Mysql的逻辑结构" class="headerlink" title="Mysql的逻辑结构"></a>Mysql的逻辑结构</h2><blockquote>
+<p>最上层服务类似CS结构,进行连接处理,授权处理</p>
+</blockquote>
+<blockquote>
+<p>第二层为Mysql服务层,SQL语句的解析分析优化,存储过程触发器视图等都在本层实现</p>
+</blockquote>
+<blockquote>
+<p>最下层为存储引擎的实现,类似Java接口实现,在调用时会屏蔽不同引擎实现间的差异</p>
+</blockquote>
+<h2 id="Mysql的日志系统"><a href="#Mysql的日志系统" class="headerlink" title="Mysql的日志系统"></a>Mysql的日志系统</h2><h3 id="undo-log"><a href="#undo-log" class="headerlink" title="undo log"></a>undo log</h3><p>即回滚日志文件,主要用于事务执行失败,进行回滚,在MVCC中对数据历史版本查看.由引擎层的InnoDB引擎实现,为逻辑日志,记录数据被修改前的值.保证了事务的一致性</p>
+<h3 id="redo-log"><a href="#redo-log" class="headerlink" title="redo log"></a>redo log</h3><p>即重做日志文件,记录数据修改后的值,用于持久化到磁盘中,由引擎层的InnoDB引擎实现,是物理日志,记录的是物理数据页修改的信息(诸如某个数据页上的内容发生改动).当某条数据需要更新,InnoDB会先将数据更新,然后记录redo log在内存中,找个时间将redo log操作执行到磁盘文件上.不管提交是否成功,都会记录,若进行回滚操作,也会记录回滚.保证了事务的持久性.</p>
+<h3 id="MVCC-多版本并发控制"><a href="#MVCC-多版本并发控制" class="headerlink" title="MVCC(多版本并发控制)"></a>MVCC(多版本并发控制)</h3><p>是Mysql中基于乐观锁理论实现隔离级别的方式,用于读提交和可重复读隔离级别的实现.在Mysql中,会在表中每条数据后添加两个字段:<strong>最近修改改行数据的事务ID</strong>和<strong>指向改行回滚段(undolog)的指针</strong>.实际上为保存了数据在某个时间节点的快照.</p>
+<h3 id="binlog与redo-log区别"><a href="#binlog与redo-log区别" class="headerlink" title="binlog与redo log区别"></a>binlog与redo log区别</h3><ol>
+<li>redo log是在InnoDB存储引擎层产生,而binlog是MySQL数据库的上层服务层产生</li>
+<li>两种日志记录内容形式差异.binlog是逻辑日志,记录对应的sql语句和事务;而redo log是物理日志,记录的是关于每个页的更改的物理情况</li>
+<li>两种日志的记录写入磁盘的时间点不同,binlog只在事务提交完成后进行一次写入.而redo log在事务进行中不断被写入.</li>
+<li>binlog不是循环使用,在写满或重启后,才会生成新的binlog文件,redo log是循环使用</li>
+<li>两者都能进行数据恢复.</li>
+</ol>
+<h2 id="Mysql如何保证一致性和持久性"><a href="#Mysql如何保证一致性和持久性" class="headerlink" title="Mysql如何保证一致性和持久性"></a>Mysql如何保证一致性和持久性</h2><p>为保证ACID中的一致性和持久性,使用了先写日志再写磁盘的操作,即WAL(write-Ahead logging)</p>
+<p>当数据库断电再重新启动时,mysql可以通过redo log还原数据;即只要在每次事务刷新时,同步刷新redo log即可,不用同步刷新磁盘数据文件.</p>
+<h2 id="Mysql锁的类型"><a href="#Mysql锁的类型" class="headerlink" title="Mysql锁的类型"></a>Mysql锁的类型</h2><p>mysql的锁分为共享锁和排他锁,即读锁和写锁.</p>
+<p>读锁为共享的,可通过lock in share mode实现,只能读不能写</p>
+<p>写锁为排他的,会阻塞其他的写锁和读锁.</p>
+<p>另外,通过颗粒度来分,又分为表锁和行锁两种.</p>
+<p>其中表锁会锁定整张表并阻塞其他用户对该表所有的读写操作.阻塞诸如alter修改表结构等的操作</p>
+<p>行锁又可分为乐观锁和悲观锁两种,悲观锁通过for update实现,乐观锁通过版本号实现.</p>
+<h3 id="InnoDB的行锁模式"><a href="#InnoDB的行锁模式" class="headerlink" title="InnoDB的行锁模式"></a>InnoDB的行锁模式</h3><ol>
+<li>共享锁(S):用法即lock in share mode,允许一个事务去读一行,阻止其他数据获得相同数据的排他锁.意思是,若事务1对数据对象A加了S锁,事务1可以读A但不能修改A,其他事务对A也只能加S锁,而不能加X锁,直至事务1释放A上的S锁</li>
+<li>排他锁(X):用法for update,允许获取排他锁事务更新数据,阻止其他事务对相同数据加锁.若事务1对数据A进行加锁,其他事务不能再对A加任何锁.</li>
+</ol>
+<blockquote>
+<p>在没有索引的情况下,InnoDB只能使用表锁</p>
+</blockquote>
+<h2 id="Mysql的索引"><a href="#Mysql的索引" class="headerlink" title="Mysql的索引"></a>Mysql的索引</h2><blockquote>
+<p>索引按照数据结构来讲,主要包含B+树和Hash索引</p>
+</blockquote>
+<h3 id="为什么选择B-树为索引结构"><a href="#为什么选择B-树为索引结构" class="headerlink" title="为什么选择B+树为索引结构"></a>为什么选择B+树为索引结构</h3><ul>
+<li>Hash索引：Hash索引底层是哈希表，哈希表是一种以key-value存储数据的结构，所以多个数据在存储关系上是完全没有任何顺序关系的，所以，对于区间查询是无法直接通过索引查询的，就需要全表扫描。所以，哈希索引只适用于等值查询的场景。而B+ 树是一种多路平衡查询树，所以他的节点是天然有序的（左子节点小于父节点、父节点小于右子节点），所以对于范围查询的时候不需要做全表扫描</li>
+<li>二叉查找树：解决了排序的基本问题，但是由于无法保证平衡，可能退化为链表。</li>
+<li>平衡二叉树：通过旋转解决了平衡的问题，但是旋转操作效率太低。</li>
+<li>红黑树：通过舍弃严格的平衡和引入红黑节点，解决了 AVL旋转效率过低的问题，但是在磁盘等场景下，树仍然太高，IO次数太多。</li>
+<li>B+树：在B树的基础上，将非叶节点改造为不存储数据纯索引节点，进一步降低了树的高度；此外将叶节点使用指针连接成链表，范围查询更加高效</li>
+</ul>
+<h3 id="B-树的叶子节点都可以存哪些东西"><a href="#B-树的叶子节点都可以存哪些东西" class="headerlink" title="B+树的叶子节点都可以存哪些东西"></a>B+树的叶子节点都可以存哪些东西</h3><p>可能存储的是整行数据，也有可能是主键的值。B+树的叶子节点存储了整行数据的是主键索引，也被称之为聚簇索引。而索引B+ Tree的叶子节点存储了主键的值的是非主键索引，也被称之为非聚簇索引</p>
 
             </div>
             <hr>
@@ -269,7 +365,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/java%E7%AE%97%E6%B3%95/">java算法</a>
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/">数据库相关</a>
                     
                   </div>
                 
@@ -277,9 +373,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/java/">java</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E4%B9%A0%E9%A2%98/">习题</a>
+                      <a class="hover-with-bg" href="/tags/mysql/">mysql</a>
                     
                   </div>
                 
@@ -292,18 +386,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/12/01/Mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Mysql学习笔记(一)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/11/30/leetcode%E9%A2%98%E8%A7%A3--%E7%A7%BB%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/">
-                        <span class="hidden-mobile">leetcode题解--移除有序数组重复元素</span>
+                      <a href="/2020/11/30/leetcode%E9%A2%98%E8%A7%A3--%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D/">
+                        <span class="hidden-mobile">leetcode题解--括号匹配</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
