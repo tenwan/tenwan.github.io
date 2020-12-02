@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Redis学习笔记(一)</title>
+    <link href="/2020/12/02/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/"/>
+    <url>/2020/12/02/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><p>Redis是一个完全开源的高性能key-value数据库.</p><h2 id="Redis的数据结构与应用场景"><a href="#Redis的数据结构与应用场景" class="headerlink" title="Redis的数据结构与应用场景"></a>Redis的数据结构与应用场景</h2><blockquote><p>使用场景:缓存,共享session,消息队列系统,分布式锁</p></blockquote><blockquote><p>单线程Redis快的原因?</p><ol><li>纯内存操作</li><li>单线程操作,避免了频繁上下文切换</li><li>合理高效的数据结构</li><li>采用非阻塞I/O多路复用机制</li></ol></blockquote><h3 id="String字符串"><a href="#String字符串" class="headerlink" title="String字符串"></a>String字符串</h3><p>字符串是Redis最基础的数据结构.其中键都是字符串类型,剩下几种数据结构都是在字符串类型基础上构建的.常用在缓存,计数,共享session,限速等方面.</p><h3 id="Hash哈希"><a href="#Hash哈希" class="headerlink" title="Hash哈希"></a>Hash哈希</h3><p>Redis中,哈希类型是指键值本身又是一个键值对结构的数据.可用来存放用户信息,实现诸如购物车等功能.</p><h3 id="List列表-双向链表"><a href="#List列表-双向链表" class="headerlink" title="List列表(双向链表)"></a>List列表(双向链表)</h3><p>列表类型可用来存储多个有序的字符串,可做简单的消息队列功能.</p><h3 id="Set集合"><a href="#Set集合" class="headerlink" title="Set集合"></a>Set集合</h3><p>集合类型可用来保存多个的字符串元素,与列表不同的是,集合中不允许重复元素且元素无序,不能通过索引下标获取元素.可通过Set的交集,并集,差集等来计算重合元素.</p><h3 id="Sorted-Set有序集合"><a href="#Sorted-Set有序集合" class="headerlink" title="Sorted Set有序集合"></a>Sorted Set有序集合</h3><p>相对Set多了一个权重参数Score,集合中元素能按Score进行排列.常用来做排行榜,取Top N.</p><h2 id="Redis的数据过期策略"><a href="#Redis的数据过期策略" class="headerlink" title="Redis的数据过期策略"></a>Redis的数据过期策略</h2><blockquote><p>Redis中数据过期策略采用定期删除与惰性删除策略</p></blockquote><h3 id="定期删除策略"><a href="#定期删除策略" class="headerlink" title="定期删除策略"></a>定期删除策略</h3><p>Redis会启动一个定时器定时监视所有key，判断key的时效性，若过期即删除key。此方法能保证过期的key最终都能被删除。但本方法每次都要遍历内存中所有数据，非常消耗CPU资源。并且当Key过期后，定时器还未被唤起，这一段时间内的key仍然可用。</p><h3 id="惰性删除策略"><a href="#惰性删除策略" class="headerlink" title="惰性删除策略"></a>惰性删除策略</h3><p>在获取到key时，判断key是否过期，若过期则删除。本方法缺点是：若某个key一直未被使用，则其将会一直在内存中，占用空间。</p><h3 id="两者结合策略"><a href="#两者结合策略" class="headerlink" title="两者结合策略"></a>两者结合策略</h3><p>定时删除策略不再扫描全部key。而是随机抽取部分key进行检查，从而降低对CPU的损耗。惰性删除策略弥补了可能未被检查到的key。若还是存在过期的key，既没有被定时器抽取，也没有被使用，则当内存不够时，使用内存淘汰机制进行淘汰。</p><blockquote><p>移除最近最少使用的key/随机移除某个key </p><p>LRU（Least Recently Used) 最近最少使用</p></blockquote><h4 id="如何实现LRU"><a href="#如何实现LRU" class="headerlink" title="如何实现LRU"></a>如何实现LRU</h4><p>一般使用HashMap和双向链表实现LRU。使用HashMap存储key，而value指向双向链表实现的LRU的Node节点，如图：</p><p><img src="/img/LRU.png"></p><p>h表头，t表尾，预先设置LRU的容量。若存储满了，则O（1）时间淘汰掉双向链表的表尾。每次访问数据，都可通过O（1）效率把新节点增加到队头或把已存在点移动到队头。</p><h4 id="Redis的LRU具体实现"><a href="#Redis的LRU具体实现" class="headerlink" title="Redis的LRU具体实现"></a>Redis的LRU具体实现</h4><p>Redis每次按key获取一个值时，都会更新value中的LRU字段为当前秒级别的时间戳。</p><p>第一版LRU为，随机从dict中取出五个key，淘汰一个LRU最小的。</p><p>在3.0时，改进一版算法，首先第一批随机挑选的key会放进一个pool中（默认大小16），pool中的key是按LRU字段大小顺序排列。接下来每次随机挑选的key的LRU必须小于pool的最小LRU才会继续放入，直至pool放满。放满后，若有新的key需要放入，则将pool中LRU最大的key取出。淘汰的时候，直接从pool中选取LRU最小的值进行淘汰即可。</p><h2 id="Redis如何发现热点key"><a href="#Redis如何发现热点key" class="headerlink" title="Redis如何发现热点key"></a>Redis如何发现热点key</h2><p>Redis主要有五种发现热点key的方法：</p><ol><li>凭借经验预估：提前知道某个活动的开启，将该key作为热点key。</li><li>服务端收集：在操作redis前，加入计数代码进行数据统计。</li><li>抓包评估：Redis使用TCP协议与客户端通信，通信协议采用RESP，即自己写程序监听端口能进行拦截包分析。</li><li>在proxy层，对每个redis请求进行收集上报。（proxy–代理服务器）</li><li>Redis自带命令查询：Redis4.0.4版本后，使用命令redis-cli-hotkeys能找出热点key</li></ol><h3 id="Redis缓存雪崩问题的解决"><a href="#Redis缓存雪崩问题的解决" class="headerlink" title="Redis缓存雪崩问题的解决"></a>Redis缓存雪崩问题的解决</h3><ol><li>使用Redis高可用框架：使用 Redis 集群来保证 Redis 服务不会挂掉。</li><li>缓存时间不一致，给缓存的失效时间，加上一个随机值，避免集体失效。</li><li>限流降级策略：有一定的备案，比如个性推荐服务不可用了，换成热点数据推荐服务。</li></ol><h3 id="Redis缓存穿透问题的解决（待详细展开）"><a href="#Redis缓存穿透问题的解决（待详细展开）" class="headerlink" title="Redis缓存穿透问题的解决（待详细展开）"></a>Redis缓存穿透问题的解决（待详细展开）</h3><ol><li>在接口做校验。</li><li>缓存击穿加锁/设置不过期</li><li>布隆过滤器拦截</li></ol><h2 id="Redis的几种集群模式"><a href="#Redis的几种集群模式" class="headerlink" title="Redis的几种集群模式"></a>Redis的几种集群模式</h2><blockquote><ol><li>主从复制</li><li>哨兵模式</li><li>cluster模式</li></ol></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据库相关</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Redis</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Mysql学习笔记(一)</title>
     <link href="/2020/12/01/Mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/"/>
     <url>/2020/12/01/Mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/</url>
