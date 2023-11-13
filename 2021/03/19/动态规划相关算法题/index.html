@@ -1,0 +1,1039 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="刘金博">
+  <meta name="keywords" content="">
+  <title>动态规划相关算法题 - xiaoliu‘s sapce</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>xiaoliu's space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="动态规划相关算法题">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-19 18:38" pubdate>
+        2021年3月19日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      71
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">动态规划相关算法题</h1>
+            
+            <div class="markdown-body">
+              <h3 id="1-1、斐波那契数列"><a href="#1-1、斐波那契数列" class="headerlink" title="1.1、斐波那契数列"></a>1.1、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/c6c7742f5ba7442aada113136ddea0c3?tpId=13&tqId=11160&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">斐波那契数列</a></h3><blockquote>
+<p>大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项（从0开始，第0项为0，第1项是1）。</p>
+</blockquote>
+<pre><code class="hljs angelscript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-symbol">T7</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> Fibonacci(<span class="hljs-built_in">int</span> n) &#123;
+        <span class="hljs-comment">// 条件</span>
+        <span class="hljs-keyword">if</span> (n &lt;= <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> n;
+       	<span class="hljs-comment">// 可以用自底向上的方法</span>
+        <span class="hljs-built_in">int</span> pre2 = <span class="hljs-number">0</span>, pre1 = <span class="hljs-number">1</span>;
+        <span class="hljs-built_in">int</span> f = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; i++) &#123;
+            f = pre2 + pre1; <span class="hljs-comment">// 如果动态规划，这个就是dp的公式</span>
+            pre2 = pre1;
+            pre1 = f;
+        &#125;
+        <span class="hljs-keyword">return</span> f;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="1-2、跳台阶"><a href="#1-2、跳台阶" class="headerlink" title="1.2、跳台阶"></a>1.2、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/8c82a5b80378478f9484d87d1c5f12a4?tpId=13&tqId=11161&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">跳台阶</a></h3><blockquote>
+<p>一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。总得还是公式F(N)=F(N-1)+F(N-2)</p>
+</blockquote>
+<pre><code class="hljs aspectj"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T8</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">JumpFloor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">target</span>)</span> </span>&#123;
+        <span class="hljs-comment">// 条件</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">target</span> &lt;= <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">target</span>;
+      	<span class="hljs-comment">// 自底向上的方法</span>
+        <span class="hljs-keyword">int</span> pre2 = <span class="hljs-number">1</span>, pre1 = <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">3</span>; i &lt;= <span class="hljs-keyword">target</span>; i++) &#123;
+            sum = pre2 + pre1; <span class="hljs-comment">// 一样的道理， 和上面那道题的初始值不一样</span>
+            pre2 = pre1;
+            pre1 = sum;
+        &#125;
+        <span class="hljs-keyword">return</span> sum;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="1-3、矩形覆盖"><a href="#1-3、矩形覆盖" class="headerlink" title="1.3、矩形覆盖"></a>1.3、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/72a5a919508a4251859fb2cfb987a0e6?tpId=13&tqId=11163&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">矩形覆盖</a></h3><blockquote>
+<p>我们可以用2乘1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2乘1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？还是公式F(N)=F(N-1)+F(N-2)。</p>
+</blockquote>
+<pre><code class="hljs aspectj"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T10</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">RectCover</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">target</span>)</span> </span>&#123;
+        <span class="hljs-comment">// 条件</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">target</span> &lt;= <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">target</span>;
+      	<span class="hljs-comment">// 自底向上</span>
+        <span class="hljs-keyword">int</span> pre2 = <span class="hljs-number">1</span>, pre1 = <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">3</span>; i &lt;= <span class="hljs-keyword">target</span>; i++) &#123;
+            sum = pre2 + pre1; <span class="hljs-comment">// 同理呀</span>
+            pre2 = pre1;
+            pre1 = sum;
+        &#125;
+        <span class="hljs-keyword">return</span> sum;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="1-4、变态跳台阶"><a href="#1-4、变态跳台阶" class="headerlink" title="1.4、变态跳台阶"></a>1.4、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/22243d016f6b47f2a6928b4313c85387?tpId=13&tqId=11162&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">变态跳台阶</a></h3><blockquote>
+<p>一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。</p>
+</blockquote>
+<pre><code class="hljs aspectj"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">JumpFloorII</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">target</span>)</span> </span>&#123;
+    <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-keyword">target</span>];
+    Arrays.fill(dp, <span class="hljs-number">1</span>);  <span class="hljs-comment">//快速填充数组值为1，每层都有直接一步到位的情形</span>
+    <span class="hljs-comment">// 注意起始位置</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-keyword">target</span>; i++)
+    <span class="hljs-comment">// 开始跳</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; i; j++)
+        <span class="hljs-comment">// 注意dp[i] 累计dp[j]</span>
+            dp[i] += dp[j];
+    <span class="hljs-keyword">return</span> dp[<span class="hljs-keyword">target</span> - <span class="hljs-number">1</span>];
+&#125;</code></pre>
+
+<h3 id="2-最大子序和-1385"><a href="#2-最大子序和-1385" class="headerlink" title="2. 最大子序和(1385)"></a>2. 最大子序和(1385)</h3><blockquote>
+<p>给定一个整数数组 <code>nums</code> ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+</blockquote>
+<pre><code class="hljs angelscript"><span class="hljs-keyword">class</span> <span class="hljs-symbol">Solution</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> maxSubArray(<span class="hljs-built_in">int</span>[] nums) &#123;
+        <span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-comment">// 注意两个变量的初始化</span>
+        <span class="hljs-built_in">int</span> preSum = nums[<span class="hljs-number">0</span>];
+        <span class="hljs-built_in">int</span> maxSum = preSum;
+        <span class="hljs-comment">// 注意从1开始</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt; nums.length; i++) &#123;
+            <span class="hljs-comment">// 注意这个条件</span>
+            preSum = preSum &gt; <span class="hljs-number">0</span> ? preSum + nums[i] : nums[i];
+            maxSum = Math.max(maxSum, preSum);
+        &#125;
+        <span class="hljs-keyword">return</span> maxSum;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="3-1、股票的最大利润"><a href="#3-1、股票的最大利润" class="headerlink" title="3.1、股票的最大利润"></a>3.1、<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/description/?utm_source=LCUS&utm_medium=ip_redirect_q_uns&utm_campaign=transfer2china">股票的最大利润</a></h3><blockquote>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：[7,1,5,3,6,4]</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：5</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释：在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。</span>
+    注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。</code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：prices = [7,6,4,3,1]</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：0</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释：在这种情况下, 没有交易完成, 所以最大利润为 0。</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">maxProfit</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] prices)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (prices == null || prices.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+        <span class="hljs-keyword">int</span> <span class="hljs-built_in">min</span> = prices[<span class="hljs-number">0</span>];
+        <span class="hljs-keyword">int</span> <span class="hljs-built_in">max</span> = <span class="hljs-number">0</span>;
+        <span class="hljs-comment">// 从1开始</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; prices.length; i++) &#123;
+            <span class="hljs-comment">// 注意保持最小</span>
+            <span class="hljs-built_in">min</span> = prices[i] &lt; <span class="hljs-built_in">min</span> ? prices[i] : <span class="hljs-built_in">min</span>; 
+            <span class="hljs-built_in">max</span> = Math.<span class="hljs-built_in">max</span>(<span class="hljs-built_in">max</span>, prices[i] - <span class="hljs-built_in">min</span>);  <span class="hljs-comment">//即找出已经出现的最小值，每天都计算利润即可</span>
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="3-2-买卖股票的最佳时机-II"><a href="#3-2-买卖股票的最佳时机-II" class="headerlink" title="3.2 买卖股票的最佳时机 II"></a>3.2 买卖股票的最佳时机 II</h3><blockquote>
+<p>在上题基础上可以多次交易</p>
+<pre><code class="hljs tap">&gt;输入: [7,1,5,3,6,4]
+&gt;输出: 7
+&gt;解释: 在第<span class="hljs-number"> 2 </span>天（股票价格 = 1）的时候买入，在第<span class="hljs-number"> 3 </span>天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 =<span class="hljs-number"> 4 </span>。
+    随后，在第<span class="hljs-number"> 4 </span>天（股票价格 = 3）的时候买入，在第<span class="hljs-number"> 5 </span>天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 =<span class="hljs-number"> 3 </span>。</code></pre>
+
+<pre><code class="hljs tap">&gt;输入: [1,2,3,4,5]
+&gt;输出: 4
+&gt;解释: 在第<span class="hljs-number"> 1 </span>天（股票价格 = 1）的时候买入，在第<span class="hljs-number"> 5 </span>天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 =<span class="hljs-number"> 4 </span>。
+    注意你不能在第<span class="hljs-number"> 1 </span>天和第<span class="hljs-number"> 2 </span>天接连购买股票，之后再将它们卖出。
+    因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。</code></pre>
+</blockquote>
+<pre><code class="hljs angelscript"><span class="hljs-keyword">class</span> <span class="hljs-symbol">Solution</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> maxProfit(<span class="hljs-built_in">int</span>[] prices) &#123;
+        <span class="hljs-comment">// 贪心：只要我当前数比前一个数大， 就xxx</span>
+        <span class="hljs-built_in">int</span> profit = <span class="hljs-number">0</span>;
+        <span class="hljs-comment">// 从1开始，因为下面的if</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt; prices.length; i++) &#123;
+            <span class="hljs-keyword">if</span> (prices[i] &gt; prices[i - <span class="hljs-number">1</span>]) 
+                profit += prices[i]- prices[i - <span class="hljs-number">1</span>];
+        &#125;
+        <span class="hljs-keyword">return</span> profit;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="4-打家劫舍"><a href="#4-打家劫舍" class="headerlink" title="4. 打家劫舍"></a>4. 打家劫舍</h3><blockquote>
+<p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。</p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。</p>
+<pre><code class="hljs tap">&gt;输入：[1,2,3,1]
+&gt;输出：4
+&gt;解释：偷窃<span class="hljs-number"> 1 </span>号房屋 (金额 = 1) ，然后偷窃<span class="hljs-number"> 3 </span>号房屋 (金额 = 3)。
+    偷窃到的最高金额 =<span class="hljs-number"> 1 </span>+<span class="hljs-number"> 3 </span>=<span class="hljs-number"> 4 </span>。</code></pre>
+
+<pre><code class="hljs tap">&gt;输入：[2,7,9,3,1]
+&gt;输出：12
+&gt;解释：偷窃<span class="hljs-number"> 1 </span>号房屋 (金额 = 2), 偷窃<span class="hljs-number"> 3 </span>号房屋 (金额 = 9)，接着偷窃<span class="hljs-number"> 5 </span>号房屋 (金额 = 1)。
+    偷窃到的最高金额 =<span class="hljs-number"> 2 </span>+<span class="hljs-number"> 9 </span>+<span class="hljs-number"> 1 </span>=<span class="hljs-number"> 12 </span>.</code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">rob</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> pre2 = <span class="hljs-number">0</span>, pre1 = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;
+            <span class="hljs-comment">// 注意这个状态转移，毕竟题目是隔着偷</span>
+            <span class="hljs-keyword">int</span> cur = Math.<span class="hljs-built_in">max</span>(pre2 + nums[i], pre1);
+            pre2 = pre1;
+            pre1 = cur;
+        &#125;
+        <span class="hljs-keyword">return</span> pre1;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="5-打家劫舍-II"><a href="#5-打家劫舍-II" class="headerlink" title="5. 打家劫舍 II"></a>5. 打家劫舍 II</h3><blockquote>
+<p>你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都 围成一圈 ，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警 。</p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你 在不触动警报装置的情况下 ，能够偷窃到的最高金额。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：nums = [2,3,2]</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：3</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释：你不能先偷窃 1 号房屋（金额 = 2），然后偷窃 3 号房屋（金额 = 2）, 因为他们是相邻的。</span></code></pre>
+
+<pre><code class="hljs tap">&gt;输入：nums = [1,2,3,1]
+&gt;输出：4
+&gt;解释：你可以先偷窃<span class="hljs-number"> 1 </span>号房屋（金额 = 1），然后偷窃<span class="hljs-number"> 3 </span>号房屋（金额 = 3）。
+    偷窃到的最高金额 =<span class="hljs-number"> 1 </span>+<span class="hljs-number"> 3 </span>=<span class="hljs-number"> 4 </span>。</code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">rob</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (nums == null || nums.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">int</span> n = nums.length;
+        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> nums[<span class="hljs-number">0</span>];
+        <span class="hljs-comment">// 注意0-n-2 个 1 -n-1</span>
+        <span class="hljs-keyword">return</span> Math.<span class="hljs-built_in">max</span>(rob(nums, <span class="hljs-number">0</span>, n - <span class="hljs-number">2</span>), rob(nums, <span class="hljs-number">1</span>, n - <span class="hljs-number">1</span>));
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">rob</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> first, <span class="hljs-keyword">int</span> last)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> pre2 = <span class="hljs-number">0</span>, pre1 = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = first; i &lt;= last; i++) &#123;
+            <span class="hljs-keyword">int</span> cur = Math.<span class="hljs-built_in">max</span>(pre1, pre2 + nums[i]);
+            pre2 = pre1;
+            pre1 = cur;
+        &#125;
+        <span class="hljs-keyword">return</span> pre1;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="6、剪绳子"><a href="#6、剪绳子" class="headerlink" title="6、剪绳子"></a>6、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/57d85990ba5b440ab888fc72b0751bf8?tpId=13&tqId=33257&tPage=4&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">剪绳子</a></h3><blockquote>
+<p>给你一根长度为n的绳子，请把绳子剪成整数长的m段（m、n都是整数，n&gt;1并且m&gt;1，m&lt;=n），每段绳子的长度记为k[1],…,k[m]。请问k[1]x…xk[m]可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入</span>
+<span class="hljs-meta">&gt;</span><span class="bash">8</span>
+<span class="hljs-meta">&gt;</span><span class="bash">返回值</span>
+<span class="hljs-meta">&gt;</span><span class="bash">18</span></code></pre>
+</blockquote>
+<pre><code class="hljs reasonml"><span class="hljs-comment">// 动态规划</span>
+public <span class="hljs-built_in">int</span> integer<span class="hljs-constructor">Break(<span class="hljs-params">int</span> <span class="hljs-params">n</span>)</span> &#123;
+    <span class="hljs-built_in">int</span><span class="hljs-literal">[]</span> dp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span><span class="hljs-literal">[<span class="hljs-identifier">n</span> + <span class="hljs-number">1</span>]</span>;
+    dp<span class="hljs-literal">[<span class="hljs-number">1</span>]</span> = <span class="hljs-number">1</span>;
+    <span class="hljs-comment">// 一厘米，没法切，所以从2</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; i++)
+    <span class="hljs-comment">// 切从1cm开始</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> j = <span class="hljs-number">1</span>; j &lt; i; j++)
+        <span class="hljs-comment">//  注意这个状态转移</span>
+            dp<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span> = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>max(dp<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span>, <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>max(j<span class="hljs-operator"> * </span>(i - j), dp<span class="hljs-literal">[<span class="hljs-identifier">j</span>]</span><span class="hljs-operator"> * </span>(i - j)));
+    return dp<span class="hljs-literal">[<span class="hljs-identifier">n</span>]</span>;
+&#125;</code></pre>
+
+<h3 id="7、礼物的最大值"><a href="#7、礼物的最大值" class="headerlink" title="7、礼物的最大值"></a>7、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/questionTerminal/72a99e28381a407991f2c96d8cb238ab">礼物的最大值</a></h3><blockquote>
+<p>小东所在公司要发年终奖，而小东恰好获得了最高福利，他要在公司年会上参与一个抽奖游戏，游戏在一个6*6的棋盘上进行，上面放着36个价值不等的礼物，每个小的棋盘上面放置着一个礼物，他需要从左上角开始游戏，每次只能向下或者向右移动一步，到达右下角停止，一路上的格子里的礼物小东都能拿到，请设计一个算法使小东拿到价值最高的礼物。</p>
+<p>给定一个6*6的矩阵<strong>board</strong>，其中每个元素为对应格子的礼物价值,左上角为[0,0],请返回能获得的最大价值，保证每个礼物价值大于100小于1000。</p>
+</blockquote>
+<pre><code class="hljs pgsql"><span class="hljs-built_in">public</span> <span class="hljs-type">int</span> getMost(<span class="hljs-type">int</span>[][] <span class="hljs-keyword">values</span>) &#123;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">values</span> == <span class="hljs-keyword">null</span> || <span class="hljs-keyword">values</span>.length == <span class="hljs-number">0</span> || <span class="hljs-keyword">values</span>[<span class="hljs-number">0</span>].length == <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> n = <span class="hljs-keyword">values</span>[<span class="hljs-number">0</span>].length;
+    <span class="hljs-type">int</span>[] dp = <span class="hljs-built_in">new</span> <span class="hljs-type">int</span>[n];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] <span class="hljs-keyword">value</span> : <span class="hljs-keyword">values</span>) &#123;
+        dp[<span class="hljs-number">0</span>] += <span class="hljs-keyword">value</span>[<span class="hljs-number">0</span>];
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; n; i++)
+            dp[i] = Math.max(dp[i], dp[i - <span class="hljs-number">1</span>]) + <span class="hljs-keyword">value</span>[i];
+    &#125;
+    <span class="hljs-keyword">return</span> dp[n - <span class="hljs-number">1</span>];
+&#125;</code></pre>
+
+<h3 id="8-最小路径和"><a href="#8-最小路径和" class="headerlink" title="8. 最小路径和"></a>8. 最小路径和</h3><blockquote>
+<p>给定一个包含非负整数的 <code>m x n</code> 网格 <code>grid</code> ，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。</p>
+<pre><code class="hljs lua">&gt;输入：grid = <span class="hljs-string">[[1,3,1],[1,5,1],[4,2,1]]</span>
+&gt;输出：<span class="hljs-number">7</span>
+&gt;解释：因为路径 <span class="hljs-number">1</span>→<span class="hljs-number">3</span>→<span class="hljs-number">1</span>→<span class="hljs-number">1</span>→<span class="hljs-number">1</span> 的总和最小。</code></pre>
+
+<pre><code class="hljs lua">&gt;输入：grid = <span class="hljs-string">[[1,2,3],[4,5,6]]</span>
+&gt;输出：<span class="hljs-number">12</span></code></pre>
+</blockquote>
+<pre><code class="hljs inform7">class Solution &#123;
+    public int minPathSum(int<span class="hljs-comment">[]</span><span class="hljs-comment">[]</span> grid) &#123;
+        if (grid == null || grid.length == 0 || grid<span class="hljs-comment">[0]</span>.length == 0)
+            return 0;
+        int m = grid.length;
+        int n = grid<span class="hljs-comment">[0]</span>.length;
+        int<span class="hljs-comment">[]</span><span class="hljs-comment">[]</span> dp = new int<span class="hljs-comment">[m]</span><span class="hljs-comment">[n]</span>;
+        dp<span class="hljs-comment">[0]</span><span class="hljs-comment">[0]</span> = grid<span class="hljs-comment">[0]</span><span class="hljs-comment">[0]</span>;
+        // 第一列
+        for (int i = 1; i &lt; m; i++)&#123;
+            dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[0]</span> = dp<span class="hljs-comment">[i - 1]</span><span class="hljs-comment">[0]</span> + grid<span class="hljs-comment">[i]</span><span class="hljs-comment">[0]</span>;
+        &#125;
+        // 第一行
+        for (int j = 1; j &lt; n; j++)&#123;
+            dp<span class="hljs-comment">[0]</span><span class="hljs-comment">[j]</span> = dp<span class="hljs-comment">[0]</span><span class="hljs-comment">[j - 1]</span> + grid<span class="hljs-comment">[0]</span><span class="hljs-comment">[j]</span>;
+        &#125;
+
+        for (int i = 1; i &lt; m; i++) &#123;
+            for (int j = 1; j &lt; n; j++)&#123;
+                dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> = Math.min(dp<span class="hljs-comment">[i - 1]</span><span class="hljs-comment">[j]</span>, dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j - 1]</span>) + grid<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span>;
+            &#125;
+        &#125;
+        return dp<span class="hljs-comment">[m - 1]</span><span class="hljs-comment">[n - 1]</span>;
+        
+    &#125;
+&#125;</code></pre>
+
+<h3 id="9-不同路径"><a href="#9-不同路径" class="headerlink" title="9. 不同路径"></a>9. 不同路径</h3><blockquote>
+<p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。</p>
+<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。</p>
+<p>问总共有多少条不同的路径？</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：m = 3, n = 2</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：3</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">从左上角开始，总共有 3 条路径可以到达右下角。</span>
+<span class="hljs-meta">&gt;</span><span class="bash">1. 向右 -&gt; 向下 -&gt; 向下</span>
+<span class="hljs-meta">&gt;</span><span class="bash">2. 向下 -&gt; 向下 -&gt; 向右</span>
+<span class="hljs-meta">&gt;</span><span class="bash">3. 向下 -&gt; 向右 -&gt; 向下</span></code></pre>
+
+<pre><code class="hljs nix">&gt;输入：<span class="hljs-attr">m</span> = <span class="hljs-number">7</span>, <span class="hljs-attr">n</span> = <span class="hljs-number">3</span>
+&gt;输出：<span class="hljs-number">28</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">uniquePaths</span><span class="hljs-params">(<span class="hljs-keyword">int</span> m, <span class="hljs-keyword">int</span> n)</span> </span>&#123;
+        <span class="hljs-comment">// 优化过后了</span>
+        <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
+        <span class="hljs-comment">// 注意</span>
+        Arrays.<span class="hljs-built_in">fill</span>(dp, <span class="hljs-number">1</span>);
+        <span class="hljs-comment">// 注意起始位置</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; m; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt; n; j++) &#123;
+                <span class="hljs-comment">// 累加</span>
+                dp[j] += dp[j - <span class="hljs-number">1</span>];
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[n <span class="hljs-number">-1</span>];
+    &#125;
+&#125;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">uniquePaths</span><span class="hljs-params">(<span class="hljs-keyword">int</span> m, <span class="hljs-keyword">int</span> n)</span> </span>&#123;
+        <span class="hljs-keyword">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m][n];        
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;
+                <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span> || j == <span class="hljs-number">0</span>)
+                    dp[i][j] = <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">else</span> &#123;
+                    dp[i][j] = dp[i - <span class="hljs-number">1</span>][j] + dp[i][j - <span class="hljs-number">1</span>];
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[m - <span class="hljs-number">1</span>][n - <span class="hljs-number">1</span>];        
+    &#125;
+&#125;</code></pre>
+
+<h3 id="9-2-不同路径-II"><a href="#9-2-不同路径-II" class="headerlink" title="9.2 不同路径 II"></a>9.2 不同路径 II</h3><blockquote>
+<p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。</p>
+<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。</p>
+<p>现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：2</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">3x3 网格的正中间有一个障碍物。</span>
+<span class="hljs-meta">&gt;</span><span class="bash">从左上角到右下角一共有 2 条不同的路径：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">1. 向右 -&gt; 向右 -&gt; 向下 -&gt; 向下</span>
+<span class="hljs-meta">&gt;</span><span class="bash">2. 向下 -&gt; 向下 -&gt; 向右 -&gt; 向右</span></code></pre>
+
+<pre><code class="hljs lua">&gt;输入：obstacleGrid = <span class="hljs-string">[[0,1],[0,0]]</span>
+&gt;输出：<span class="hljs-number">1</span></code></pre>
+</blockquote>
+<pre><code class="hljs inform7">class Solution &#123;
+    public int uniquePathsWithObstacles(int<span class="hljs-comment">[]</span><span class="hljs-comment">[]</span> obstacleGrid) &#123;
+        int m = obstacleGrid.length;
+        int n = obstacleGrid<span class="hljs-comment">[0]</span>.length;
+        // 因为if
+        int<span class="hljs-comment">[]</span> dp = new int<span class="hljs-comment">[n + 1]</span>;
+        dp<span class="hljs-comment">[1]</span> = 1; // 注意初始值
+        // 起始位置
+        for (int i = 1; i &lt;= m; i++) &#123;
+            for (int j = 1; j &lt;= n; j++) &#123;
+                // 别忘了条件
+                if (obstacleGrid<span class="hljs-comment">[i - 1]</span><span class="hljs-comment">[j - 1]</span> == 1) 
+                    dp<span class="hljs-comment">[j]</span> = 0;
+                else 
+                    dp<span class="hljs-comment">[j]</span> += dp<span class="hljs-comment">[j - 1]</span>;
+            &#125;
+        &#125;
+        return dp<span class="hljs-comment">[n]</span>;
+    &#125;
+&#125;
+class Solution &#123;
+    public int uniquePathsWithObstacles(int<span class="hljs-comment">[]</span><span class="hljs-comment">[]</span> obstacleGrid) &#123;
+        int m = obstacleGrid.length;
+        int n = obstacleGrid<span class="hljs-comment">[0]</span>.length;
+        int <span class="hljs-comment">[]</span><span class="hljs-comment">[]</span> dp = new int<span class="hljs-comment">[m+1]</span><span class="hljs-comment">[n+1]</span>;
+        // 第一行 和 其他行的区别在于没有来自上边的路径 但是 起点到起点 算一条路径 所以这样初始化
+        dp<span class="hljs-comment">[0]</span><span class="hljs-comment">[1]</span> = 1;
+        for(int i = 1; i &lt;= m; i++) &#123;
+            for(int j = 1; j &lt;= n; j++) &#123;
+                if(obstacleGrid<span class="hljs-comment">[i-1]</span><span class="hljs-comment">[j-1]</span> == 1) &#123;
+                    // 障碍 不可达 路径数量为0
+                    dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> = 0;
+                &#125;
+                else &#123;
+                    // 左 + 上
+                    dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> = dp<span class="hljs-comment">[i-1]</span><span class="hljs-comment">[j]</span> + dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j-1]</span>;
+                &#125;
+            &#125;
+        &#125;
+        return dp<span class="hljs-comment">[m]</span><span class="hljs-comment">[n]</span>;
+    &#125;
+&#125;
+class Solution &#123;
+    public int uniquePathsWithObstacles(int<span class="hljs-comment">[]</span><span class="hljs-comment">[]</span> obstacleGrid) &#123;
+        int m = obstacleGrid.length;
+        int n = obstacleGrid<span class="hljs-comment">[0]</span>.length;
+        int<span class="hljs-comment">[]</span><span class="hljs-comment">[]</span> dp = new int<span class="hljs-comment">[m]</span><span class="hljs-comment">[n]</span>;
+        dp<span class="hljs-comment">[0]</span><span class="hljs-comment">[0]</span> = 1;
+        for (int i = 0; i &lt; m; i++)&#123;
+            for (int j = 0; j &lt; n; j++)&#123;
+                if (obstacleGrid<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> == 1)
+                    continue;
+                if (i == 0 &amp;&amp; j == 0)
+                    continue;
+                if(i == 0)
+                    dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> = dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j - 1]</span>;
+                else if (j == 0)
+                    dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> = dp<span class="hljs-comment">[i - 1]</span><span class="hljs-comment">[j]</span>;
+                else dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> = dp<span class="hljs-comment">[i - 1]</span><span class="hljs-comment">[j]</span> + dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j - 1]</span>;
+            &#125;
+        &#125;
+        return dp<span class="hljs-comment">[m - 1]</span><span class="hljs-comment">[n - 1]</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="9-3-最大正方形"><a href="#9-3-最大正方形" class="headerlink" title="9.3 最大正方形"></a>9.3 最大正方形</h3><blockquote>
+<p>在一个由 <code>&#39;0&#39;</code> 和 <code>&#39;1&#39;</code> 组成的二维矩阵内，找到只包含 <code>&#39;1&#39;</code> 的最大正方形，并返回其面积。</p>
+<pre><code class="hljs prolog">&gt;输入：matrix = [[<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],[<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>],[<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>],[<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>]]
+&gt;输出：<span class="hljs-number">4</span></code></pre>
+</blockquote>
+<pre><code class="hljs inform7">class Solution &#123;
+    public int maximalSquare(char<span class="hljs-comment">[]</span><span class="hljs-comment">[]</span> matrix) &#123;
+        /**
+        dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span>表示以第i行第j列为右下角所能构成的最大正方形边长, 则递推式为: 
+        dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> = 1 + min(dp<span class="hljs-comment">[i-1]</span><span class="hljs-comment">[j-1]</span>, dp<span class="hljs-comment">[i-1]</span><span class="hljs-comment">[j]</span>, dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j-1]</span>);
+        **/
+        if (matrix == null ||  matrix.length == 0 || matrix<span class="hljs-comment">[0]</span>.length == 0) return 0;
+        int m = matrix.length;
+        int n = matrix<span class="hljs-comment">[0]</span>.length;
+        int max = 0;
+        int<span class="hljs-comment">[]</span><span class="hljs-comment">[]</span> dp = new int<span class="hljs-comment">[m + 1]</span><span class="hljs-comment">[n + 1]</span>;
+
+        for (int i = 1; i &lt;= m; i++) &#123;
+            for (int j = 1; j &lt;= n; j++)&#123;
+                if (matrix<span class="hljs-comment">[i-1]</span><span class="hljs-comment">[j-1]</span> == &#x27;1&#x27;) &#123;
+                    // 左， 上，左上
+                    dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span> = 1 + Math.min(dp<span class="hljs-comment">[i-1]</span><span class="hljs-comment">[j-1]</span>, Math.min(dp<span class="hljs-comment">[i-1]</span><span class="hljs-comment">[j]</span>, dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j-1]</span>));
+                    max = Math.max(max, dp<span class="hljs-comment">[i]</span><span class="hljs-comment">[j]</span>);
+                &#125;
+            &#125;
+        &#125;
+        return max * max;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="10-解码方法"><a href="#10-解码方法" class="headerlink" title="10. 解码方法"></a>10. 解码方法</h3><blockquote>
+<p>一条包含字母 A-Z 的消息通过以下映射进行了 编码 ：</p>
+<p>‘A’ -&gt; 1<br>‘B’ -&gt; 2<br>…<br>‘Z’ -&gt; 26<br>要 解码 已编码的消息，所有数字必须基于上述映射的方法，反向映射回字母（可能有多种方法）。例如，”111” 可以将 “1” 中的每个 “1” 映射为 “A” ，从而得到 “AAA” ，或者可以将 “11” 和 “1”（分别为 “K” 和 “A” ）映射为 “KA” 。注意，”06” 不能映射为 “F” ，因为 “6” 和 “06” 不同。</p>
+<p>给你一个只含数字的 非空 字符串 num ，请计算并返回 解码 方法的 总数 。</p>
+<p>题目数据保证答案肯定是一个 32 位 的整数。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：s = <span class="hljs-string">&quot;12&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：2</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释：它可以解码为 <span class="hljs-string">&quot;AB&quot;</span>（1 2）或者 <span class="hljs-string">&quot;L&quot;</span>（12）。</span></code></pre>
+
+<pre><code class="hljs gcode">&gt;输入：s = <span class="hljs-string">&quot;226&quot;</span>
+&gt;输出：<span class="hljs-number">3</span>
+&gt;解释：它可以解码为 <span class="hljs-string">&quot;BZ&quot;</span> <span class="hljs-comment">(2 26)</span>, <span class="hljs-string">&quot;VF&quot;</span> <span class="hljs-comment">(22 6)</span>, 或者 <span class="hljs-string">&quot;BBF&quot;</span> <span class="hljs-comment">(2 2 6)</span> 。</code></pre>
+</blockquote>
+<pre><code class="hljs php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> numDecodings(<span class="hljs-keyword">String</span> s) &#123;
+        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        &#125;
+        <span class="hljs-keyword">int</span> n = s.length();
+        <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n + <span class="hljs-number">1</span>];
+        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>; <span class="hljs-comment">// 初始值</span>
+        <span class="hljs-comment">// 注意第一个元素是0？</span>
+        dp[<span class="hljs-number">1</span>] = s.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&#x27;0&#x27;</span> ? <span class="hljs-number">0</span> : <span class="hljs-number">1</span>;
+        <span class="hljs-comment">// 注意起始位置，</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; i++) &#123;
+            <span class="hljs-comment">// substring 用的很骚</span>
+            <span class="hljs-keyword">int</span> one = <span class="hljs-keyword">Integer</span>.valueOf(s.substring(i - <span class="hljs-number">1</span>, i));
+            <span class="hljs-keyword">if</span> (one != <span class="hljs-number">0</span>) &#123;
+                dp[i] += dp[i - <span class="hljs-number">1</span>];
+            &#125;
+            <span class="hljs-comment">// 注意这个判断</span>
+            <span class="hljs-keyword">if</span> (s.charAt(i - <span class="hljs-number">2</span>) == <span class="hljs-string">&#x27;0&#x27;</span>) <span class="hljs-keyword">continue</span>;
+            <span class="hljs-keyword">int</span> two = <span class="hljs-keyword">Integer</span>.valueOf(s.substring(i - <span class="hljs-number">2</span>, i));
+            <span class="hljs-keyword">if</span> (two &lt;= <span class="hljs-number">26</span>) &#123;
+                dp[i] += dp[i - <span class="hljs-number">2</span>];
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[n];
+    &#125;
+&#125;</code></pre>
+
+<h3 id="11-最长上升子序列"><a href="#11-最长上升子序列" class="headerlink" title="11. 最长上升子序列"></a>11. 最长上升子序列</h3><blockquote>
+<p>给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。</p>
+<p>子序列是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。</p>
+<pre><code class="hljs dns">&gt;输入：nums = [<span class="hljs-number">10,9,2,5</span>,<span class="hljs-number">3,7,101,18</span>]
+&gt;输出：<span class="hljs-number">4</span>
+&gt;解释：最长递增子序列是 [<span class="hljs-number">2,3,7,101</span>]，因此长度为 <span class="hljs-number">4</span> 。</code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：nums = [0,1,0,3,2,3]</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：4</span></code></pre>
+</blockquote>
+<pre><code class="hljs reasonml"><span class="hljs-keyword">class</span> Solution &#123;
+    public <span class="hljs-built_in">int</span> length<span class="hljs-constructor">OfLIS(<span class="hljs-params">int</span>[] <span class="hljs-params">nums</span>)</span> &#123;
+        <span class="hljs-keyword">if</span> (nums.length<span class="hljs-operator"> == </span><span class="hljs-number">0</span>) return <span class="hljs-number">0</span>;
+        <span class="hljs-built_in">int</span><span class="hljs-literal">[]</span> dp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span><span class="hljs-literal">[<span class="hljs-identifier">nums</span>.<span class="hljs-identifier">length</span>]</span>;
+        <span class="hljs-comment">// 注意这个初始化</span>
+        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Arrays</span>.</span></span>fill(dp, <span class="hljs-number">1</span>);
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> j = <span class="hljs-number">0</span>; j &lt; i; j++) &#123;
+                <span class="hljs-keyword">if</span> (nums<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span> &gt; nums<span class="hljs-literal">[<span class="hljs-identifier">j</span>]</span>) &#123;
+                    <span class="hljs-comment">// 注意if</span>
+                    dp<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span> = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>max(dp<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span>, dp<span class="hljs-literal">[<span class="hljs-identifier">j</span>]</span> + <span class="hljs-number">1</span>); <span class="hljs-comment">// 关键这里，</span>
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-comment">// 找最大</span>
+        return <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Arrays</span>.</span></span>stream(dp).max<span class="hljs-literal">()</span>.<span class="hljs-keyword">or</span><span class="hljs-constructor">Else(0)</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="12-最长公共子序列"><a href="#12-最长公共子序列" class="headerlink" title="12. 最长公共子序列"></a>12. 最长公共子序列</h3><blockquote>
+<p>给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。</p>
+<p>一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。<br>例如，”ace” 是 “abcde” 的子序列，但 “aec” 不是 “abcde” 的子序列。两个字符串的「公共子序列」是这两个字符串所共同拥有的子序列。</p>
+<p>若这两个字符串没有公共子序列，则返回 0。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：text1 = <span class="hljs-string">&quot;abcde&quot;</span>, text2 = <span class="hljs-string">&quot;ace&quot;</span></span> 
+<span class="hljs-meta">&gt;</span><span class="bash">输出：3</span>  
+<span class="hljs-meta">&gt;</span><span class="bash">解释：最长公共子序列是 <span class="hljs-string">&quot;ace&quot;</span>，它的长度为 3。</span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：text1 = <span class="hljs-string">&quot;abc&quot;</span>, text2 = <span class="hljs-string">&quot;abc&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：3</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释：最长公共子序列是 <span class="hljs-string">&quot;abc&quot;</span>，它的长度为 3。</span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：text1 = <span class="hljs-string">&quot;abc&quot;</span>, text2 = <span class="hljs-string">&quot;def&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：0</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释：两个字符串没有公共子序列，返回 0。</span></code></pre>
+</blockquote>
+<pre><code class="hljs reasonml"><span class="hljs-keyword">class</span> Solution &#123;
+    public <span class="hljs-built_in">int</span> longest<span class="hljs-constructor">CommonSubsequence(String <span class="hljs-params">text1</span>, String <span class="hljs-params">text2</span>)</span> &#123;
+        <span class="hljs-built_in">int</span> n1 = text1.length<span class="hljs-literal">()</span>, n2 = text2.length<span class="hljs-literal">()</span>;
+        <span class="hljs-built_in">int</span><span class="hljs-literal">[]</span><span class="hljs-literal">[]</span> dp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span><span class="hljs-literal">[<span class="hljs-identifier">n1</span> + <span class="hljs-number">1</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">n2</span> + <span class="hljs-number">1</span>]</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= n1; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> j = <span class="hljs-number">1</span>; j &lt;= n2; j++) &#123;
+                <span class="hljs-keyword">if</span> (text1.<span class="hljs-built_in">char</span><span class="hljs-constructor">At(<span class="hljs-params">i</span> - 1)</span><span class="hljs-operator"> == </span>text2.<span class="hljs-built_in">char</span><span class="hljs-constructor">At(<span class="hljs-params">j</span> - 1)</span>) &#123;
+                    dp<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">j</span>]</span> = dp<span class="hljs-literal">[<span class="hljs-identifier">i</span> - <span class="hljs-number">1</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">j</span> - <span class="hljs-number">1</span>]</span> + <span class="hljs-number">1</span>;
+                &#125; <span class="hljs-keyword">else</span> &#123;
+                    dp<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">j</span>]</span> = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>max(dp<span class="hljs-literal">[<span class="hljs-identifier">i</span> - <span class="hljs-number">1</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">j</span>]</span>, dp<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">j</span> - <span class="hljs-number">1</span>]</span>);
+                &#125;
+            &#125;
+        &#125;
+        return dp<span class="hljs-literal">[<span class="hljs-identifier">n1</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">n2</span>]</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="15-编辑距离"><a href="#15-编辑距离" class="headerlink" title="15. 编辑距离"></a>15. 编辑距离</h3><blockquote>
+<p>给你两个单词 word1 和 word2，请你计算出将 word1 转换成 word2 所使用的最少操作数 。</p>
+<p>你可以对一个单词进行如下三种操作：</p>
+<p>插入一个字符<br>删除一个字符<br>替换一个字符</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：word1 = <span class="hljs-string">&quot;horse&quot;</span>, word2 = <span class="hljs-string">&quot;ros&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：3</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">horse -&gt; rorse (将 <span class="hljs-string">&#x27;h&#x27;</span> 替换为 <span class="hljs-string">&#x27;r&#x27;</span>)</span>
+<span class="hljs-meta">&gt;</span><span class="bash">rorse -&gt; rose (删除 <span class="hljs-string">&#x27;r&#x27;</span>)</span>
+<span class="hljs-meta">&gt;</span><span class="bash">rose -&gt; ros (删除 <span class="hljs-string">&#x27;e&#x27;</span>)</span></code></pre>
+
+<pre><code class="hljs xl">&gt;输入：word1 = <span class="hljs-string">&quot;intention&quot;</span>, word2 = <span class="hljs-string">&quot;execution&quot;</span>
+&gt;输出：<span class="hljs-number">5</span>
+&gt;解释：
+&gt;<span class="hljs-function"><span class="hljs-title">intention</span> -&gt;</span> inention (删除 <span class="hljs-string">&#x27;t&#x27;</span>)
+&gt;<span class="hljs-function"><span class="hljs-title">inention</span> -&gt;</span> enention (将 <span class="hljs-string">&#x27;i&#x27;</span> 替换为 <span class="hljs-string">&#x27;e&#x27;</span>)
+&gt;<span class="hljs-function"><span class="hljs-title">enention</span> -&gt;</span> exention (将 <span class="hljs-string">&#x27;n&#x27;</span> 替换为 <span class="hljs-string">&#x27;x&#x27;</span>)
+&gt;<span class="hljs-function"><span class="hljs-title">exention</span> -&gt;</span> exection (将 <span class="hljs-string">&#x27;n&#x27;</span> 替换为 <span class="hljs-string">&#x27;c&#x27;</span>)
+&gt;<span class="hljs-function"><span class="hljs-title">exection</span> -&gt;</span> execution (插入 <span class="hljs-string">&#x27;u&#x27;</span>)</code></pre>
+</blockquote>
+<pre><code class="hljs reasonml"><span class="hljs-keyword">class</span> Solution &#123;
+    public <span class="hljs-built_in">int</span> min<span class="hljs-constructor">Distance(String <span class="hljs-params">word1</span>, String <span class="hljs-params">word2</span>)</span> &#123;
+        <span class="hljs-keyword">if</span> (word1<span class="hljs-operator"> == </span>null<span class="hljs-operator"> || </span>word2<span class="hljs-operator"> == </span>null) &#123;
+            return <span class="hljs-number">0</span>;
+        &#125;
+        <span class="hljs-built_in">int</span> m = word1.length<span class="hljs-literal">()</span>, n = word2.length<span class="hljs-literal">()</span>;
+        <span class="hljs-built_in">int</span><span class="hljs-literal">[]</span><span class="hljs-literal">[]</span> dp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span><span class="hljs-literal">[<span class="hljs-identifier">m</span> + <span class="hljs-number">1</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">n</span> + <span class="hljs-number">1</span>]</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) &#123;
+            dp<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span><span class="hljs-literal">[<span class="hljs-number">0</span>]</span> = i;
+        &#125;
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;
+            dp<span class="hljs-literal">[<span class="hljs-number">0</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span> = i;
+        &#125;
+        <span class="hljs-comment">// 这dp</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; j++) &#123;
+                <span class="hljs-keyword">if</span> (word1.<span class="hljs-built_in">char</span><span class="hljs-constructor">At(<span class="hljs-params">i</span> - 1)</span><span class="hljs-operator"> == </span>word2.<span class="hljs-built_in">char</span><span class="hljs-constructor">At(<span class="hljs-params">j</span> - 1)</span>) &#123;
+                    dp<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">j</span>]</span> = dp<span class="hljs-literal">[<span class="hljs-identifier">i</span> - <span class="hljs-number">1</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">j</span> - <span class="hljs-number">1</span>]</span>;
+                &#125; <span class="hljs-keyword">else</span> &#123;
+                    dp<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">j</span>]</span> = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>min(dp<span class="hljs-literal">[<span class="hljs-identifier">i</span> - <span class="hljs-number">1</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">j</span> - <span class="hljs-number">1</span>]</span>, <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>min(dp<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">j</span> - <span class="hljs-number">1</span>]</span>, dp<span class="hljs-literal">[<span class="hljs-identifier">i</span> - <span class="hljs-number">1</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">j</span>]</span>)) + <span class="hljs-number">1</span>;
+                &#125;
+            &#125;
+        &#125;
+        return dp<span class="hljs-literal">[<span class="hljs-identifier">m</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">n</span>]</span>;
+    &#125;
+
+&#125;</code></pre>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/java%E7%AE%97%E6%B3%95/">java算法</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B9%A0%E9%A2%98/">习题</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，大部分为学习心得，欢迎与博主联系讨论</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/20/BFS%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">BFS相关算法题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/18/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">
+                        <span class="hidden-mobile">字符串相关算法题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+<b>此身此时此地</b>
+<i class="iconfont icon-love"></i>
+<b>所见所闻所想</b>
+
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

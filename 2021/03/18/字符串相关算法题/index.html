@@ -1,0 +1,716 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="刘金博">
+  <meta name="keywords" content="">
+  <title>字符串相关算法题 - xiaoliu‘s sapce</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>xiaoliu's space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="字符串相关算法题">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-18 12:23" pubdate>
+        2021年3月18日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      28
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">字符串相关算法题</h1>
+            
+            <div class="markdown-body">
+              <h3 id="1-字符串相加"><a href="#1-字符串相加" class="headerlink" title="1. 字符串相加"></a>1. 字符串相加</h3><blockquote>
+<p>给定两个字符串形式的非负整数 <code>num1</code> 和<code>num2</code> ，计算它们的和。</p>
+</blockquote>
+<pre><code class="hljs reasonml"><span class="hljs-keyword">class</span> Solution &#123;
+    public String add<span class="hljs-constructor">Strings(String <span class="hljs-params">num1</span>, String <span class="hljs-params">num2</span>)</span> &#123;
+        StringBuilder str = <span class="hljs-keyword">new</span> <span class="hljs-constructor">StringBuilder()</span>;
+        <span class="hljs-comment">// 三个变量 carry i j：倒着来</span>
+        <span class="hljs-built_in">int</span> carry = <span class="hljs-number">0</span>, i = num1.length<span class="hljs-literal">()</span> - <span class="hljs-number">1</span>, j = num2.length<span class="hljs-literal">()</span> - <span class="hljs-number">1</span>;
+        <span class="hljs-comment">// while循环条件 注意｜｜</span>
+        <span class="hljs-keyword">while</span> (carry<span class="hljs-operator"> == </span><span class="hljs-number">1</span><span class="hljs-operator"> || </span>i &gt;= <span class="hljs-number">0</span><span class="hljs-operator"> || </span>j &gt;= <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-comment">// 注意&quot;0&quot;</span>
+            <span class="hljs-built_in">int</span> x = i &lt; <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : num1.<span class="hljs-built_in">char</span><span class="hljs-constructor">At(<span class="hljs-params">i</span>--)</span> - <span class="hljs-character">&#x27;0&#x27;</span>;
+            <span class="hljs-built_in">int</span> y = j &lt; <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : num2.<span class="hljs-built_in">char</span><span class="hljs-constructor">At(<span class="hljs-params">j</span>--)</span> - <span class="hljs-character">&#x27;0&#x27;</span>;
+            <span class="hljs-comment">// 老生长谈了</span>
+            <span class="hljs-comment">// 加的时候</span>
+            str.append((x + y + carry) % <span class="hljs-number">10</span>);
+            <span class="hljs-comment">// 注意进位</span>
+            carry = (x + y + carry)<span class="hljs-operator"> / </span><span class="hljs-number">10</span>; 
+        &#125;
+        <span class="hljs-comment">// 别忘了反转</span>
+        <span class="hljs-comment">// 反转</span>
+        return str.reverse<span class="hljs-literal">()</span>.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="43-字符串相乘"><a href="#43-字符串相乘" class="headerlink" title="43. 字符串相乘"></a>43. 字符串相乘</h3><blockquote>
+<p>给定两个以字符串形式表示的非负整数 <code>num1</code> 和 <code>num2</code>，返回 <code>num1</code> 和 <code>num2</code> 的乘积，它们的乘积也表示为字符串形式。</p>
+<pre><code class="hljs gcode">&gt;输入: <span class="hljs-symbol">num1</span> = <span class="hljs-string">&quot;123&quot;</span>, <span class="hljs-symbol">num2</span> = <span class="hljs-string">&quot;456&quot;</span>
+&gt;输出: <span class="hljs-string">&quot;56088&quot;</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> <span class="hljs-title">multiply</span><span class="hljs-params">(<span class="hljs-keyword">String</span> num1, <span class="hljs-keyword">String</span> num2)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> len1 = num1.length();
+        <span class="hljs-keyword">int</span> len2 = num2.length();
+        <span class="hljs-keyword">if</span> (len1 == <span class="hljs-number">0</span> || len2 == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;0&quot;</span>;
+        <span class="hljs-keyword">int</span>[] mul = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[len1 + len2];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = len1 - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--)&#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = len2 - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">0</span>; j--)&#123;
+                <span class="hljs-keyword">int</span> n = (num1.charAt(i) - <span class="hljs-string">&#x27;0&#x27;</span>) * (num2.charAt(j) - <span class="hljs-string">&#x27;0&#x27;</span>) + mul[i + j + <span class="hljs-number">1</span>];
+                mul[i + j + <span class="hljs-number">1</span>] = n % <span class="hljs-number">10</span>;
+                mul[i + j] += n / <span class="hljs-number">10</span>;
+            &#125;
+        &#125;
+        StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder();
+        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (i &lt; len1 + len2 - <span class="hljs-number">1</span> &amp;&amp; mul[i] == <span class="hljs-number">0</span>) i++;
+        <span class="hljs-keyword">while</span> (i &lt; len1 + len2) sb.append(mul[i++]);
+        <span class="hljs-keyword">return</span> sb.toString();
+    &#125;
+&#125;</code></pre>
+
+<h3 id="2-反转字符串-660"><a href="#2-反转字符串-660" class="headerlink" title="2. 反转字符串(660)"></a>2. 反转字符串(660)</h3><blockquote>
+<p>写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。</p>
+<p>不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。</p>
+<p>你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。</p>
+<pre><code class="hljs css">&gt;输入：<span class="hljs-selector-attr">[<span class="hljs-string">&quot;h&quot;</span>,<span class="hljs-string">&quot;e&quot;</span>,<span class="hljs-string">&quot;l&quot;</span>,<span class="hljs-string">&quot;l&quot;</span>,<span class="hljs-string">&quot;o&quot;</span>]</span>
+&gt;输出：<span class="hljs-selector-attr">[<span class="hljs-string">&quot;o&quot;</span>,<span class="hljs-string">&quot;l&quot;</span>,<span class="hljs-string">&quot;l&quot;</span>,<span class="hljs-string">&quot;e&quot;</span>,<span class="hljs-string">&quot;h&quot;</span>]</span></code></pre>
+
+<pre><code class="hljs smalltalk">&gt;输入：[<span class="hljs-comment">&quot;H&quot;</span>,<span class="hljs-comment">&quot;a&quot;</span>,<span class="hljs-comment">&quot;n&quot;</span>,<span class="hljs-comment">&quot;n&quot;</span>,<span class="hljs-comment">&quot;a&quot;</span>,<span class="hljs-comment">&quot;h&quot;</span>]
+&gt;输出：[<span class="hljs-comment">&quot;h&quot;</span>,<span class="hljs-comment">&quot;a&quot;</span>,<span class="hljs-comment">&quot;n&quot;</span>,<span class="hljs-comment">&quot;n&quot;</span>,<span class="hljs-comment">&quot;a&quot;</span>,<span class="hljs-comment">&quot;H&quot;</span>]</code></pre>
+</blockquote>
+<pre><code class="hljs cpp"><span class="hljs-comment">// 利用while反转交换</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">reverseString</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[] s)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> p1 = <span class="hljs-number">0</span>, p2 = s.length - <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">while</span>(p1 &lt; p2)&#123;
+            swap(s, p1++, p2--);
+        &#125;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[] s, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j)</span> </span>&#123;
+        <span class="hljs-keyword">char</span> temp = s[i];
+        s[i] = s[j];
+        s[j] = temp;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="3-无重复字符的最长子串-2862"><a href="#3-无重复字符的最长子串-2862" class="headerlink" title="3. 无重复字符的最长子串(2862)"></a>3. 无重复字符的最长子串(2862)</h3><blockquote>
+<p>给定一个字符串，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入: s = <span class="hljs-string">&quot;abcabcbb&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出: 3</span> 
+<span class="hljs-meta">&gt;</span><span class="bash">解释: 因为无重复字符的最长子串是 <span class="hljs-string">&quot;abc&quot;</span>，所以其长度为 3。</span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入: s = <span class="hljs-string">&quot;bbbbb&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出: 1</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释: 因为无重复字符的最长子串是 <span class="hljs-string">&quot;b&quot;</span>，所以其长度为 1。</span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入: s = <span class="hljs-string">&quot;pwwkew&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出: 3</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释: 因为无重复字符的最长子串是 <span class="hljs-string">&quot;wke&quot;</span>，所以其长度为 3。</span>
+    请注意，你的答案必须是 子串 的长度，&quot;pwke&quot; 是一个子序列，不是子串。</code></pre>
+</blockquote>
+<pre><code class="hljs reasonml"><span class="hljs-keyword">class</span> Solution &#123;
+    public <span class="hljs-built_in">int</span> length<span class="hljs-constructor">OfLongestSubstring(String <span class="hljs-params">s</span>)</span> &#123;
+        <span class="hljs-built_in">int</span> n = s.length<span class="hljs-literal">()</span>, ans = <span class="hljs-number">0</span>;
+        <span class="hljs-comment">// map 加双指针。map来保留索引，类似于滑动窗</span>
+        Map&lt;Character, Integer&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;<span class="hljs-literal">()</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;
+            <span class="hljs-keyword">if</span> (map.contains<span class="hljs-constructor">Key(<span class="hljs-params">s</span>.<span class="hljs-params">charAt</span>(<span class="hljs-params">j</span>)</span>)) &#123;
+                i = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>max(map.get(s.<span class="hljs-built_in">char</span><span class="hljs-constructor">At(<span class="hljs-params">j</span>)</span>), i);
+            &#125;
+            ans = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>max(ans, j - i + <span class="hljs-number">1</span>);
+            map.put(s.<span class="hljs-built_in">char</span><span class="hljs-constructor">At(<span class="hljs-params">j</span>)</span>, j + <span class="hljs-number">1</span>);
+        &#125;
+        return ans;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="4-1、左旋转字符串"><a href="#4-1、左旋转字符串" class="headerlink" title="4.1、左旋转字符串"></a>4.1、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/12d959b108cb42b1ab72cef4d36af5ec?tpId=13&tqId=11196&tPage=3&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">左旋转字符串</a></h3><blockquote>
+<p>汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入</span>
+<span class="hljs-meta">&gt;</span><span class="bash"><span class="hljs-string">&quot;abcXYZdef&quot;</span>,3</span>
+<span class="hljs-meta">&gt;</span><span class="bash">返回值</span>
+<span class="hljs-meta">&gt;</span><span class="bash"><span class="hljs-string">&quot;XYZdefabc&quot;</span></span></code></pre>
+</blockquote>
+<pre><code class="hljs processing"><span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> LeftRotateString(<span class="hljs-keyword">String</span> <span class="hljs-built_in">str</span>, <span class="hljs-built_in">int</span> n) &#123;
+    <span class="hljs-keyword">if</span> (n &gt;= <span class="hljs-built_in">str</span>.length())
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">str</span>;
+    <span class="hljs-built_in">char</span>[] chars = <span class="hljs-built_in">str</span>.toCharArray();
+    <span class="hljs-comment">// 分三步反转</span>
+    <span class="hljs-comment">// 1. n之前反转</span>
+    <span class="hljs-built_in">reverse</span>(chars, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);
+    <span class="hljs-comment">// 2. n之后反转</span>
+    <span class="hljs-built_in">reverse</span>(chars, n, chars.length - <span class="hljs-number">1</span>);
+    <span class="hljs-comment">// 3. 全部反转</span>
+    <span class="hljs-built_in">reverse</span>(chars, <span class="hljs-number">0</span>, chars.length - <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">String</span>(chars);
+&#125;
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-built_in">reverse</span>(<span class="hljs-built_in">char</span>[] chars, <span class="hljs-built_in">int</span> i, <span class="hljs-built_in">int</span> j) &#123;
+    <span class="hljs-keyword">while</span> (i &lt; j)
+        swap(chars, i++, j--);
+&#125;
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> swap(<span class="hljs-built_in">char</span>[] chars, <span class="hljs-built_in">int</span> i, <span class="hljs-built_in">int</span> j) &#123;
+    <span class="hljs-built_in">char</span> t = chars[i];
+    chars[i] = chars[j];
+    chars[j] = t;
+&#125;</code></pre>
+
+<h3 id="4-2、翻转单词顺序列"><a href="#4-2、翻转单词顺序列" class="headerlink" title="4.2、翻转单词顺序列"></a>4.2、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/3194a4f4cf814f63919d0790578d51f3?tpId=13&tqId=11197&tPage=3&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">翻转单词顺序列</a></h3><blockquote>
+<p>牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入</span>
+<span class="hljs-meta">&gt;</span><span class="bash"><span class="hljs-string">&quot;nowcoder. a am I&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">返回值</span>
+<span class="hljs-meta">&gt;</span><span class="bash"><span class="hljs-string">&quot;I am a nowcoder.&quot;</span></span></code></pre>
+</blockquote>
+<p>正确的解法应该是和书上一样，先旋转每个单词，再旋转整个字符串。</p>
+<pre><code class="hljs processing"><span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> ReverseSentence(<span class="hljs-keyword">String</span> <span class="hljs-built_in">str</span>) &#123;
+    <span class="hljs-built_in">int</span> n = <span class="hljs-built_in">str</span>.length();
+    <span class="hljs-built_in">char</span>[] chars = <span class="hljs-built_in">str</span>.toCharArray();
+    <span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>;
+    <span class="hljs-comment">// 双指针，滑窗，，注意边界。</span>
+    <span class="hljs-keyword">while</span> (j &lt;= n) &#123;
+        <span class="hljs-comment">// 关键是这个判断边界</span>
+        <span class="hljs-keyword">if</span> (j == n || chars[j] == <span class="hljs-string">&#x27; &#x27;</span>) &#123;
+            <span class="hljs-comment">// 反转</span>
+            <span class="hljs-built_in">reverse</span>(chars, i, j - <span class="hljs-number">1</span>);
+            <span class="hljs-comment">// 下个单词的索引开头</span>
+            i = j + <span class="hljs-number">1</span>;
+        &#125;
+        <span class="hljs-comment">// 继续走</span>
+        j++;
+    &#125;
+    <span class="hljs-comment">// 全反转</span>
+    <span class="hljs-built_in">reverse</span>(chars, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">String</span>(chars);
+&#125;
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-built_in">reverse</span>(<span class="hljs-built_in">char</span>[] c, <span class="hljs-built_in">int</span> i, <span class="hljs-built_in">int</span> j) &#123;
+    <span class="hljs-keyword">while</span> (i &lt; j)
+        swap(c, i++, j--);
+&#125;
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> swap(<span class="hljs-built_in">char</span>[] c, <span class="hljs-built_in">int</span> i, <span class="hljs-built_in">int</span> j) &#123;
+    <span class="hljs-built_in">char</span> t = c[i];
+    c[i] = c[j];
+    c[j] = t;
+&#125;</code></pre>
+
+<h3 id="5、把字符串转成整数"><a href="#5、把字符串转成整数" class="headerlink" title="5、把字符串转成整数"></a>5、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/1277c681251b4372bdef344468e4f26e?tpId=13&tqId=11202&tPage=3&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">把字符串转成整数</a></h3><blockquote>
+<p>将一个字符串转换成一个整数，要求不能使用字符串转换整数的库函数。 数值为0或者字符串不是一个合法的数值则返回0</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入</span>
+<span class="hljs-meta">&gt;</span><span class="bash"><span class="hljs-string">&quot;+2147483647&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">返回值</span>
+<span class="hljs-meta">&gt;</span><span class="bash">2147483647</span></code></pre>
+</blockquote>
+<pre><code class="hljs axapta"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T49</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> StrToInt(String <span class="hljs-built_in">str</span>) &#123;
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">str</span> == <span class="hljs-literal">null</span> || <span class="hljs-built_in">str</span>.length() == <span class="hljs-number">0</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-comment">// 注意第一个字符是否是-</span>
+        <span class="hljs-built_in">boolean</span> isNegative = <span class="hljs-built_in">str</span>.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&#x27;-&#x27;</span>;
+        <span class="hljs-built_in">int</span> ret = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">str</span>.length(); i++) &#123;
+            <span class="hljs-built_in">char</span> c = <span class="hljs-built_in">str</span>.charAt(i);
+            <span class="hljs-comment">// 跳过第一个字符</span>
+            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span> &amp;&amp; (c == <span class="hljs-string">&#x27;+&#x27;</span> || c == <span class="hljs-string">&#x27;-&#x27;</span>))  <span class="hljs-comment">/* 符号判定 */</span>
+                <span class="hljs-keyword">continue</span>;
+            <span class="hljs-comment">// 防止非法输入</span>
+            <span class="hljs-keyword">if</span> (c &lt; <span class="hljs-string">&#x27;0&#x27;</span> || c &gt; <span class="hljs-string">&#x27;9&#x27;</span>)                <span class="hljs-comment">/* 非法输入 */</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            <span class="hljs-comment">// 正常操作，注意“0”</span>
+            ret = ret * <span class="hljs-number">10</span> + (c - <span class="hljs-string">&#x27;0&#x27;</span>);
+        &#125;
+        <span class="hljs-keyword">return</span> isNegative ? -ret : ret;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="5-最长回文子串-1478"><a href="#5-最长回文子串-1478" class="headerlink" title="5. 最长回文子串(1478)"></a>5. 最长回文子串(1478)</h3><blockquote>
+<p>给你一个字符串 <code>s</code>，找到 <code>s</code> 中最长的回文子串</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：s = <span class="hljs-string">&quot;babad&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：<span class="hljs-string">&quot;bab&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释：<span class="hljs-string">&quot;aba&quot;</span> 同样是符合题意的答案。</span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：s = <span class="hljs-string">&quot;cbbd&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：<span class="hljs-string">&quot;bb&quot;</span></span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：s = <span class="hljs-string">&quot;ac&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：<span class="hljs-string">&quot;a&quot;</span></span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：s = <span class="hljs-string">&quot;a&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：<span class="hljs-string">&quot;a&quot;</span></span></code></pre>
+</blockquote>
+<p>中心扩展</p>
+<ul>
+<li>两种情况</li>
+<li>奇数长度</li>
+<li>偶数长度</li>
+<li>取最长，求起始和结束位置</li>
+<li>用substring即可</li>
+</ul>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> <span class="hljs-title">longestPalindrome</span><span class="hljs-params">(<span class="hljs-keyword">String</span> s)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (s == null || s.length() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> s;
+        <span class="hljs-keyword">int</span> start = <span class="hljs-number">0</span>, <span class="hljs-built_in">end</span> = <span class="hljs-number">0</span>; <span class="hljs-comment">// 记录起始位置</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s.length(); i++) &#123;
+            <span class="hljs-comment">// 两种情况 以i为中心，以i和i+1为中心</span>
+            <span class="hljs-keyword">int</span> len1 = expand(s, i - <span class="hljs-number">1</span>, i + <span class="hljs-number">1</span>); <span class="hljs-comment">// 中心扩展 </span>
+            <span class="hljs-keyword">int</span> len2 = expand(s, i, i + <span class="hljs-number">1</span>);
+            <span class="hljs-keyword">int</span> len = Math.<span class="hljs-built_in">max</span>(len1, len2); <span class="hljs-comment">// 取最长的长度</span>
+            <span class="hljs-keyword">if</span> (len &gt; <span class="hljs-built_in">end</span> - start) &#123;
+                start = i - (len - <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;
+                <span class="hljs-built_in">end</span> = i + len / <span class="hljs-number">2</span>;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> s.substring(start, <span class="hljs-built_in">end</span> + <span class="hljs-number">1</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">expand</span><span class="hljs-params">(<span class="hljs-keyword">String</span> s, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span> </span>&#123;
+        <span class="hljs-keyword">while</span> (l &gt;= <span class="hljs-number">0</span> &amp;&amp; r &lt; s.length() &amp;&amp; s.charAt(l) == s.charAt(r)) &#123;
+            l--;
+            r++;
+        &#125;
+        <span class="hljs-comment">// 这里要注意</span>
+        <span class="hljs-keyword">return</span> r - l - <span class="hljs-number">1</span>;
+    &#125;
+&#125;</code></pre>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/java%E7%AE%97%E6%B3%95/">java算法</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B9%A0%E9%A2%98/">习题</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，大部分为学习心得，欢迎与博主联系讨论</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/19/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">动态规划相关算法题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/17/%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">
+                        <span class="hidden-mobile">数组相关算法题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+<b>此身此时此地</b>
+<i class="iconfont icon-love"></i>
+<b>所见所闻所想</b>
+
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

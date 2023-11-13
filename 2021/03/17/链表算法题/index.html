@@ -1,0 +1,1115 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="刘金博">
+  <meta name="keywords" content="">
+  <title>需要熟练的链表算法题 - xiaoliu‘s sapce</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>xiaoliu's space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="需要熟练的链表算法题">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-17 12:00" pubdate>
+        2021年3月17日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      53
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">需要熟练的链表算法题</h1>
+            
+            <div class="markdown-body">
+              <h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="1、从尾到头打印链表"><a href="#1、从尾到头打印链表" class="headerlink" title="1、从尾到头打印链表"></a>1、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/d0267f7f55b3412ba93bd35cfa8e8035?tpId=13&tqId=11156&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">从尾到头打印链表</a></h3><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T3</span> </span>&#123;
+    <span class="hljs-comment">// 创建list</span>
+    ArrayList&lt;Integer&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+    <span class="hljs-keyword">public</span> ArrayList&lt;Integer&gt; <span class="hljs-function"><span class="hljs-title">printListFromTailToHead</span>(<span class="hljs-params">ListNode listNode</span>)</span> &#123;
+        <span class="hljs-comment">// 判断头节点是否为空</span>
+        <span class="hljs-keyword">if</span> (listNode != <span class="hljs-literal">null</span>) &#123;
+            <span class="hljs-comment">// 递归打印</span>
+            <span class="hljs-built_in">this</span>.printListFromTailToHead(listNode.next);
+            list.add(listNode.val);
+        &#125;
+        <span class="hljs-keyword">return</span> list;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="2、删除链表中重复的结点"><a href="#2、删除链表中重复的结点" class="headerlink" title="2、删除链表中重复的结点"></a>2、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/fc533c45b73a41b0b44ccba763f866ef?tpId=13&tqId=11209&tPage=3&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">删除链表中重复的结点</a></h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/">https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/</a></p>
+<pre><code class="hljs axapta"><span class="hljs-keyword">public</span> ListNode deleteDuplication(ListNode pHead) &#123;
+    <span class="hljs-comment">// 1. 边界，需要下一个结点做判断，因此还是需要判断下个结点是否为空</span>
+    <span class="hljs-keyword">if</span> (pHead == <span class="hljs-literal">null</span> || pHead.<span class="hljs-keyword">next</span> == <span class="hljs-literal">null</span>)
+        <span class="hljs-keyword">return</span> pHead;
+    <span class="hljs-comment">// 取下一个结点</span>
+    ListNode <span class="hljs-keyword">next</span> = pHead.<span class="hljs-keyword">next</span>;
+    <span class="hljs-comment">// 2. 判断当前结点和下一个结点是否相等</span>
+    <span class="hljs-keyword">if</span> (pHead.val == <span class="hljs-keyword">next</span>.val) &#123;
+        <span class="hljs-comment">// 3. 如果相等，判断是否一直重复</span>
+        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">next</span> != <span class="hljs-literal">null</span> &amp;&amp; pHead.val == <span class="hljs-keyword">next</span>.val)
+            <span class="hljs-keyword">next</span> = <span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span>;
+        <span class="hljs-keyword">return</span> deleteDuplication(<span class="hljs-keyword">next</span>);
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-comment">// 4， 否则不重复的话，就递归下一个结点</span>
+        pHead.<span class="hljs-keyword">next</span> = deleteDuplication(pHead.<span class="hljs-keyword">next</span>);
+        <span class="hljs-keyword">return</span> pHead;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="3-1-环形链表"><a href="#3-1-环形链表" class="headerlink" title="3.1 环形链表"></a>3.1 环形链表</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/linked-list-cycle/">https://leetcode-cn.com/problems/linked-list-cycle/</a></p>
+<pre><code class="hljs axapta"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">boolean</span> hasCycle(ListNode head) &#123;
+        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span>) &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        &#125;
+        ListNode l1 = head, l2 = head.<span class="hljs-keyword">next</span>;
+        <span class="hljs-keyword">while</span> (l1 != <span class="hljs-literal">null</span> &amp;&amp; l2 != <span class="hljs-literal">null</span> &amp;&amp; l2.<span class="hljs-keyword">next</span> != <span class="hljs-literal">null</span>) &#123;
+            <span class="hljs-keyword">if</span> (l1 == l2) &#123;
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            &#125;
+            l1 = l1.<span class="hljs-keyword">next</span>;
+            l2 = l2.<span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span>;
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="3-2、链表中环的入口结点"><a href="#3-2、链表中环的入口结点" class="headerlink" title="3.2、链表中环的入口结点"></a>3.2、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/253d2c59ec3e4bc68da16833f79a38e4?tpId=13&tqId=11208&tPage=3&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">链表中环的入口结点</a></h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/linked-list-cycle-ii/submissions/">https://leetcode-cn.com/problems/linked-list-cycle-ii/submissions/</a></p>
+<pre><code class="hljs axapta"><span class="hljs-comment">// 快慢指针</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> ListNode detectCycle(ListNode head) &#123;
+        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.<span class="hljs-keyword">next</span> == <span class="hljs-literal">null</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        
+        <span class="hljs-built_in">boolean</span> hasCycle = <span class="hljs-literal">false</span>;
+        ListNode p1 = head, p2 = head;
+        <span class="hljs-keyword">while</span>(p2.<span class="hljs-keyword">next</span> != <span class="hljs-literal">null</span> &amp;&amp; p2.<span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span> != <span class="hljs-literal">null</span>) &#123;
+            p1 = p1.<span class="hljs-keyword">next</span>;
+            p2 = p2.<span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span>;
+            <span class="hljs-keyword">if</span> (p1 == p2) &#123;
+                hasCycle = <span class="hljs-literal">true</span>;
+                <span class="hljs-keyword">break</span>;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">if</span>(hasCycle)&#123;
+            p2 = head;
+            <span class="hljs-keyword">while</span> (p1 != p2) &#123;
+                p1 = p1.<span class="hljs-keyword">next</span>;
+                p2 = p2.<span class="hljs-keyword">next</span>;
+            &#125;
+            <span class="hljs-keyword">return</span> p1;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        &#125;
+    
+    &#125;
+&#125;</code></pre>
+
+<h3 id="4、反转链表"><a href="#4、反转链表" class="headerlink" title="4、反转链表"></a>4、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/75e878df47f24fdc9dc3e400ec6058ca?tpId=13&tqId=11168&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">反转链表</a></h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/">https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/</a></p>
+<pre><code class="hljs axapta"><span class="hljs-keyword">public</span> ListNode reverseList(ListNode head) &#123;
+    <span class="hljs-comment">// 总感觉，本质还是两个指针，pre不过初始化为null，cur为head当前结点</span>
+    ListNode pre = <span class="hljs-literal">null</span>; 
+    ListNode cur = head;
+    <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">null</span>) &#123;
+        <span class="hljs-comment">// 1. 获取当前节点的下一个节点，方便cur下移动</span>
+        ListNode nextTemp = cur.<span class="hljs-keyword">next</span>;
+        <span class="hljs-comment">// 2. 当前节点的下个节点指向前一个节点 （反转，那肯定cur的next指向pre咯）</span>
+        cur.<span class="hljs-keyword">next</span> = pre; 
+        <span class="hljs-comment">// 3. pre移动下一个结点，那肯定是cur咯</span>
+        pre = cur; 
+        <span class="hljs-comment">// 4. cur移动下一个结点， 那肯定是nextTemp咯</span>
+        cur = nextTemp;
+    &#125;
+    <span class="hljs-keyword">return</span> pre;
+&#125;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T15</span> </span>&#123;
+    <span class="hljs-keyword">public</span> ListNode ReverseList(ListNode head) &#123;
+        <span class="hljs-comment">// 判断</span>
+        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">reverse</span>(<span class="hljs-literal">null</span>, head);
+    &#125;
+    <span class="hljs-keyword">private</span> ListNode <span class="hljs-keyword">reverse</span>(ListNode pre, ListNode cur) &#123;
+        <span class="hljs-comment">// 递归结束判断</span>
+        <span class="hljs-keyword">if</span> (cur == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> pre;
+        <span class="hljs-comment">// 1. 依然第一个方法遍历依然，得到cur的next，递归用</span>
+        ListNode <span class="hljs-keyword">next</span> = cur.<span class="hljs-keyword">next</span>;
+        <span class="hljs-comment">// 2. 反转操作</span>
+        cur.<span class="hljs-keyword">next</span> = pre;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">reverse</span>(cur, <span class="hljs-keyword">next</span>);
+    &#125;
+&#125;</code></pre>
+
+<h3 id="5、链表中倒数第k个结点"><a href="#5、链表中倒数第k个结点" class="headerlink" title="5、链表中倒数第k个结点"></a>5、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/529d3ae5a407492994ad2a246518148a?tpId=13&tqId=11167&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">链表中倒数第k个结点</a></h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/">https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/</a></p>
+<pre><code class="hljs typescript"><span class="hljs-keyword">public</span> ListNode <span class="hljs-function"><span class="hljs-title">FindKthToTail</span>(<span class="hljs-params">ListNode head, int k</span>)</span> &#123;
+    <span class="hljs-comment">// 还是双指针</span>
+    <span class="hljs-comment">// 1. 边界判断</span>
+    <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    ListNode p1 = head;
+    <span class="hljs-comment">// 2. 先让p1移动k步</span>
+    <span class="hljs-keyword">while</span> (p1 != <span class="hljs-literal">null</span> &amp;&amp; k-- &gt; <span class="hljs-number">0</span>)
+        p1 = p1.next;
+    <span class="hljs-comment">// 3. 这一步防止k大于head的长度</span>
+    <span class="hljs-keyword">if</span> (k &gt; <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    ListNode p2 = head;
+    <span class="hljs-comment">// 4. 二者正常走，不过p1肯定先到末尾</span>
+    <span class="hljs-keyword">while</span> (p1 != <span class="hljs-literal">null</span>) &#123;
+        p1 = p1.next;
+        p2 = p2.next;
+    &#125;
+    <span class="hljs-comment">// 5. 返回p2</span>
+    <span class="hljs-keyword">return</span> p2;
+&#125;</code></pre>
+
+<h3 id="6、合并两个排序的链表"><a href="#6、合并两个排序的链表" class="headerlink" title="6、合并两个排序的链表"></a>6、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/d8b6b4358f774294a89de2a6ac4d9337?tpId=13&tqId=11169&tPage=1&rp=1&ru=/ta%252">合并两个排序的链表</a></h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/">https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/</a></p>
+<pre><code class="hljs kotlin"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T16</span> </span>&#123;
+    <span class="hljs-keyword">public</span> ListNode Merge(ListNode list1,ListNode list2) &#123;
+        <span class="hljs-comment">// 1. 如果list1为空，返回list2</span>
+        <span class="hljs-keyword">if</span> (list1 == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> list2;
+        <span class="hljs-comment">// 2. 如果list2为空，返回list1</span>
+        <span class="hljs-keyword">if</span> (list2 == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> list1;
+        <span class="hljs-comment">// 3. 如果list1.val &lt; list2.val，则list1.next连接下一个比较值（递归比较）</span>
+        <span class="hljs-keyword">if</span> (list1.<span class="hljs-keyword">val</span> &lt; list2.<span class="hljs-keyword">val</span>) &#123;
+            list1.next = Merge(list1.next, list2);
+            <span class="hljs-keyword">return</span> list1;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-comment">// 4. 否则，list2.next 连接下一个比较值（递归比较）</span>
+            list2.next = Merge(list1, list2.next);
+            <span class="hljs-keyword">return</span> list2;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="7、两个链表的第一个公共结点"><a href="#7、两个链表的第一个公共结点" class="headerlink" title="7、两个链表的第一个公共结点"></a>7、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/6ab1d9a29e88450685099d45c9e31e46?tpId=13&tqId=11189&tPage=2&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">两个链表的第一个公共结点</a></h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">https://leetcode-cn.com/problems/intersection-of-two-linked-lists/</a></p>
+<pre><code class="hljs awk"><span class="hljs-regexp">//</span> 还是双指针
+public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) &#123;
+    ListNode l1 = pHead1, l2 = pHead2;
+    <span class="hljs-regexp">//</span> <span class="hljs-number">1</span>. 循环条件
+    <span class="hljs-keyword">while</span> (l1 != l2) &#123;
+        <span class="hljs-regexp">//</span> <span class="hljs-number">2</span>. 走完l1，从头走head2
+        l1 = (l1 == null) ? pHead2 : l1.<span class="hljs-keyword">next</span>;
+        <span class="hljs-regexp">//</span> <span class="hljs-number">3</span>. 走完l2，从头走head1
+        l2 = (l2 == null) ? pHead1 : l2.<span class="hljs-keyword">next</span>;
+    &#125;
+    <span class="hljs-regexp">//</span> <span class="hljs-number">4</span>. 返回l1
+    return l1;
+&#125;</code></pre>
+
+<h3 id="8-两数相加-2819"><a href="#8-两数相加-2819" class="headerlink" title="8. 两数相加(2819)"></a>8. 两数相加(2819)</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/add-two-numbers/">https://leetcode-cn.com/problems/add-two-numbers/</a></p>
+<pre><code class="hljs axapta"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123;
+        <span class="hljs-comment">// 边界判断：3个</span>
+        <span class="hljs-comment">// 1. l1和l2同时为空</span>
+        <span class="hljs-keyword">if</span> (l1 == <span class="hljs-literal">null</span> &amp;&amp; l2 == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        <span class="hljs-comment">// 2. l1为空，返回l2</span>
+        <span class="hljs-keyword">if</span> (l1 == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> l2;
+        <span class="hljs-comment">// 3. l2为空，返回l1</span>
+        <span class="hljs-keyword">if</span> (l2 == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> l1;
+        <span class="hljs-comment">// 三指针</span>
+        <span class="hljs-comment">// 1. p1</span>
+        ListNode p1 = l1;
+        <span class="hljs-comment">// 2. p2</span>
+        ListNode p2 = l2;
+        <span class="hljs-comment">// 3. p3 特殊：返回最值链表</span>
+        ListNode l3 = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">-1</span>);
+        ListNode p3 = l3;
+        <span class="hljs-comment">// 4. 注意：进位</span>
+        <span class="hljs-built_in">int</span> carried = <span class="hljs-number">0</span>;
+        <span class="hljs-comment">// 5. 循环条件，任意一个不为空即可</span>
+        <span class="hljs-keyword">while</span> (p1 != <span class="hljs-literal">null</span> || p2 != <span class="hljs-literal">null</span>) &#123;
+            <span class="hljs-comment">// p1不为空，获取p1val，否则0</span>
+            <span class="hljs-built_in">int</span> a = p1 != <span class="hljs-literal">null</span> ? p1.val : <span class="hljs-number">0</span>;
+            <span class="hljs-comment">// p2不为空，获取p2val，否则0</span>
+            <span class="hljs-built_in">int</span> b = p2 != <span class="hljs-literal">null</span> ? p2.val : <span class="hljs-number">0</span>;
+            <span class="hljs-comment">// 关键一步，(a+b+carried) % 10 个位</span>
+            p3.<span class="hljs-keyword">next</span> = <span class="hljs-keyword">new</span> ListNode((a + b + carried) % <span class="hljs-number">10</span>);
+            <span class="hljs-comment">// 加完，记得进位呀(a + b + carried) / 10</span>
+            carried = (a + b + carried) / <span class="hljs-number">10</span>;
+            <span class="hljs-comment">// 三个指针开始移动</span>
+            p3 = p3.<span class="hljs-keyword">next</span>;
+            p1 = p1 != <span class="hljs-literal">null</span> ? p1.<span class="hljs-keyword">next</span> : <span class="hljs-literal">null</span>;
+            p2 = p2 != <span class="hljs-literal">null</span> ? p2.<span class="hljs-keyword">next</span> : <span class="hljs-literal">null</span>;
+        &#125;
+        <span class="hljs-comment">// 循环完之后，判断进位是否0，如果不是，new一个结点为1，是的话，就null</span>
+        p3.<span class="hljs-keyword">next</span> = carried != <span class="hljs-number">0</span> ? <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">1</span>) : <span class="hljs-literal">null</span>;
+        <span class="hljs-comment">// 返回l3下一个结点</span>
+        <span class="hljs-keyword">return</span> l3.<span class="hljs-keyword">next</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="9-合并K个排序链表-924"><a href="#9-合并K个排序链表-924" class="headerlink" title="9. 合并K个排序链表(924)"></a>9. 合并K个排序链表(924)</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-k-sorted-lists/">https://leetcode-cn.com/problems/merge-k-sorted-lists/</a></p>
+<p>最小堆</p>
+<pre><code class="hljs typescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> ListNode <span class="hljs-function"><span class="hljs-title">mergeKLists</span>(<span class="hljs-params">ListNode[] lists</span>)</span> &#123;
+        <span class="hljs-comment">// 边界判断</span>
+        <span class="hljs-keyword">if</span> (lists == <span class="hljs-literal">null</span> || lists.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        <span class="hljs-comment">// 2. 堆，大顶堆</span>
+        PriorityQueue&lt;ListNode&gt; queue = <span class="hljs-keyword">new</span> PriorityQueue&lt;&gt;((o1, o2) -&gt; o1.val - o2.val);
+        <span class="hljs-comment">// 3. 返回结点</span>
+        ListNode dummy = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">0</span>);
+        <span class="hljs-comment">// 4. 临时p</span>
+        ListNode p = dummy;
+        <span class="hljs-comment">// 5. 遍历k个lists，一个一个添加到queue</span>
+        <span class="hljs-keyword">for</span> (ListNode node : lists) &#123;
+            <span class="hljs-keyword">if</span> (node != <span class="hljs-literal">null</span>) queue.add(node);
+        &#125;
+        <span class="hljs-comment">// 6. 循环堆不为空</span>
+        <span class="hljs-keyword">while</span> (!queue.isEmpty()) &#123;
+            <span class="hljs-comment">// p的下个结点指向 取出堆中最大的链表结点</span>
+            p.next = queue.poll();
+            <span class="hljs-comment">// 移动</span>
+            p = p.next;
+            <span class="hljs-comment">// 如果下一个不为空，继续添加刚才堆中最大的下一个结点</span>
+            <span class="hljs-keyword">if</span> (p.next != <span class="hljs-literal">null</span>) queue.add(p.next);
+        &#125;
+        <span class="hljs-comment">// 7. 返回下一个结点</span>
+        <span class="hljs-keyword">return</span> dummy.next;
+    &#125;   
+&#125;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+   <span class="hljs-keyword">public</span> ListNode <span class="hljs-function"><span class="hljs-title">mergeKLists</span>(<span class="hljs-params">ListNode[] lists</span>)</span> &#123;
+        <span class="hljs-comment">// 归并</span>
+        <span class="hljs-keyword">if</span> (lists == <span class="hljs-literal">null</span> || lists.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        <span class="hljs-keyword">return</span> merge(lists, <span class="hljs-number">0</span>, lists.length - <span class="hljs-number">1</span>);
+    &#125;
+
+    <span class="hljs-keyword">private</span> ListNode <span class="hljs-function"><span class="hljs-title">merge</span>(<span class="hljs-params">ListNode[] lists, int left, int right</span>)</span> &#123;
+        <span class="hljs-comment">// 归并排序一样</span>
+        <span class="hljs-keyword">if</span> (left == right) <span class="hljs-keyword">return</span> lists[left];
+        int mid = left + (right - left) / <span class="hljs-number">2</span>;
+        ListNode l1 = merge(lists, left, mid);
+        ListNode l2 = merge(lists, mid + <span class="hljs-number">1</span>, right);
+        <span class="hljs-keyword">return</span> mergeTwoLists(l1, l2);
+    &#125;
+    <span class="hljs-comment">// 不过，最后归并的时候用的是合并两个排序的链表</span>
+    <span class="hljs-keyword">private</span> ListNode <span class="hljs-function"><span class="hljs-title">mergeTwoLists</span>(<span class="hljs-params">ListNode l1, ListNode l2</span>)</span> &#123;
+        <span class="hljs-keyword">if</span> (l1 == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> l2;
+        <span class="hljs-keyword">if</span> (l2 == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> l1;
+        <span class="hljs-keyword">if</span> (l1.val &lt; l2.val) &#123;
+            l1.next = mergeTwoLists(l1.next, l2);
+            <span class="hljs-keyword">return</span> l1;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            l2.next = mergeTwoLists(l1,l2.next);
+            <span class="hljs-keyword">return</span> l2;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="10-两两交换链表中的节点-947"><a href="#10-两两交换链表中的节点-947" class="headerlink" title="10. 两两交换链表中的节点(947)"></a>10. 两两交换链表中的节点(947)</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/swap-nodes-in-pairs/">https://leetcode-cn.com/problems/swap-nodes-in-pairs/</a></p>
+<pre><code class="hljs awk">class Solution &#123;
+    <span class="hljs-regexp">//</span> 两两交换，那么双指针
+    public ListNode swapPairs(ListNode head) &#123;
+        <span class="hljs-regexp">//</span> 创建一个返回结点
+        ListNode node = new ListNode(-<span class="hljs-number">1</span>);
+        <span class="hljs-regexp">//</span> 该结点的<span class="hljs-keyword">next</span>指向head
+        node.<span class="hljs-keyword">next</span> = head;
+        <span class="hljs-regexp">//</span> 在创建一个pre，移动到node
+        ListNode pre = node;
+        <span class="hljs-regexp">//</span> 循环遍历
+        <span class="hljs-regexp">//</span> pre的<span class="hljs-keyword">next</span>才是head，因此判断<span class="hljs-keyword">next</span> <span class="hljs-keyword">next</span>
+        <span class="hljs-keyword">while</span> (pre.<span class="hljs-keyword">next</span> != null &amp;&amp; pre.<span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span> != null) &#123;
+            <span class="hljs-regexp">//</span> 获取l1， l2
+            ListNode l1 = pre.<span class="hljs-keyword">next</span>, l2 = pre.<span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span>;
+            <span class="hljs-regexp">//</span> 
+            ListNode <span class="hljs-keyword">next</span> = l2.<span class="hljs-keyword">next</span>;
+            l1.<span class="hljs-keyword">next</span> = <span class="hljs-keyword">next</span>;
+            l2.<span class="hljs-keyword">next</span> = l1;
+            pre.<span class="hljs-keyword">next</span> = l2;
+            <span class="hljs-regexp">//</span> pre移动一步
+            pre = l1;
+        &#125;
+        return node.<span class="hljs-keyword">next</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="11-链表的中间结点-853"><a href="#11-链表的中间结点-853" class="headerlink" title="11. 链表的中间结点(853)"></a>11. 链表的中间结点(853)</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/middle-of-the-linked-list/">https://leetcode-cn.com/problems/middle-of-the-linked-list/</a></p>
+<pre><code class="hljs axapta"><span class="hljs-comment">// 双指针（快慢）</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> ListNode middleNode(ListNode head) &#123;
+        ListNode p = head, q = head;
+        <span class="hljs-keyword">while</span> (q != <span class="hljs-literal">null</span> &amp;&amp; q.<span class="hljs-keyword">next</span> != <span class="hljs-literal">null</span>) &#123;
+            q = q.<span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span>;
+            p = p.<span class="hljs-keyword">next</span>;
+        &#125;
+        <span class="hljs-keyword">return</span> p;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="12-删除排序链表中的重复元素-603"><a href="#12-删除排序链表中的重复元素-603" class="headerlink" title="12. 删除排序链表中的重复元素(603)"></a>12. 删除排序链表中的重复元素(603)</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/">https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/</a></p>
+<pre><code class="hljs xquery">// 和那个有点区别
+class Solution &#123;
+    public ListNode deleteDuplicates(ListNode<span class="hljs-built_in"> head</span>) &#123;
+        <span class="hljs-keyword">if</span> <span class="hljs-built_in">(head</span> == null ||<span class="hljs-built_in"> head</span>.<span class="hljs-keyword">next</span> == null) <span class="hljs-keyword">return</span><span class="hljs-built_in"> head</span>;
+       <span class="hljs-built_in"> head</span>.<span class="hljs-keyword">next</span> = deleteDuplicates<span class="hljs-built_in">(head</span>.<span class="hljs-keyword">next</span>);
+        <span class="hljs-keyword">return</span><span class="hljs-built_in"> head</span>.val ==<span class="hljs-built_in"> head</span>.<span class="hljs-keyword">next</span>.val ?<span class="hljs-built_in"> head</span>.<span class="hljs-keyword">next</span> :<span class="hljs-built_in"> head</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="13-回文链表-624"><a href="#13-回文链表-624" class="headerlink" title="13. 回文链表(624)"></a>13. 回文链表(624)</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-linked-list/">https://leetcode-cn.com/problems/palindrome-linked-list/</a></p>
+<p>这题考察了很多链表的题，挺综合额</p>
+<pre><code class="hljs axapta"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">boolean</span> isPalindrome(ListNode head) &#123;
+        <span class="hljs-keyword">if</span>(head == <span class="hljs-literal">null</span> || head.<span class="hljs-keyword">next</span> == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        <span class="hljs-comment">// 找中点</span>
+        ListNode slow = head, fast = head.<span class="hljs-keyword">next</span>;
+        <span class="hljs-keyword">while</span>(fast != <span class="hljs-literal">null</span> &amp;&amp; fast.<span class="hljs-keyword">next</span> != <span class="hljs-literal">null</span>) &#123;
+            slow = slow.<span class="hljs-keyword">next</span>;
+            fast = fast.<span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span>;
+        &#125;
+        <span class="hljs-comment">// 奇偶情况</span>
+        <span class="hljs-keyword">if</span>(fast != <span class="hljs-literal">null</span>) slow = slow.<span class="hljs-keyword">next</span>;
+        <span class="hljs-comment">// cut</span>
+        cut(head, slow);
+        <span class="hljs-comment">// 比较</span>
+        <span class="hljs-keyword">return</span> isEqual(head, <span class="hljs-keyword">reverse</span>(slow));
+        
+    &#125;
+    
+    <span class="hljs-comment">// 切</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> cut (ListNode head, ListNode cutNode) &#123;
+        ListNode node = head;
+        <span class="hljs-comment">// 循环遍历找到和cutNode相等的结点的前一个结点</span>
+        <span class="hljs-keyword">while</span>(node.<span class="hljs-keyword">next</span> != cutNode) &#123;
+            node = node.<span class="hljs-keyword">next</span>;
+        &#125;
+        <span class="hljs-comment">// 然后直接null</span>
+        node.<span class="hljs-keyword">next</span> = <span class="hljs-literal">null</span>;
+    &#125;
+    
+    <span class="hljs-comment">// 反转链表派上用场</span>
+    <span class="hljs-keyword">public</span> ListNode <span class="hljs-keyword">reverse</span>(ListNode head) &#123;
+        ListNode pre = <span class="hljs-literal">null</span>;
+        ListNode cur = head;
+        <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">null</span>) &#123;
+            ListNode nextNode = cur.<span class="hljs-keyword">next</span>;
+            cur.<span class="hljs-keyword">next</span> = pre;
+            pre = cur;
+            cur = nextNode;
+        &#125;
+        <span class="hljs-keyword">return</span> pre;
+    &#125;
+    
+    
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">boolean</span> isEqual(ListNode l1, ListNode l2) &#123;
+        <span class="hljs-comment">// 二者都不为空才行</span>
+        <span class="hljs-keyword">while</span>(l1 != <span class="hljs-literal">null</span> &amp;&amp; l2 != <span class="hljs-literal">null</span>) &#123;
+            <span class="hljs-comment">// 二者值不相等直接false</span>
+            <span class="hljs-keyword">if</span>(l1.val != l2.val) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            <span class="hljs-comment">// 移动</span>
+            l1 = l1.<span class="hljs-keyword">next</span>;
+            l2 = l2.<span class="hljs-keyword">next</span>;
+        &#125;
+        <span class="hljs-comment">// 比如就true</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="14-奇偶链表-317"><a href="#14-奇偶链表-317" class="headerlink" title="14. 奇偶链表(317)"></a>14. 奇偶链表(317)</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/odd-even-linked-list/">https://leetcode-cn.com/problems/odd-even-linked-list/</a></p>
+<pre><code class="hljs awk">class Solution &#123;
+    public ListNode oddEvenList(ListNode head) &#123;
+        <span class="hljs-keyword">if</span> (head == null) return head;
+        <span class="hljs-regexp">//</span> 临时变量 奇头 偶头下 偶头部
+        ListNode odd = head, even = head.<span class="hljs-keyword">next</span>, evenHead = even;
+        <span class="hljs-regexp">//</span> 循环遍历偶和偶下不为空
+        <span class="hljs-keyword">while</span> (even != null &amp;&amp; even.<span class="hljs-keyword">next</span> != null) &#123;
+            <span class="hljs-regexp">//</span> 奇 -&gt; 奇下下
+            odd.<span class="hljs-keyword">next</span> = odd.<span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span>;
+            <span class="hljs-regexp">//</span> 奇移动一步
+            odd = odd.<span class="hljs-keyword">next</span>;
+            <span class="hljs-regexp">//</span> 偶 -&gt; 偶下下
+            even.<span class="hljs-keyword">next</span> = even.<span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span>;
+            <span class="hljs-regexp">//</span> 偶移动
+            even = even.<span class="hljs-keyword">next</span>;
+        &#125;
+        <span class="hljs-regexp">//</span> 奇 -&gt; 偶头
+        odd.<span class="hljs-keyword">next</span> = evenHead;
+        <span class="hljs-regexp">//</span> 返回head
+        return head;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="92-反转链表-II"><a href="#92-反转链表-II" class="headerlink" title="92. 反转链表 II"></a>92. 反转链表 II</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-linked-list-ii/">https://leetcode-cn.com/problems/reverse-linked-list-ii/</a></p>
+<pre><code class="hljs axapta"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 定位到要反转部分的头节点 2，head = 2；前驱结点 1，pre = 1；</span>
+<span class="hljs-comment"> * 当前节点的下一个节点3调整为前驱节点的下一个节点 1-&gt;3-&gt;2-&gt;4-&gt;5,</span>
+<span class="hljs-comment"> * 当前结点仍为2， 前驱结点依然是1，重复上一步操作。。。</span>
+<span class="hljs-comment"> * 1-&gt;4-&gt;3-&gt;2-&gt;5.</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> ListNode reverseBetween(ListNode head, <span class="hljs-built_in">int</span> m, <span class="hljs-built_in">int</span> n) &#123;
+        ListNode dummy = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">0</span>);
+        dummy.<span class="hljs-keyword">next</span> = head;
+        ListNode pre = dummy, cur, <span class="hljs-keyword">next</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt; m; i++) 
+            pre = pre.<span class="hljs-keyword">next</span>;
+        cur  = pre.<span class="hljs-keyword">next</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = m; i &lt; n; i++) &#123;
+            <span class="hljs-keyword">next</span> = cur.<span class="hljs-keyword">next</span>;
+            cur.<span class="hljs-keyword">next</span> = <span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span>;
+            <span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span> = pre.<span class="hljs-keyword">next</span>;
+            pre.<span class="hljs-keyword">next</span> = <span class="hljs-keyword">next</span>;
+        &#125;
+        <span class="hljs-keyword">return</span> dummy.<span class="hljs-keyword">next</span>;
+    &#125;
+&#125;
+<span class="hljs-comment">// 投机取巧 缓存</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> ListNode reverseBetween(ListNode head, <span class="hljs-built_in">int</span> m, <span class="hljs-built_in">int</span> n) &#123;
+        ListNode p = head;
+        <span class="hljs-built_in">int</span> idx = <span class="hljs-number">1</span>;
+        Stack&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();
+        <span class="hljs-keyword">while</span> (p != <span class="hljs-literal">null</span>) &#123;
+            <span class="hljs-keyword">if</span> (idx &gt;= m &amp;&amp; idx &lt;= n)
+                stack.push(p.val);
+            idx++;
+            p = p.<span class="hljs-keyword">next</span>;
+        &#125;
+        idx = <span class="hljs-number">1</span>;
+        p = head;
+        <span class="hljs-keyword">while</span> (p != <span class="hljs-literal">null</span>) &#123;
+            <span class="hljs-keyword">if</span> (idx &gt;= m &amp;&amp; idx &lt;= n)
+                p.val = stack.pop();
+            idx++;
+            p = p.<span class="hljs-keyword">next</span>;
+        &#125;
+        <span class="hljs-keyword">return</span> head;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="15-K-个一组翻转链表-字节爱考"><a href="#15-K-个一组翻转链表-字节爱考" class="headerlink" title="15. K 个一组翻转链表(字节爱考)"></a>15. K 个一组翻转链表(字节爱考)</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-nodes-in-k-group/">https://leetcode-cn.com/problems/reverse-nodes-in-k-group/</a></p>
+<pre><code class="hljs awk">class Solution &#123;
+    public ListNode reverseKGroup(ListNode head, int k) &#123;
+        ListNode dummy = new ListNode(<span class="hljs-number">0</span>), pre = dummy, curr = head, <span class="hljs-keyword">next</span>;
+        <span class="hljs-regexp">//</span> 临时赋值
+        dummy.<span class="hljs-keyword">next</span> = head;
+        <span class="hljs-regexp">//</span> 算长度
+        int len = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (head != null) &#123;
+            len++;
+            head = head.<span class="hljs-keyword">next</span>;
+        &#125;
+        <span class="hljs-regexp">//</span> 从头
+        head = dummy.<span class="hljs-keyword">next</span>;
+        <span class="hljs-regexp">//</span> 两重<span class="hljs-keyword">for</span>遍历
+        <span class="hljs-keyword">for</span> (int i = <span class="hljs-number">0</span>; i &lt; len / k; i++) &#123;
+            <span class="hljs-keyword">for</span> (int j = <span class="hljs-number">0</span>; j &lt; k - <span class="hljs-number">1</span>; j++) &#123;
+                <span class="hljs-regexp">//</span> 谜一般的操作
+                <span class="hljs-regexp">//</span> 临时<span class="hljs-keyword">next</span>
+                <span class="hljs-keyword">next</span> = curr.<span class="hljs-keyword">next</span>;
+                <span class="hljs-regexp">//</span> 我指向你
+                curr.<span class="hljs-keyword">next</span> = <span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span>;
+                <span class="hljs-regexp">//</span> 你指向他
+                <span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span> = pre.<span class="hljs-keyword">next</span>;
+                <span class="hljs-regexp">//</span> 他指向临时
+                pre.<span class="hljs-keyword">next</span> = <span class="hljs-keyword">next</span>;
+            &#125;
+            pre = curr; <span class="hljs-regexp">//</span> 移动
+            curr = pre.<span class="hljs-keyword">next</span>; <span class="hljs-regexp">//</span> 移动
+        &#125;
+        return dummy.<span class="hljs-keyword">next</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="16-奇数位升序偶数位降序的链表"><a href="#16-奇数位升序偶数位降序的链表" class="headerlink" title="16. 奇数位升序偶数位降序的链表"></a>16. 奇数位升序偶数位降序的链表</h3><pre><code class="hljs axapta"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ListNode oddEvenLinkedList(ListNode head) &#123;
+    <span class="hljs-comment">// 将偶数链表拆分出来</span>
+    ListNode evenHead = getEvenList(head);
+    <span class="hljs-comment">// 逆序偶数链表</span>
+    ListNode reEvenHead = reverseList(evenHead);
+    <span class="hljs-comment">// 归并奇偶链表</span>
+    ListNode mHead = mergeList(head, reEvenHead);
+    <span class="hljs-keyword">return</span> mHead;
+&#125; 
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ListNode getEvenList(ListNode head) &#123;
+    ListNode odd = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">-1</span>);
+    ListNode even = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">-1</span>);
+    <span class="hljs-built_in">int</span> cnt = <span class="hljs-number">1</span>;
+    ListNode cur1 = odd, cur2 = even;
+    <span class="hljs-keyword">while</span> (head != <span class="hljs-literal">null</span>) &#123;
+        <span class="hljs-keyword">if</span> (cnt % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>) &#123;
+            cur1.<span class="hljs-keyword">next</span> = head;
+            cur1 = cur1.<span class="hljs-keyword">next</span>;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            cur2.<span class="hljs-keyword">next</span> = head;
+            cur2 = cur2.<span class="hljs-keyword">next</span>;
+        &#125;
+        head = head.<span class="hljs-keyword">next</span>;
+        cnt++;
+    &#125;
+    cur1.<span class="hljs-keyword">next</span> = <span class="hljs-literal">null</span>;
+    cur2.<span class="hljs-keyword">next</span> = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">return</span> even.<span class="hljs-keyword">next</span>;
+&#125;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ListNode reverseList(ListNode head) &#123;
+    ListNode pre = <span class="hljs-literal">null</span>;
+    ListNode cur = head;
+    <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">null</span>) &#123;
+        ListNode <span class="hljs-keyword">next</span> = cur.<span class="hljs-keyword">next</span>;
+        cur.<span class="hljs-keyword">next</span> = pre;
+        pre = cur;
+        cur = <span class="hljs-keyword">next</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> pre;
+&#125;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ListNode mergeList(ListNode l1, ListNode l2)&#123;
+    <span class="hljs-comment">// 我用递归</span>
+    <span class="hljs-keyword">if</span> (l1 == <span class="hljs-literal">null</span>) 
+        <span class="hljs-keyword">return</span> l2;
+    <span class="hljs-keyword">if</span> (l2 == <span class="hljs-literal">null</span>)
+        <span class="hljs-keyword">return</span> l1;
+    <span class="hljs-keyword">if</span> (l1.val &lt; l2.val) &#123;
+        l1.<span class="hljs-keyword">next</span> = mergeList(l1.<span class="hljs-keyword">next</span>, l2);
+        <span class="hljs-keyword">return</span> l1;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        l2.<span class="hljs-keyword">next</span> = mergeList(l1, l2.<span class="hljs-keyword">next</span>);
+        <span class="hljs-keyword">return</span> l2;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="17-分隔链表"><a href="#17-分隔链表" class="headerlink" title="17. 分隔链表"></a>17. 分隔链表</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/partition-list/">https://leetcode-cn.com/problems/partition-list/</a></p>
+<pre><code class="hljs axapta"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> ListNode partition(ListNode head, <span class="hljs-built_in">int</span> x) &#123;
+        ListNode dummy1 = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">0</span>);
+        ListNode dummy2 = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">0</span>);
+        ListNode node1 = dummy1, node2 = dummy2;
+        <span class="hljs-keyword">while</span> (head != <span class="hljs-literal">null</span>)&#123;
+            <span class="hljs-keyword">if</span> (head.val &lt; x)&#123;
+                node1.<span class="hljs-keyword">next</span> = head;
+                <span class="hljs-comment">// 你左脚走</span>
+                head = head.<span class="hljs-keyword">next</span>;
+                <span class="hljs-comment">// 1也左脚走</span>
+                node1 = node1.<span class="hljs-keyword">next</span>;
+                <span class="hljs-comment">// 直接割，我不需要</span>
+                node1.<span class="hljs-keyword">next</span> = <span class="hljs-literal">null</span>;
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                node2.<span class="hljs-keyword">next</span> = head;
+                head = head.<span class="hljs-keyword">next</span>;
+                node2 = node2.<span class="hljs-keyword">next</span>;
+                node2.<span class="hljs-keyword">next</span> = <span class="hljs-literal">null</span>;
+            &#125;
+        &#125;
+        node1.<span class="hljs-keyword">next</span> = dummy2.<span class="hljs-keyword">next</span>;
+        <span class="hljs-keyword">return</span> dummy1.<span class="hljs-keyword">next</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="18-排序链表"><a href="#18-排序链表" class="headerlink" title="18 排序链表"></a>18 排序链表</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sort-list/">https://leetcode-cn.com/problems/sort-list/</a></p>
+<pre><code class="hljs typescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> ListNode <span class="hljs-function"><span class="hljs-title">sortList</span>(<span class="hljs-params">ListNode head</span>)</span> &#123;
+        <span class="hljs-keyword">return</span> head == <span class="hljs-literal">null</span> ? <span class="hljs-literal">null</span> : mergeSort(head);
+    &#125;
+    <span class="hljs-keyword">private</span> ListNode <span class="hljs-function"><span class="hljs-title">mergeSort</span>(<span class="hljs-params">ListNode head</span>)</span> &#123;
+        <span class="hljs-keyword">if</span> (head.next == <span class="hljs-literal">null</span>)
+            <span class="hljs-keyword">return</span> head;
+        ListNode p = head, q = head, pre = <span class="hljs-literal">null</span>;
+        <span class="hljs-keyword">while</span> (q != <span class="hljs-literal">null</span> &amp;&amp; q.next != <span class="hljs-literal">null</span>)&#123;
+            pre = p;
+            p = p.next;
+            q = q.next.next;
+        &#125;
+        pre.next = <span class="hljs-literal">null</span>;
+        ListNode l = mergeSort(head);
+        ListNode r = mergeSort(p);
+        <span class="hljs-keyword">return</span> merge(l, r);
+    &#125;
+
+    <span class="hljs-keyword">private</span> ListNode <span class="hljs-function"><span class="hljs-title">merge</span>(<span class="hljs-params">ListNode l1, ListNode l2</span>)</span>&#123;
+        <span class="hljs-keyword">if</span> (l1 == <span class="hljs-literal">null</span>)
+            <span class="hljs-keyword">return</span> l2;
+        <span class="hljs-keyword">if</span> (l2 == <span class="hljs-literal">null</span>)
+            <span class="hljs-keyword">return</span> l1;
+        <span class="hljs-keyword">if</span> (l1.val &lt; l2.val)&#123;
+            l1.next = merge(l1.next, l2);
+            <span class="hljs-keyword">return</span> l1;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            l2.next = merge(l1, l2.next);
+            <span class="hljs-keyword">return</span> l2;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="143-重排链表"><a href="#143-重排链表" class="headerlink" title="143. 重排链表"></a>143. 重排链表</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reorder-list/">https://leetcode-cn.com/problems/reorder-list/</a></p>
+<pre><code class="hljs axapta"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> reorderList(ListNode head) &#123;
+        LinkedList&lt;ListNode&gt; queue = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+        ListNode cur = head;
+        <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">null</span>) &#123;
+            queue.addLast(cur);
+            cur = cur.<span class="hljs-keyword">next</span>;
+        &#125;
+        <span class="hljs-keyword">while</span> (!queue.isEmpty()) &#123;
+            <span class="hljs-keyword">if</span> (cur == <span class="hljs-literal">null</span>)
+                cur = queue.pollFirst();
+            <span class="hljs-keyword">else</span> &#123;
+                cur.<span class="hljs-keyword">next</span> = queue.pollFirst();
+                cur = cur.<span class="hljs-keyword">next</span>;
+            &#125;
+            cur.<span class="hljs-keyword">next</span> = queue.pollLast();
+            cur = cur.<span class="hljs-keyword">next</span>;
+        &#125;
+        <span class="hljs-keyword">if</span> (cur != <span class="hljs-literal">null</span>) 
+            cur.<span class="hljs-keyword">next</span> = <span class="hljs-literal">null</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="19-删除链表的倒数第N个节点"><a href="#19-删除链表的倒数第N个节点" class="headerlink" title="19. 删除链表的倒数第N个节点"></a>19. 删除链表的倒数第N个节点</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/">https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/</a></p>
+<pre><code class="hljs axapta"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> ListNode removeNthFromEnd(ListNode head, <span class="hljs-built_in">int</span> n) &#123;
+        ListNode fast = head;
+        <span class="hljs-keyword">while</span> (n-- &gt; <span class="hljs-number">0</span>) &#123;
+            fast = fast.<span class="hljs-keyword">next</span>;
+        &#125;
+        <span class="hljs-comment">// 这里没懂， 得举例子就懂了</span>
+        <span class="hljs-keyword">if</span> (fast == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> head.<span class="hljs-keyword">next</span>;
+        ListNode slow = head;
+        <span class="hljs-keyword">while</span> (fast.<span class="hljs-keyword">next</span> != <span class="hljs-literal">null</span>) &#123;
+            fast = fast.<span class="hljs-keyword">next</span>;
+            slow = slow.<span class="hljs-keyword">next</span>;
+        &#125;
+        <span class="hljs-comment">// 这里也懂了...举个例子就行</span>
+        slow.<span class="hljs-keyword">next</span> = slow.<span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span>;
+        <span class="hljs-keyword">return</span> head;
+    &#125;
+&#125;</code></pre>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/java%E7%AE%97%E6%B3%95/">java算法</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/java/">java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B9%A0%E9%A2%98/">习题</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，大部分为学习心得，欢迎与博主联系讨论</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/17/%E9%9C%80%E8%A6%81%E7%86%9F%E7%BB%83%E7%9A%84%E6%A0%91%E7%AE%97%E6%B3%95%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">需要熟练的树算法题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/17/SQL%E8%AF%AD%E5%8F%A5%E7%BB%83%E4%B9%A0/">
+                        <span class="hidden-mobile">SQL语句练习</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+<b>此身此时此地</b>
+<i class="iconfont icon-love"></i>
+<b>所见所闻所想</b>
+
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

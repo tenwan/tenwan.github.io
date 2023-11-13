@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="刘金博">
+  <meta name="keywords" content="">
+  <title>Redis学习笔记(一) - xiaoliu‘s sapce</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>xiaoliu's space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Redis学习笔记(一)">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-02 16:55" pubdate>
+        2020年12月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis学习笔记(一)</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><p>Redis是一个完全开源的高性能key-value数据库.</p>
+<h2 id="Redis的数据结构与应用场景"><a href="#Redis的数据结构与应用场景" class="headerlink" title="Redis的数据结构与应用场景"></a>Redis的数据结构与应用场景</h2><blockquote>
+<p>使用场景:缓存,共享session,消息队列系统,分布式锁</p>
+</blockquote>
+<blockquote>
+<p>单线程Redis快的原因?</p>
+<ol>
+<li>纯内存操作</li>
+<li>单线程操作,避免了频繁上下文切换</li>
+<li>合理高效的数据结构</li>
+<li>采用非阻塞I/O多路复用机制</li>
+</ol>
+</blockquote>
+<h3 id="String字符串"><a href="#String字符串" class="headerlink" title="String字符串"></a>String字符串</h3><p>字符串是Redis最基础的数据结构.其中键都是字符串类型,剩下几种数据结构都是在字符串类型基础上构建的.常用在缓存,计数,共享session,限速等方面.</p>
+<h3 id="Hash哈希"><a href="#Hash哈希" class="headerlink" title="Hash哈希"></a>Hash哈希</h3><p>Redis中,哈希类型是指键值本身又是一个键值对结构的数据.可用来存放用户信息,实现诸如购物车等功能.</p>
+<h3 id="List列表-双向链表"><a href="#List列表-双向链表" class="headerlink" title="List列表(双向链表)"></a>List列表(双向链表)</h3><p>列表类型可用来存储多个有序的字符串,可做简单的消息队列功能.</p>
+<h3 id="Set集合"><a href="#Set集合" class="headerlink" title="Set集合"></a>Set集合</h3><p>集合类型可用来保存多个的字符串元素,与列表不同的是,集合中不允许重复元素且元素无序,不能通过索引下标获取元素.可通过Set的交集,并集,差集等来计算重合元素.</p>
+<h3 id="Sorted-Set有序集合"><a href="#Sorted-Set有序集合" class="headerlink" title="Sorted Set有序集合"></a>Sorted Set有序集合</h3><p>相对Set多了一个权重参数Score,集合中元素能按Score进行排列.常用来做排行榜,取Top N.</p>
+<h2 id="Redis的数据过期策略"><a href="#Redis的数据过期策略" class="headerlink" title="Redis的数据过期策略"></a>Redis的数据过期策略</h2><blockquote>
+<p>Redis中数据过期策略采用定期删除与惰性删除策略</p>
+</blockquote>
+<h3 id="定期删除策略"><a href="#定期删除策略" class="headerlink" title="定期删除策略"></a>定期删除策略</h3><p>Redis会启动一个定时器定时监视所有key，判断key的时效性，若过期即删除key。此方法能保证过期的key最终都能被删除。但本方法每次都要遍历内存中所有数据，非常消耗CPU资源。并且当Key过期后，定时器还未被唤起，这一段时间内的key仍然可用。</p>
+<h3 id="惰性删除策略"><a href="#惰性删除策略" class="headerlink" title="惰性删除策略"></a>惰性删除策略</h3><p>在获取到key时，判断key是否过期，若过期则删除。本方法缺点是：若某个key一直未被使用，则其将会一直在内存中，占用空间。</p>
+<h3 id="两者结合策略"><a href="#两者结合策略" class="headerlink" title="两者结合策略"></a>两者结合策略</h3><p>定时删除策略不再扫描全部key。而是随机抽取部分key进行检查，从而降低对CPU的损耗。惰性删除策略弥补了可能未被检查到的key。若还是存在过期的key，既没有被定时器抽取，也没有被使用，则当内存不够时，使用内存淘汰机制进行淘汰。</p>
+<blockquote>
+<p>移除最近最少使用的key/随机移除某个key </p>
+<p>LRU（Least Recently Used) 最近最少使用</p>
+</blockquote>
+<h4 id="如何实现LRU"><a href="#如何实现LRU" class="headerlink" title="如何实现LRU"></a>如何实现LRU</h4><p>一般使用HashMap和双向链表实现LRU。使用HashMap存储key，而value指向双向链表实现的LRU的Node节点，如图：</p>
+<p><img src="/img/LRU.png" srcset="/img/loading.gif"></p>
+<p>h表头，t表尾，预先设置LRU的容量。若存储满了，则O（1）时间淘汰掉双向链表的表尾。每次访问数据，都可通过O（1）效率把新节点增加到队头或把已存在点移动到队头。</p>
+<h4 id="Redis的LRU具体实现"><a href="#Redis的LRU具体实现" class="headerlink" title="Redis的LRU具体实现"></a>Redis的LRU具体实现</h4><p>Redis每次按key获取一个值时，都会更新value中的LRU字段为当前秒级别的时间戳。</p>
+<p>第一版LRU为，随机从dict中取出五个key，淘汰一个LRU最小的。</p>
+<p>在3.0时，改进一版算法，首先第一批随机挑选的key会放进一个pool中（默认大小16），pool中的key是按LRU字段大小顺序排列。接下来每次随机挑选的key的LRU必须小于pool的最小LRU才会继续放入，直至pool放满。放满后，若有新的key需要放入，则将pool中LRU最大的key取出。淘汰的时候，直接从pool中选取LRU最小的值进行淘汰即可。</p>
+<h2 id="Redis如何发现热点key"><a href="#Redis如何发现热点key" class="headerlink" title="Redis如何发现热点key"></a>Redis如何发现热点key</h2><p>Redis主要有五种发现热点key的方法：</p>
+<ol>
+<li>凭借经验预估：提前知道某个活动的开启，将该key作为热点key。</li>
+<li>服务端收集：在操作redis前，加入计数代码进行数据统计。</li>
+<li>抓包评估：Redis使用TCP协议与客户端通信，通信协议采用RESP，即自己写程序监听端口能进行拦截包分析。</li>
+<li>在proxy层，对每个redis请求进行收集上报。（proxy–代理服务器）</li>
+<li>Redis自带命令查询：Redis4.0.4版本后，使用命令redis-cli-hotkeys能找出热点key</li>
+</ol>
+<h3 id="Redis缓存雪崩问题的解决"><a href="#Redis缓存雪崩问题的解决" class="headerlink" title="Redis缓存雪崩问题的解决"></a>Redis缓存雪崩问题的解决</h3><ol>
+<li>使用Redis高可用框架：使用 Redis 集群来保证 Redis 服务不会挂掉。</li>
+<li>缓存时间不一致，给缓存的失效时间，加上一个随机值，避免集体失效。</li>
+<li>限流降级策略：有一定的备案，比如个性推荐服务不可用了，换成热点数据推荐服务。</li>
+</ol>
+<h3 id="Redis缓存穿透问题的解决（待详细展开）"><a href="#Redis缓存穿透问题的解决（待详细展开）" class="headerlink" title="Redis缓存穿透问题的解决（待详细展开）"></a>Redis缓存穿透问题的解决（待详细展开）</h3><ol>
+<li>在接口做校验。</li>
+<li>缓存击穿加锁/设置不过期</li>
+<li>布隆过滤器拦截</li>
+</ol>
+<h2 id="Redis的几种集群模式"><a href="#Redis的几种集群模式" class="headerlink" title="Redis的几种集群模式"></a>Redis的几种集群模式</h2><blockquote>
+<ol>
+<li>主从复制</li>
+<li>哨兵模式</li>
+<li>cluster模式</li>
+</ol>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/">数据库相关</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Redis/">Redis</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，大部分为学习心得，欢迎与博主联系讨论</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/02/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%8C)/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Redis学习笔记(二)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/01/Mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/">
+                        <span class="hidden-mobile">Mysql学习笔记(一)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+<b>此身此时此地</b>
+<i class="iconfont icon-love"></i>
+<b>所见所闻所想</b>
+
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

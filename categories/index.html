@@ -1,0 +1,779 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="刘金博">
+  <meta name="keywords" content="">
+  <title>分类 - xiaoliu‘s sapce</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>xiaoliu's space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/test2.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="分类">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+
+
+
+
+
+<div class="category-list">
+  
+  
+  
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-clowwe80b001hd8vx8cmq4g6w" role="tab" data-toggle="collapse" href="#collapse-clowwe80b001hd8vx8cmq4g6w"
+        aria-expanded="false"
+      >
+        java算法
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/java%E7%AE%97%E6%B3%95/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>22</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-clowwe80b001hd8vx8cmq4g6w" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-clowwe80b001hd8vx8cmq4g6w">
+    
+    
+    
+      
+      
+        <a href="/2021/04/06/N%E4%BA%BA%E8%B5%B0%E9%92%A2%E7%B4%A2%E9%97%AE%E9%A2%98%E8%B8%A9%E5%9D%91/" class="list-group-item list-group-item-action">
+          <span class="category-post">N人走钢索问题踩坑</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/26/%E5%92%8C%E6%95%B0%E5%AD%97%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">和数字相关算法题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/26/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">背包问题相关算法题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/22/%E6%8E%92%E5%BA%8F%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">排序相关算法题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/20/DFS%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">DFS相关算法题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/20/BFS%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">BFS相关算法题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/19/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">动态规划相关算法题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/18/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">字符串相关算法题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/17/%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">数组相关算法题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/17/%E9%9C%80%E8%A6%81%E7%86%9F%E7%BB%83%E7%9A%84%E6%A0%91%E7%AE%97%E6%B3%95%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">需要熟练的树算法题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/categories/java%E7%AE%97%E6%B3%95/" class="list-group-item list-group-item-action">
+          <span class="category-post">More...</span>
+        </a>
+        
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-clowwe7zq0003d8vxci6g9hsx" role="tab" data-toggle="collapse" href="#collapse-clowwe7zq0003d8vxci6g9hsx"
+        aria-expanded="false"
+      >
+        随笔
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E9%9A%8F%E7%AC%94/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>12</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-clowwe7zq0003d8vxci6g9hsx" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-clowwe7zq0003d8vxci6g9hsx">
+    
+    
+    
+      
+      
+        <a href="/2023/08/13/%E6%B8%B8%E6%88%8F%E4%BA%BA%E7%94%9F/" class="list-group-item list-group-item-action">
+          <span class="category-post">当我在玩游戏时，我在想什么</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/12/31/%E5%A5%BD%E4%B9%85%E4%B8%8D%E8%A7%81%EF%BC%8C%E5%8F%88%E6%98%AF%E6%96%B0%E5%B9%B4/" class="list-group-item list-group-item-action">
+          <span class="category-post">好久不见，又是新年</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/04/08/%E4%B8%89%E6%9C%88%E8%BF%91%E5%86%B5/" class="list-group-item list-group-item-action">
+          <span class="category-post">三月近况</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/12/31/%E7%BB%99%E4%B8%80%E5%B9%B4%E5%89%8D%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1-2022/" class="list-group-item list-group-item-action">
+          <span class="category-post">给一年前自己的一封信-2022</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/11/14/2022%E5%B9%B4%E8%AE%A1%E5%88%92%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%8A%80%E6%9C%AF/" class="list-group-item list-group-item-action">
+          <span class="category-post">2022年计划了解和学习的技术</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/11/11/%E8%AF%8D%E4%B8%8D%E5%B0%BD%E6%84%8F/" class="list-group-item list-group-item-action">
+          <span class="category-post">给一年前自己的一封信-2022</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/09/14/%E4%B9%9D%E6%9C%88%E8%BF%91%E5%86%B5/" class="list-group-item list-group-item-action">
+          <span class="category-post">九月近况</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/07/07/%E5%8F%AA%E8%A8%80%E7%89%87%E8%AF%AD/" class="list-group-item list-group-item-action">
+          <span class="category-post">只言片语</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/07/06/2021%E9%98%85%E8%AF%BB/" class="list-group-item list-group-item-action">
+          <span class="category-post">2021阅读</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/02/%E4%B8%80%E4%BA%9B%E7%A2%8E%E7%89%87/" class="list-group-item list-group-item-action">
+          <span class="category-post">一些碎片</span>
+        </a>
+      
+    
+      
+      
+        <a href="/categories/%E9%9A%8F%E7%AC%94/" class="list-group-item list-group-item-action">
+          <span class="category-post">More...</span>
+        </a>
+        
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-clowwe7zx000cd8vxe0po4vze" role="tab" data-toggle="collapse" href="#collapse-clowwe7zx000cd8vxe0po4vze"
+        aria-expanded="false"
+      >
+        Java知识
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/Java%E7%9F%A5%E8%AF%86/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>11</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-clowwe7zx000cd8vxe0po4vze" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-clowwe7zx000cd8vxe0po4vze">
+    
+    
+    
+      
+      
+        <a href="/2021/07/09/Java%E4%B8%AD%E7%9A%84%E9%94%81/" class="list-group-item list-group-item-action">
+          <span class="category-post">Java中的锁</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/07/08/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">Java线程池学习总结（转载）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/07/08/Mysql%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%89%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">Mysql学习总结（三）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/07/07/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" class="list-group-item list-group-item-action">
+          <span class="category-post">Java 多线程相关学习总结</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/07/07/Java%20Map/" class="list-group-item list-group-item-action">
+          <span class="category-post">Java Map相关学习总结</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/07/06/Collections.sort()%E7%94%A8%E6%B3%95/" class="list-group-item list-group-item-action">
+          <span class="category-post">Collections.sort()用法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/21/%E9%AB%98%E7%83%AD%E5%BA%A6%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">高热度题参要</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/17/%E9%9B%86%E5%90%88%E6%80%BB%E7%BB%93/" class="list-group-item list-group-item-action">
+          <span class="category-post">集合总结</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/11/28/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%80%BB%E7%BB%93/" class="list-group-item list-group-item-action">
+          <span class="category-post">红黑树总结</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/11/27/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" class="list-group-item list-group-item-action">
+          <span class="category-post">java垃圾回收机制</span>
+        </a>
+      
+    
+      
+      
+        <a href="/categories/Java%E7%9F%A5%E8%AF%86/" class="list-group-item list-group-item-action">
+          <span class="category-post">More...</span>
+        </a>
+        
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-clowwe803000od8vxahqgemvq" role="tab" data-toggle="collapse" href="#collapse-clowwe803000od8vxahqgemvq"
+        aria-expanded="false"
+      >
+        深度学习
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>5</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-clowwe803000od8vxahqgemvq" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-clowwe803000od8vxahqgemvq">
+    
+    
+    
+      
+      
+        <a href="/2021/04/12/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E9%A2%84%E6%B5%8B%EF%BC%88%E4%B8%80%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">时间序列预测（一）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/01/07/Pytorch-Geometric%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/" class="list-group-item list-group-item-action">
+          <span class="category-post">Pytorch-Geometric安装笔记</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/12/15/%E5%9B%BE%E8%AE%A1%E7%AE%97%E8%AE%B2%E5%BA%A7%E5%BF%83%E5%BE%97/" class="list-group-item list-group-item-action">
+          <span class="category-post">图计算讲座心得</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/12/13/GCN%E8%8A%82%E7%82%B9%E5%88%86%E7%B1%BB%E5%AE%9E%E9%AA%8C%EF%BC%88%E4%B8%80%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">GCN节点分类实验（一）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/11/25/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BB%BC%E8%BF%B0/" class="list-group-item list-group-item-action">
+          <span class="category-post">图神经网络综述</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-clowwe8090019d8vxc3bohb3j" role="tab" data-toggle="collapse" href="#collapse-clowwe8090019d8vxc3bohb3j"
+        aria-expanded="false"
+      >
+        数据库相关
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>5</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-clowwe8090019d8vxc3bohb3j" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-clowwe8090019d8vxc3bohb3j">
+    
+    
+    
+      
+      
+        <a href="/2021/03/17/SQL%E8%AF%AD%E5%8F%A5%E7%BB%83%E4%B9%A0/" class="list-group-item list-group-item-action">
+          <span class="category-post">SQL语句练习</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/" class="list-group-item list-group-item-action">
+          <span class="category-post">数据库系统原理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/12/02/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%8C)/" class="list-group-item list-group-item-action">
+          <span class="category-post">Redis学习笔记(二)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/12/02/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/" class="list-group-item list-group-item-action">
+          <span class="category-post">Redis学习笔记(一)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/12/01/Mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/" class="list-group-item list-group-item-action">
+          <span class="category-post">Mysql学习笔记(一)</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+<b>此身此时此地</b>
+<i class="iconfont icon-love"></i>
+<b>所见所闻所想</b>
+
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

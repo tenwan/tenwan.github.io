@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="刘金博">
+  <meta name="keywords" content="">
+  <title>HashMap - xiaoliu‘s sapce</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>xiaoliu's space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="HashMap">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-26 17:41" pubdate>
+        2020年11月26日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">HashMap</h1>
+            
+            <div class="markdown-body">
+              <h1 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h1><p>HashMap是由数组和链表组合构成的数据结构，数组插入键值对，当遇到哈希值相等的节点时，即在该节点上形成链表。当新的节点插入链表时，java8之前是头插法，java8之后变为尾插法，主要防止哈希表扩容时，头插法易形成循环链表。</p>
+<h1 id="为何JAVA8之后改为尾插法？"><a href="#为何JAVA8之后改为尾插法？" class="headerlink" title="为何JAVA8之后改为尾插法？"></a>为何JAVA8之后改为尾插法？</h1><p>首先来看看HashMap的扩容机制：</p>
+<blockquote>
+<p>数组容量是有限的，数据多次插入的，到达一定的数量就会进行扩容，也就是resize.</p>
+<p>一般有两个因素：Capacity–HashMap当前长度       LoadFactor–负载因子，默认值0.75f</p>
+<p>即假设当前的容量大小为100，当存进第76个元素的时候，判断发现需要对哈希表进行resize。</p>
+</blockquote>
+<p>具体扩容分为两步进行：</p>
+<p>  <strong>扩容</strong>：创建一个新的空数组，长度是原数组的2倍</p>
+<p>  <strong>rehash</strong>：遍历原数组，把所有节点重新Hash到新数组</p>
+<blockquote>
+<p>为何要重新hash节点插入？直接复制更快？</p>
+<p>因长度扩容之后，数组长度改变，Hash的规则也会随之改变</p>
+</blockquote>
+<p>具体到为什么改为尾插法更好，使用头插法，容量为2的容器，某一节点上链表A-B-C在不同线程扩容插入A,B,C时，可能会形成B-A-B的回环，而使用尾插不会改变链表上的顺序，扩容时即不会出现链表成环问题。由此JAVA8不会出现像JAVA7在多线程操作哈希表时的死循环问题。</p>
+<p>但这并不说明JAVA8可以任意把哈希表使用在多线程中，通过源码可知put/get方法均没有加同步锁，还是无法保证上一秒put的值，下一秒get还是原值，即线程安全还是无法保证。</p>
+<blockquote>
+<p>哈希表的默认初始化长度是16        为经验值</p>
+</blockquote>
+<h1 id="为何重写equals方法要重写hashCode方法？"><a href="#为何重写equals方法要重写hashCode方法？" class="headerlink" title="为何重写equals方法要重写hashCode方法？"></a>为何重写equals方法要重写hashCode方法？</h1><p>java中所有的对象都是继承于Object类，而Ojbect类中有两个比较两个对象是否相等的方法：equals和hashCode。</p>
+<p>而哈希表找到数组同一节点上的链表时，使用equals比较链表上不同的值，也就是说我们一定要对hashCode进行重写，以保证<strong>相同的对象返回相同的hash值，不同的对象返回不同的hash值</strong>。</p>
+<h1 id="HashMap为何是线程不安全的"><a href="#HashMap为何是线程不安全的" class="headerlink" title="HashMap为何是线程不安全的"></a>HashMap为何是线程不安全的</h1><h2 id="jdk1-7中HashMap"><a href="#jdk1-7中HashMap" class="headerlink" title="jdk1.7中HashMap"></a>jdk1.7中HashMap</h2><p>原因一：扩容造成死循环</p>
+<p>在对哈希表进行扩容时，扩容函数将原数据转移到新表中，也会使用头插法，造成链表顺序翻转，多线程情况下这里是形成死循环的关键点。</p>
+<p>原因二：扩容造成数据丢失</p>
+<p>在扩容时，也可能造成数据丢失，数据指向自己，形成自环</p>
+<h2 id="jdk1-8中的HashMap"><a href="#jdk1-8中的HashMap" class="headerlink" title="jdk1.8中的HashMap"></a>jdk1.8中的HashMap</h2><p>在jdk1.8中对HashMap进行了优化，在发生hash碰撞，不再采用头插法方式，而是直接插入链表尾部，因此不会出现环形链表的情况，但是在多线程的情况下仍然不安全。诸如不同线程的put相互覆盖的情况。</p>
+<h1 id="如何处理HashMap在线程不安全的情况"><a href="#如何处理HashMap在线程不安全的情况" class="headerlink" title="如何处理HashMap在线程不安全的情况"></a>如何处理HashMap在线程不安全的情况</h1><p>一般使用<strong>HashTable</strong>或者<strong>CurrentHashMap</strong>。</p>
+<blockquote>
+<p>虽然Hashtable和HashMap相比是线程安全的，但其在对数据操作时都会上锁，存在效率问题。另外<strong>Hashtable 是不允许键或值为 null 的，HashMap 的键值则都可以为 null</strong>。</p>
+</blockquote>
+<h1 id="ConcurrentHashMap如何保证线程安全？"><a href="#ConcurrentHashMap如何保证线程安全？" class="headerlink" title="ConcurrentHashMap如何保证线程安全？"></a>ConcurrentHashMap如何保证线程安全？</h1><p>ConcurrentHashMap的存值put步骤如下：</p>
+<ol>
+<li><p>根据 key 计算出 hashcode 。</p>
+</li>
+<li><p>判断是否需要进行初始化。</p>
+</li>
+<li><p>即为当前 key 定位出的 Node，如果为空表示当前位置可以写入数据，利用 CAS 尝试写入，失败则自旋保证成功。</p>
+</li>
+<li><p>如果当前位置的 <code>hashcode == MOVED == -1</code>,则需要进行扩容。</p>
+</li>
+<li><p>如果都不满足，则利用 synchronized 锁写入数据。</p>
+</li>
+<li><p>如果数量大于 <code>TREEIFY_THRESHOLD</code> 则要转换为红黑树。</p>
+</li>
+</ol>
+<p>ConcurrentHashMap的取值get步骤如下：</p>
+<ol>
+<li>根据计算出来的 hashcode 寻址，如果就在桶上那么直接返回值。</li>
+<li>如果是红黑树那就按照树的方式获取值。</li>
+<li>就不满足那就按照链表的方式遍历获取值。</li>
+</ol>
+<h1 id="何为CAS，何为自旋？"><a href="#何为CAS，何为自旋？" class="headerlink" title="何为CAS，何为自旋？"></a>何为CAS，何为自旋？</h1><p>CAS 是乐观锁的一种实现方式，为一种轻量级的锁，认为并发操作并不总会发生。</p>
+<p>具体流程为：线程在读取数据时不进行加锁，在准备写回数据时，比较原值是否修改，若未被其他线程修改则写回，若已被修改，则重新执行读取流程。</p>
+<p>但其不能检测ABA问题，即A被某线程修改为B，再被某线程修改回A。乐观锁CAS无法检测。</p>
+<h1 id="synchronized底层原理"><a href="#synchronized底层原理" class="headerlink" title="synchronized底层原理"></a>synchronized底层原理</h1><h1 id="synchronized锁升级策略"><a href="#synchronized锁升级策略" class="headerlink" title="synchronized锁升级策略"></a>synchronized锁升级策略</h1>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java%E7%9F%A5%E8%AF%86/">Java知识</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%9B%86%E5%90%88/">集合</a>
+                    
+                      <a class="hover-with-bg" href="/tags/java/">java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，大部分为学习心得，欢迎与博主联系讨论</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/27/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">java垃圾回收机制</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/25/%E3%80%8A%E4%B9%9D%E9%9B%B6%E3%80%8B%EF%BC%88%E5%A4%96%E4%B8%A4%E9%A6%96%EF%BC%89/">
+                        <span class="hidden-mobile">《九零》（外两首）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+<b>此身此时此地</b>
+<i class="iconfont icon-love"></i>
+<b>所见所闻所想</b>
+
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

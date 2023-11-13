@@ -1,0 +1,1030 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="刘金博">
+  <meta name="keywords" content="">
+  <title>BFS相关算法题 - xiaoliu‘s sapce</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>xiaoliu's space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="BFS相关算法题">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-20 16:33" pubdate>
+        2021年3月20日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      65
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">BFS相关算法题</h1>
+            
+            <div class="markdown-body">
+              <h3 id="完全平方数"><a href="#完全平方数" class="headerlink" title="完全平方数"></a>完全平方数</h3><blockquote>
+<p>给定正整数 <em>n</em>，找到若干个完全平方数（比如 <code>1, 4, 9, 16, ...</code>）使得它们的和等于 <em>n</em>。让其组成和的完全平方数的个数最少。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：n = 12</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：3</span> 
+<span class="hljs-meta">&gt;</span><span class="bash">解释：12 = 4 + 4 + 4</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输入：n = 13</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：2</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释：13 = 4 + 9</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">numSquares</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;
+    List&lt;Integer&gt; squares = generateSquares(n);
+    Queue&lt;Integer&gt; <span class="hljs-built_in">queue</span> = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+    <span class="hljs-keyword">boolean</span>[] marked = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[n + <span class="hljs-number">1</span>]; <span class="hljs-comment">// 其实感觉是为了剪枝,也可以set标记</span>
+    <span class="hljs-built_in">queue</span>.add(n);
+    marked[n] = <span class="hljs-literal">true</span>; <span class="hljs-comment">// </span>
+    <span class="hljs-keyword">int</span> level = <span class="hljs-number">0</span>; <span class="hljs-comment">// </span>
+    <span class="hljs-keyword">while</span> (!<span class="hljs-built_in">queue</span>.isEmpty()) &#123;
+        <span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span> = <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">size</span>();
+        level++;
+        <span class="hljs-keyword">while</span> (<span class="hljs-built_in">size</span>-- &gt; <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">int</span> cur = <span class="hljs-built_in">queue</span>.poll();
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> s : squares) &#123;
+                <span class="hljs-keyword">int</span> next = cur - s;
+                <span class="hljs-keyword">if</span> (next &lt; <span class="hljs-number">0</span>) &#123;
+                    <span class="hljs-keyword">break</span>;
+                &#125;
+                <span class="hljs-keyword">if</span> (next == <span class="hljs-number">0</span>) &#123;
+                    <span class="hljs-keyword">return</span> level;
+                &#125;
+                <span class="hljs-keyword">if</span> (marked[next]) &#123;
+                    <span class="hljs-keyword">continue</span>; <span class="hljs-comment">// 剪</span>
+                &#125;
+                marked[next] = <span class="hljs-literal">true</span>;
+                <span class="hljs-built_in">queue</span>.add(next);
+            &#125;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> n;
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 生成小于 n 的平方数序列</span>
+<span class="hljs-comment"> * @return 1,4,9,...</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> List&lt;Integer&gt; <span class="hljs-title">generateSquares</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;
+    List&lt;Integer&gt; squares = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+    <span class="hljs-keyword">int</span> square = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">int</span> diff = <span class="hljs-number">3</span>;
+    <span class="hljs-keyword">while</span> (square &lt;= n) &#123;
+        squares.add(square);
+        square += diff;
+        diff += <span class="hljs-number">2</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> squares;
+&#125;</code></pre>
+
+<h3 id="2-二叉树的最小深度"><a href="#2-二叉树的最小深度" class="headerlink" title="2. 二叉树的最小深度"></a>2. 二叉树的最小深度</h3><blockquote>
+<p>给定一个二叉树，找出其最小深度。</p>
+<p>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。</p>
+<pre><code class="hljs yaml"><span class="hljs-string">&gt;输入：root</span> <span class="hljs-string">=</span> [<span class="hljs-number">3</span>,<span class="hljs-number">9</span>,<span class="hljs-number">20</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">15</span>,<span class="hljs-number">7</span>]
+<span class="hljs-string">&gt;输出：2</span>
+<span class="hljs-string">&gt;输入：root</span> <span class="hljs-string">=</span> [<span class="hljs-number">2</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">4</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">5</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">6</span>]
+<span class="hljs-string">&gt;输出：5</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">minDepth</span><span class="hljs-params">(TreeNode root)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (root == null) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        Queue&lt;TreeNode&gt; <span class="hljs-built_in">queue</span> = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+        <span class="hljs-comment">// 树不需要标记哦</span>
+        <span class="hljs-built_in">queue</span>.add(root);
+        <span class="hljs-keyword">int</span> depth = <span class="hljs-number">1</span>; <span class="hljs-comment">// 根根</span>
+        <span class="hljs-keyword">while</span> (!<span class="hljs-built_in">queue</span>.isEmpty()) &#123;
+            <span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span> = <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">size</span>();
+            <span class="hljs-keyword">while</span> (<span class="hljs-built_in">size</span>-- &gt; <span class="hljs-number">0</span>) &#123;
+                TreeNode node = <span class="hljs-built_in">queue</span>.poll();
+                <span class="hljs-keyword">if</span> (node.left == null &amp;&amp; node.right == null)
+                    <span class="hljs-keyword">return</span> depth;
+                <span class="hljs-keyword">if</span> (node.left != null)
+                    <span class="hljs-built_in">queue</span>.add(node.left);
+                <span class="hljs-keyword">if</span> (node.right != null)
+                    <span class="hljs-built_in">queue</span>.add(node.right);
+            &#125;
+            depth++;
+        &#125;
+        <span class="hljs-keyword">return</span> depth;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="3-打开转盘锁"><a href="#3-打开转盘锁" class="headerlink" title="3. 打开转盘锁"></a>3. 打开转盘锁</h3><blockquote>
+<p>你有一个带有四个圆形拨轮的转盘锁。每个拨轮都有10个数字： ‘0’, ‘1’, ‘2’, ‘3’, ‘4’, ‘5’, ‘6’, ‘7’, ‘8’, ‘9’ 。每个拨轮可以自由旋转：例如把 ‘9’ 变为  ‘0’，’0’ 变为 ‘9’ 。每次旋转都只能旋转一个拨轮的一位数字。</p>
+<p>锁的初始数字为 ‘0000’ ，一个代表四个拨轮的数字的字符串。</p>
+<p>列表 deadends 包含了一组死亡数字，一旦拨轮的数字和列表里的任何一个元素相同，这个锁将会被永久锁定，无法再被旋转。</p>
+<p>字符串 target 代表可以解锁的数字，你需要给出最小的旋转次数，如果无论如何不能解锁，返回 -1。</p>
+<pre><code class="hljs clean">&gt;输入：deadends = [<span class="hljs-string">&quot;0201&quot;</span>,<span class="hljs-string">&quot;0101&quot;</span>,<span class="hljs-string">&quot;0102&quot;</span>,<span class="hljs-string">&quot;1212&quot;</span>,<span class="hljs-string">&quot;2002&quot;</span>], target = <span class="hljs-string">&quot;0202&quot;</span>
+&gt;输出：<span class="hljs-number">6</span>
+&gt;解释：
+&gt;可能的移动序列为 <span class="hljs-string">&quot;0000&quot;</span> -&gt; <span class="hljs-string">&quot;1000&quot;</span> -&gt; <span class="hljs-string">&quot;1100&quot;</span> -&gt; <span class="hljs-string">&quot;1200&quot;</span> -&gt; <span class="hljs-string">&quot;1201&quot;</span> -&gt; <span class="hljs-string">&quot;1202&quot;</span> -&gt; <span class="hljs-string">&quot;0202&quot;</span>。
+&gt;注意 <span class="hljs-string">&quot;0000&quot;</span> -&gt; <span class="hljs-string">&quot;0001&quot;</span> -&gt; <span class="hljs-string">&quot;0002&quot;</span> -&gt; <span class="hljs-string">&quot;0102&quot;</span> -&gt; <span class="hljs-string">&quot;0202&quot;</span> 这样的序列是不能解锁的，
+&gt;因为当拨动到 <span class="hljs-string">&quot;0102&quot;</span> 时这个锁就会被锁定。</code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入: deadends = [<span class="hljs-string">&quot;8888&quot;</span>], target = <span class="hljs-string">&quot;0009&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：1</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">把最后一位反向旋转一次即可 <span class="hljs-string">&quot;0000&quot;</span> -&gt; <span class="hljs-string">&quot;0009&quot;</span>。</span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入: deadends = [<span class="hljs-string">&quot;8887&quot;</span>,<span class="hljs-string">&quot;8889&quot;</span>,<span class="hljs-string">&quot;8878&quot;</span>,<span class="hljs-string">&quot;8898&quot;</span>,<span class="hljs-string">&quot;8788&quot;</span>,<span class="hljs-string">&quot;8988&quot;</span>,<span class="hljs-string">&quot;7888&quot;</span>,<span class="hljs-string">&quot;9888&quot;</span>], target = <span class="hljs-string">&quot;8888&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：-1</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">无法旋转到目标数字且不被锁定。</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">openLock</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] deadends, <span class="hljs-keyword">String</span> target)</span> </span>&#123;
+        <span class="hljs-comment">// 这里将dead和marked放在一起</span>
+        Set&lt;<span class="hljs-keyword">String</span>&gt; dead = <span class="hljs-keyword">new</span> HashSet&lt;&gt;();
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">String</span> s : deadends)
+            dead.add(s);
+        <span class="hljs-comment">// queue</span>
+        Queue&lt;<span class="hljs-keyword">String</span>&gt; <span class="hljs-built_in">queue</span> = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+        Set&lt;<span class="hljs-keyword">String</span>&gt; marked = <span class="hljs-keyword">new</span> HashSet&lt;&gt;();
+        <span class="hljs-built_in">queue</span>.add(<span class="hljs-string">&quot;0000&quot;</span>);
+        marked.add(<span class="hljs-string">&quot;0000&quot;</span>);
+        <span class="hljs-keyword">int</span> cnt = <span class="hljs-number">0</span>;
+        <span class="hljs-comment">// luoji</span>
+        <span class="hljs-keyword">while</span> (!<span class="hljs-built_in">queue</span>.isEmpty()) &#123;
+            <span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span> = <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">size</span>();
+            <span class="hljs-keyword">while</span> (<span class="hljs-built_in">size</span>-- &gt; <span class="hljs-number">0</span>) &#123;
+                <span class="hljs-keyword">String</span> cur = <span class="hljs-built_in">queue</span>.poll();
+                <span class="hljs-keyword">if</span> (dead.contains(cur))
+                    <span class="hljs-keyword">continue</span>;
+                <span class="hljs-keyword">if</span> (cur.equals(target))
+                    <span class="hljs-keyword">return</span> cnt;
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++) &#123;
+                    <span class="hljs-keyword">String</span> up = plusOne(cur, i);
+                    <span class="hljs-keyword">if</span> (!marked.contains(up)) &#123;
+                        <span class="hljs-built_in">queue</span>.add(up);
+                        marked.add(up);
+                    &#125;
+                    <span class="hljs-keyword">String</span> down = minusOne(cur, i);
+                    <span class="hljs-keyword">if</span> (!marked.contains(down)) &#123;
+                        <span class="hljs-built_in">queue</span>.add(down);
+                        marked.add(down);
+                    &#125;
+                &#125;
+            &#125;
+            cnt++;
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> <span class="hljs-title">plusOne</span><span class="hljs-params">(<span class="hljs-keyword">String</span> s, <span class="hljs-keyword">int</span> j)</span> </span>&#123;
+        <span class="hljs-keyword">char</span>[] ch = s.toCharArray();
+        <span class="hljs-keyword">if</span> (ch[j] == <span class="hljs-string">&#x27;9&#x27;</span>)
+            ch[j] = <span class="hljs-string">&#x27;0&#x27;</span>;
+        <span class="hljs-keyword">else</span>
+            ch[j] += <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">String</span>(ch);
+    &#125; 
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> <span class="hljs-title">minusOne</span><span class="hljs-params">(<span class="hljs-keyword">String</span> s, <span class="hljs-keyword">int</span> j)</span> </span>&#123;
+        <span class="hljs-keyword">char</span>[] ch = s.toCharArray();
+        <span class="hljs-keyword">if</span> (ch[j] == <span class="hljs-string">&#x27;0&#x27;</span>)
+            ch[j] = <span class="hljs-string">&#x27;9&#x27;</span>;
+        <span class="hljs-keyword">else</span>
+            ch[j] -= <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">String</span>(ch);
+    &#125;
+&#125;</code></pre>
+
+<h3 id="4-地图分析"><a href="#4-地图分析" class="headerlink" title="4. 地图分析"></a>4. 地图分析</h3><blockquote>
+<p>你现在手里有一份大小为 N x N 的 网格 grid，上面的每个 单元格 都用 0 和 1 标记好了。其中 0 代表海洋，1 代表陆地，请你找出一个海洋单元格，这个海洋单元格到离它最近的陆地单元格的距离是最大的。</p>
+<p>我们这里说的距离是「曼哈顿距离」（ Manhattan Distance）：(x0, y0) 和 (x1, y1) 这两个单元格之间的距离是 |x0 - x1| + |y0 - y1| 。</p>
+<p>如果网格上只有陆地或者海洋，请返回 -1。</p>
+<pre><code class="hljs lua">&gt;输入：<span class="hljs-string">[[1,0,1],[0,0,0],[1,0,1]]</span>
+&gt;输出：<span class="hljs-number">2</span>
+&gt;解释： 
+&gt;海洋单元格 (<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) 和所有陆地单元格之间的距离都达到最大，最大距离为 <span class="hljs-number">2</span>。
+&gt;即最中间那个方格。</code></pre>
+
+<pre><code class="hljs lua">&gt;输入：<span class="hljs-string">[[1,0,0],[0,0,0],[0,0,0]]</span>
+&gt;输出：<span class="hljs-number">4</span>
+&gt;解释： 
+&gt;海洋单元格 (<span class="hljs-number">2</span>, <span class="hljs-number">2</span>) 和所有陆地单元格之间的距离都达到最大，最大距离为 <span class="hljs-number">4</span>。
+&gt;即最右下角的方格。</code></pre>
+</blockquote>
+<pre><code class="hljs haxe"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> int maxDistance(int[][] grid) &#123;
+        int[][] dir = &#123;&#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>&#125;, &#123;<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>&#125;, &#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>&#125;&#125;;
+        Queue&lt;Pair&lt;Integer, Integer&gt;&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-type">LinkedList</span>&lt;&gt;();
+        int m = grid.length, n = grid[<span class="hljs-number">0</span>].length;
+        <span class="hljs-comment">// 先把所有的陆地都入队</span>
+        <span class="hljs-keyword">for</span> (int i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            <span class="hljs-keyword">for</span> (int j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;
+                <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-number">1</span>)
+                    q.add(<span class="hljs-keyword">new</span> <span class="hljs-type">Pair</span>&lt;&gt;(i, j));
+            &#125;
+        &#125;
+
+        <span class="hljs-comment">// 判断是否都是陆地 或者没有陆地</span>
+        <span class="hljs-keyword">if</span> (q.size() == m * n || q.isEmpty())
+            <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+        <span class="hljs-comment">// 从各个陆地开始，一圈一圈的遍历海洋，最后遍历到的海洋就是离陆地最远的海洋。</span>
+
+        int step = <span class="hljs-number">0</span>;
+        Pair&lt;Integer, Integer&gt; p = <span class="hljs-literal">null</span>;
+        <span class="hljs-keyword">while</span> (!q.isEmpty()) &#123;
+            int size = q.size();
+            <span class="hljs-keyword">while</span> (size-- &gt; <span class="hljs-number">0</span>) &#123;
+                p = q.poll();
+                int x = p.getKey(), y = p.getValue();
+                <span class="hljs-comment">// 取出队列的元素，将其四周的海洋入队。</span>
+                <span class="hljs-keyword">for</span> (int[] d : <span class="hljs-type">dir</span>) &#123;
+                    int <span class="hljs-keyword">new</span><span class="hljs-type">X</span> = x + d[<span class="hljs-number">0</span>];
+                    int <span class="hljs-keyword">new</span><span class="hljs-type">Y</span> = y + d[<span class="hljs-number">1</span>];
+                    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">new</span><span class="hljs-type">X</span> &lt; <span class="hljs-number">0</span> || <span class="hljs-keyword">new</span><span class="hljs-type">X</span> &gt;= m || <span class="hljs-keyword">new</span><span class="hljs-type">Y</span> &lt; <span class="hljs-number">0</span> || <span class="hljs-keyword">new</span><span class="hljs-type">Y</span> &gt;= n || grid[<span class="hljs-keyword">new</span><span class="hljs-type">X</span>][<span class="hljs-keyword">new</span><span class="hljs-type">Y</span>] != <span class="hljs-number">0</span>) &#123;
+                        <span class="hljs-keyword">continue</span>;
+                    &#125;
+                    grid[<span class="hljs-keyword">new</span><span class="hljs-type">X</span>][<span class="hljs-keyword">new</span><span class="hljs-type">Y</span>] = <span class="hljs-number">1</span>; <span class="hljs-comment">// 标记</span>
+                    q.add(<span class="hljs-keyword">new</span> <span class="hljs-type">Pair</span>&lt;&gt;(<span class="hljs-keyword">new</span><span class="hljs-type">X</span>, <span class="hljs-keyword">new</span><span class="hljs-type">Y</span>));
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span> (q.size() &gt; <span class="hljs-number">0</span>)
+                step++;
+        &#125;
+        <span class="hljs-keyword">return</span> step;
+    &#125;
+&#125;
+<span class="hljs-keyword">public</span> int maxDistance(int[][] grid) &#123;
+    int[][] dir = &#123;&#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>&#125;, &#123;<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>&#125;, &#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>&#125;&#125;;
+    Queue&lt;Pair&lt;Integer, Integer&gt;&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-type">LinkedList</span>&lt;&gt;();
+    int m = grid.length, n = grid[<span class="hljs-number">0</span>].length;
+    <span class="hljs-comment">// 先把所有的陆地都入队</span>
+    <span class="hljs-keyword">for</span> (int i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+        <span class="hljs-keyword">for</span> (int j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;
+            <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-number">1</span>)
+                q.add(<span class="hljs-keyword">new</span> <span class="hljs-type">Pair</span>&lt;&gt;(i, j));
+        &#125;
+    &#125;
+
+    <span class="hljs-comment">// 判断是否都是陆地 或者没有陆地</span>
+    <span class="hljs-keyword">if</span> (q.size() == m + n || q.isEmpty())
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    <span class="hljs-comment">// 从各个陆地开始，一圈一圈的遍历海洋，最后遍历到的海洋就是离陆地最远的海洋。</span>
+
+    Pair&lt;Integer, Integer&gt; p = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">while</span> (!q.isEmpty()) &#123;
+        p = q.poll();
+        int x = p.getKey(), y = p.getValue();
+        <span class="hljs-comment">// 取出队列的元素，将其四周的海洋入队。</span>
+        <span class="hljs-keyword">for</span> (int[] d : <span class="hljs-type">dir</span>) &#123;
+            int <span class="hljs-keyword">new</span><span class="hljs-type">X</span> = x + d[<span class="hljs-number">0</span>];
+            int <span class="hljs-keyword">new</span><span class="hljs-type">Y</span> = y + d[<span class="hljs-number">1</span>];
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">new</span><span class="hljs-type">X</span> &lt; <span class="hljs-number">0</span> || <span class="hljs-keyword">new</span><span class="hljs-type">X</span> &gt;= m || <span class="hljs-keyword">new</span><span class="hljs-type">Y</span> &lt; <span class="hljs-number">0</span> || <span class="hljs-keyword">new</span><span class="hljs-type">Y</span> &gt;= n || grid[<span class="hljs-keyword">new</span><span class="hljs-type">X</span>][<span class="hljs-keyword">new</span><span class="hljs-type">Y</span>] != <span class="hljs-number">0</span>) &#123;
+                <span class="hljs-keyword">continue</span>;
+            &#125;
+            grid[<span class="hljs-keyword">new</span><span class="hljs-type">X</span>][<span class="hljs-keyword">new</span><span class="hljs-type">Y</span>] = grid[x][y] + <span class="hljs-number">1</span>; <span class="hljs-comment">// 省略了标记， 要不然要加标记并且加个变量</span>
+            q.add(<span class="hljs-keyword">new</span> <span class="hljs-type">Pair</span>&lt;&gt;(<span class="hljs-keyword">new</span><span class="hljs-type">X</span>, <span class="hljs-keyword">new</span><span class="hljs-type">Y</span>));
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> grid[p.getKey()][p.getValue()] - <span class="hljs-number">1</span>;
+&#125;</code></pre>
+
+<h3 id="5-腐烂的橘子"><a href="#5-腐烂的橘子" class="headerlink" title="5. 腐烂的橘子"></a>5. 腐烂的橘子</h3><blockquote>
+<p>在给定的网格中，每个单元格可以有以下三个值之一：</p>
+<p>值 0 代表空单元格；<br>值 1 代表新鲜橘子；<br>值 2 代表腐烂的橘子。<br>每分钟，任何与腐烂的橘子（在 4 个正方向上）相邻的新鲜橘子都会腐烂。</p>
+<p>返回直到单元格中没有新鲜橘子为止所必须经过的最小分钟数。如果不可能，返回 -1。</p>
+<pre><code class="hljs lua">&gt;输入：<span class="hljs-string">[[2,1,1],[1,1,0],[0,1,1]]</span>
+&gt;输出：<span class="hljs-number">4</span>
+
+&gt;输入：<span class="hljs-string">[[2,1,1],[0,1,1],[1,0,1]]</span>
+&gt;输出：<span class="hljs-number">-1</span>
+&gt;解释：左下角的橘子（第 <span class="hljs-number">2</span> 行， 第 <span class="hljs-number">0</span> 列）永远不会腐烂，因为腐烂只会发生在 <span class="hljs-number">4</span> 个正向上</code></pre>
+</blockquote>
+<pre><code class="hljs haxe"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> int orangesRotting(int[][] grid) &#123;
+        <span class="hljs-comment">// 俺就不判断了，直接上</span>
+        int[][] dir = &#123;&#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>&#125;, &#123;<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>&#125;&#125;;
+        Queue&lt;Pair&lt;Integer, Integer&gt;&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-type">LinkedList</span>&lt;&gt;();
+        int m = grid.length, n = grid[<span class="hljs-number">0</span>].length;
+        int cnt = <span class="hljs-number">0</span>; <span class="hljs-comment">// 表示新鲜的橘子</span>
+        <span class="hljs-keyword">for</span> (int i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            <span class="hljs-keyword">for</span> (int j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;
+                <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-number">1</span>)
+                    cnt++; <span class="hljs-comment">// 新鲜橘子计数</span>
+                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-number">2</span>)
+                    q.add(<span class="hljs-keyword">new</span> <span class="hljs-type">Pair</span>&lt;&gt;(i, j)); <span class="hljs-comment">// 腐烂橘子的坐标</span>
+            &#125;
+        &#125;
+        <span class="hljs-keyword">if</span> (cnt == <span class="hljs-number">0</span> || q.size() == m * n)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        int step = <span class="hljs-number">0</span>; <span class="hljs-comment">// 轮数</span>
+        <span class="hljs-keyword">while</span> (cnt &gt; <span class="hljs-number">0</span> &amp;&amp; !q.isEmpty())&#123;
+            int size = q.size();
+            <span class="hljs-keyword">while</span> (size-- &gt; <span class="hljs-number">0</span>) &#123;
+                Pair&lt;Integer, Integer&gt; p = q.poll();
+                int x = p.getKey(), y = p.getValue();
+                <span class="hljs-keyword">for</span> (int[] d : <span class="hljs-type">dir</span>) &#123;
+                    int <span class="hljs-keyword">new</span><span class="hljs-type">X</span> = x + d[<span class="hljs-number">0</span>];
+                    int <span class="hljs-keyword">new</span><span class="hljs-type">Y</span> = y + d[<span class="hljs-number">1</span>];
+                    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">new</span><span class="hljs-type">X</span> &lt; <span class="hljs-number">0</span> || <span class="hljs-keyword">new</span><span class="hljs-type">X</span> &gt;= m || <span class="hljs-keyword">new</span><span class="hljs-type">Y</span> &lt; <span class="hljs-number">0</span> || <span class="hljs-keyword">new</span><span class="hljs-type">Y</span> &gt;= n) &#123;
+                        <span class="hljs-keyword">continue</span>;
+                    &#125;
+                    <span class="hljs-keyword">if</span> (grid[<span class="hljs-keyword">new</span><span class="hljs-type">X</span>][<span class="hljs-keyword">new</span><span class="hljs-type">Y</span>] == <span class="hljs-number">1</span>) &#123;
+                        grid[<span class="hljs-keyword">new</span><span class="hljs-type">X</span>][<span class="hljs-keyword">new</span><span class="hljs-type">Y</span>] = <span class="hljs-number">2</span>;
+                        q.add(<span class="hljs-keyword">new</span> <span class="hljs-type">Pair</span>&lt;&gt;(<span class="hljs-keyword">new</span><span class="hljs-type">X</span>, <span class="hljs-keyword">new</span><span class="hljs-type">Y</span>));
+                        cnt--;
+                    &#125;
+                &#125;
+            &#125;
+            step++;
+        &#125;
+        <span class="hljs-keyword">return</span> cnt &gt; <span class="hljs-number">0</span> ? <span class="hljs-number">-1</span> : <span class="hljs-type">step</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="6-被围绕的区域"><a href="#6-被围绕的区域" class="headerlink" title="6. 被围绕的区域"></a>6. 被围绕的区域</h3><blockquote>
+<p>给你一个 <code>m x n</code> 的矩阵 <code>board</code> ，由若干字符 <code>&#39;X&#39;</code> 和 <code>&#39;O&#39;</code> ，找到所有被 <code>&#39;X&#39;</code> 围绕的区域，并将这些区域里所有的 <code>&#39;O&#39;</code> 用 <code>&#39;X&#39;</code> 填充。</p>
+<pre><code class="hljs prolog">&gt;输入：board = [[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>],[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;O&quot;</span>,<span class="hljs-string">&quot;O&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>],[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;O&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>],[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;O&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>]]
+&gt;输出：[[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>],[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>],[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>],[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;O&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>]]
+&gt;解释：被围绕的区间不会存在于边界上，换句话说，任何边界上的 <span class="hljs-string">&#x27;O&#x27;</span> 都不会被填充为 <span class="hljs-string">&#x27;X&#x27;</span>。 任何不在边界上，或不与边界上的 <span class="hljs-string">&#x27;O&#x27;</span> 相连的 <span class="hljs-string">&#x27;O&#x27;</span> 最终都会被填充为 <span class="hljs-string">&#x27;X&#x27;</span>。如果两个元素在水平或垂直方向相邻，则称它们是“相连”的。</code></pre>
+
+<pre><code class="hljs lua">&gt;输入：board = <span class="hljs-string">[[&quot;X&quot;]]</span>
+&gt;输出：<span class="hljs-string">[[&quot;X&quot;]]</span></code></pre>
+</blockquote>
+<pre><code class="hljs processing"><span class="hljs-keyword">import</span> java.util.LinkedList;
+<span class="hljs-keyword">import</span> java.util.Queue;
+
+class Solution &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> solve(<span class="hljs-built_in">char</span>[][] board) &#123;
+        <span class="hljs-keyword">if</span> (board == <span class="hljs-keyword">null</span> || board.length == <span class="hljs-number">0</span>)
+            <span class="hljs-keyword">return</span>;
+        <span class="hljs-built_in">int</span>[][] dir = &#123;&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>&#125;,&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>&#125;&#125;;
+        <span class="hljs-built_in">int</span> m = board.length, n = board[<span class="hljs-number">0</span>].length;
+        Queue&lt;Pair&lt;Integer, Integer&gt;&gt; q = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+        <span class="hljs-comment">// 找到边缘的O</span>
+        <span class="hljs-comment">// 边缘两列</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            <span class="hljs-keyword">if</span> (board[i][<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;O&#x27;</span>) &#123;
+                q.<span class="hljs-built_in">add</span>(<span class="hljs-keyword">new</span> Pair&lt;&gt;(i, <span class="hljs-number">0</span>));
+                board[i][<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;T&#x27;</span>;
+            &#125;
+            <span class="hljs-keyword">if</span> (board[i][n - <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;O&#x27;</span>) &#123;
+                q.<span class="hljs-built_in">add</span>(<span class="hljs-keyword">new</span> Pair&lt;&gt;(i, n - <span class="hljs-number">1</span>));
+                board[i][n - <span class="hljs-number">1</span>] = <span class="hljs-string">&#x27;T&#x27;</span>;
+            &#125;
+        &#125;
+        <span class="hljs-comment">// 上下两列</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;
+            <span class="hljs-keyword">if</span> (board[<span class="hljs-number">0</span>][i] == <span class="hljs-string">&#x27;O&#x27;</span>) &#123;
+                q.<span class="hljs-built_in">add</span>(<span class="hljs-keyword">new</span> Pair&lt;&gt;(<span class="hljs-number">0</span>, i));
+                board[<span class="hljs-number">0</span>][i] = <span class="hljs-string">&#x27;T&#x27;</span>;
+            &#125;
+            <span class="hljs-keyword">if</span> (board[m - <span class="hljs-number">1</span>][i] == <span class="hljs-string">&#x27;O&#x27;</span>) &#123;
+                q.<span class="hljs-built_in">add</span>(<span class="hljs-keyword">new</span> Pair&lt;&gt;(m - <span class="hljs-number">1</span>, i));
+                board[m - <span class="hljs-number">1</span>][i] = <span class="hljs-string">&#x27;T&#x27;</span>;
+            &#125;
+        &#125;
+
+        <span class="hljs-comment">// bfs 搜索</span>
+        <span class="hljs-keyword">while</span> (!q.isEmpty()) &#123;
+            <span class="hljs-built_in">int</span> <span class="hljs-built_in">size</span> = q.<span class="hljs-built_in">size</span>();
+            <span class="hljs-keyword">while</span> (<span class="hljs-built_in">size</span>-- &gt; <span class="hljs-number">0</span>) &#123;
+                Pair&lt;Integer, Integer&gt; p = q.poll();
+                <span class="hljs-built_in">int</span> x = p.getKey(), y = p.getValue();
+                <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span>[] d : dir) &#123;
+                    <span class="hljs-built_in">int</span> nx = x + d[<span class="hljs-number">0</span>];
+                    <span class="hljs-built_in">int</span> ny = y + d[<span class="hljs-number">1</span>];
+                    <span class="hljs-keyword">if</span> (nx &lt; <span class="hljs-number">0</span> || nx &gt;= m || ny &lt; <span class="hljs-number">0</span> || ny &gt;= n)
+                        <span class="hljs-keyword">continue</span>;
+                    <span class="hljs-keyword">if</span> (board[nx][ny] == <span class="hljs-string">&#x27;O&#x27;</span>)&#123;
+                        q.<span class="hljs-built_in">add</span>(<span class="hljs-keyword">new</span> Pair&lt;&gt;(nx, ny));
+                        board[nx][ny] = <span class="hljs-string">&#x27;T&#x27;</span>;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-comment">// 标记</span>
+        <span class="hljs-comment">// 再走全部走一遍</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;
+                <span class="hljs-comment">// 遇见T标记O</span>
+                <span class="hljs-keyword">if</span> (board[i][j] == <span class="hljs-string">&#x27;T&#x27;</span>) &#123;
+                    board[i][j] = <span class="hljs-string">&#x27;O&#x27;</span>;
+                    <span class="hljs-comment">// 遇见O标记X</span>
+                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (board[i][j] == <span class="hljs-string">&#x27;O&#x27;</span>) &#123;
+                    board[i][j] = <span class="hljs-string">&#x27;X&#x27;</span>;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="7-零钱兑换"><a href="#7-零钱兑换" class="headerlink" title="7. 零钱兑换"></a>7. 零钱兑换</h3><blockquote>
+<p>给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：coins = [1, 2, 5], amount = 11</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：3</span> 
+<span class="hljs-meta">&gt;</span><span class="bash">解释：11 = 5 + 5 + 1</span></code></pre>
+
+<pre><code class="hljs nix">&gt;输入：<span class="hljs-attr">coins</span> = [<span class="hljs-number">2</span>], <span class="hljs-attr">amount</span> = <span class="hljs-number">3</span>
+&gt;输出：-<span class="hljs-number">1</span></code></pre>
+
+<pre><code class="hljs nix">&gt;输入：<span class="hljs-attr">coins</span> = [<span class="hljs-number">1</span>], <span class="hljs-attr">amount</span> = <span class="hljs-number">0</span>
+&gt;输出：<span class="hljs-number">0</span></code></pre>
+
+<pre><code class="hljs nix">&gt;输入：<span class="hljs-attr">coins</span> = [<span class="hljs-number">1</span>], <span class="hljs-attr">amount</span> = <span class="hljs-number">2</span>
+&gt;输出：<span class="hljs-number">2</span></code></pre>
+</blockquote>
+<pre><code class="hljs gradle"><span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> Solution &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> coinChange(<span class="hljs-keyword">int</span>[] coins, <span class="hljs-keyword">int</span> amount) &#123;
+        <span class="hljs-keyword">if</span> (amount == <span class="hljs-number">0</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+         <span class="hljs-comment">// bfs</span>
+        Queue&lt;Integer&gt; q = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+        Set&lt;Integer&gt; marked = <span class="hljs-keyword">new</span> HashSet&lt;&gt;();
+        q.add(amount);
+        marked.add(amount);
+        Arrays.<span class="hljs-keyword">sort</span>(coins);
+        <span class="hljs-keyword">int</span> cnt = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (!q.isEmpty()) &#123;
+            <span class="hljs-keyword">int</span> <span class="hljs-keyword">size</span> = q.<span class="hljs-keyword">size</span>();
+            cnt++;
+            <span class="hljs-keyword">while</span> (<span class="hljs-keyword">size</span>-- &gt; <span class="hljs-number">0</span>) &#123;
+                <span class="hljs-keyword">int</span> cur = q.poll();
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> coin : coins) &#123;
+                    <span class="hljs-keyword">int</span> <span class="hljs-keyword">next</span> = cur - coin;
+                    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">next</span> &lt; <span class="hljs-number">0</span>)
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">next</span> == <span class="hljs-number">0</span>)
+                        <span class="hljs-keyword">return</span> cnt;
+                    <span class="hljs-keyword">if</span> (marked.contains(<span class="hljs-keyword">next</span>))
+                        <span class="hljs-keyword">continue</span>;
+                    q.add(<span class="hljs-keyword">next</span>);
+                    marked.add(<span class="hljs-keyword">next</span>);
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="8-岛屿数量"><a href="#8-岛屿数量" class="headerlink" title="8. 岛屿数量"></a>8. 岛屿数量</h3><blockquote>
+<p>给你一个由 <code>&#39;1&#39;</code>（陆地）和 <code>&#39;0&#39;</code>（水）组成的的二维网格，请你计算网格中岛屿的数量。</p>
+<pre><code class="hljs prolog">&gt;输入：grid = [
+ [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],
+ [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],
+ [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],
+ [<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>]
+&gt;]
+&gt;输出：<span class="hljs-number">1</span></code></pre>
+
+<pre><code class="hljs prolog">&gt;输入：grid = [
+ [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],
+ [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],
+ [<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],
+ [<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>]
+&gt;]
+&gt;输出：<span class="hljs-number">3</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-keyword">import</span> java.util.LinkedList;
+<span class="hljs-keyword">import</span> java.util.Queue;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+
+    <span class="hljs-keyword">int</span>[][] dir = &#123;&#123;<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>&#125;, &#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>&#125;&#125;;
+    <span class="hljs-keyword">int</span> m, n;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">numIslands</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[][] grid)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.m = grid.length;
+        <span class="hljs-keyword">if</span> (m == <span class="hljs-number">0</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">this</span>.n = grid[<span class="hljs-number">0</span>].length;
+        <span class="hljs-keyword">boolean</span>[][] marked = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[m][n];
+        <span class="hljs-keyword">int</span> cnt = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;
+                <span class="hljs-keyword">if</span> (!marked[i][j] &amp;&amp; grid[i][j] == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;
+                    cnt++;
+                    <span class="hljs-comment">// bfs</span>
+                    bfs(grid, marked, i, j);
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> cnt;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">bfs</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[][] grid, <span class="hljs-keyword">boolean</span>[][] marked, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j)</span> </span>&#123;
+        Queue&lt;Pair&lt;Integer, Integer&gt;&gt; q = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+        q.add(<span class="hljs-keyword">new</span> Pair&lt;&gt;(i, j));
+        marked[i][j] = <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">while</span> (!q.isEmpty()) &#123;
+            <span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span> = q.<span class="hljs-built_in">size</span>();
+            <span class="hljs-keyword">while</span> (<span class="hljs-built_in">size</span>-- &gt; <span class="hljs-number">0</span>) &#123;
+                Pair&lt;Integer, Integer&gt; p = q.poll();
+                <span class="hljs-keyword">int</span> x = p.<span class="hljs-built_in">getKey</span>(), y = p.getValue();
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span>[] d : dir) &#123;
+                    <span class="hljs-keyword">int</span> nx = x + d[<span class="hljs-number">0</span>];
+                    <span class="hljs-keyword">int</span> ny = y + d[<span class="hljs-number">1</span>];
+                    <span class="hljs-keyword">if</span> (nx &lt; <span class="hljs-number">0</span> || nx &gt;= m || ny &lt; <span class="hljs-number">0</span> || ny &gt;= n || marked[nx][ny])
+                        <span class="hljs-keyword">continue</span>;
+                    <span class="hljs-keyword">if</span> (grid[nx][ny] == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;
+                        q.add(<span class="hljs-keyword">new</span> Pair&lt;&gt;(nx, ny));
+                        marked[nx][ny] = <span class="hljs-literal">true</span>;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="9-单词接龙"><a href="#9-单词接龙" class="headerlink" title="9. 单词接龙"></a>9. 单词接龙</h3><blockquote>
+<p>字典 wordList 中从单词 beginWord 和 endWord 的 转换序列 是一个按下述规格形成的序列：</p>
+<p>序列中第一个单词是 beginWord 。<br>序列中最后一个单词是 endWord 。<br>每次转换只能改变一个字母。<br>转换过程中的中间单词必须是字典 wordList 中的单词。<br>给你两个单词 beginWord 和 endWord 和一个字典 wordList ，找到从 beginWord 到 endWord 的 最短转换序列 中的 单词数目 。</p>
+<pre><code class="hljs clean">&gt;输入：beginWord = <span class="hljs-string">&quot;hit&quot;</span>, endWord = <span class="hljs-string">&quot;cog&quot;</span>, wordList = [<span class="hljs-string">&quot;hot&quot;</span>,<span class="hljs-string">&quot;dot&quot;</span>,<span class="hljs-string">&quot;dog&quot;</span>,<span class="hljs-string">&quot;lot&quot;</span>,<span class="hljs-string">&quot;log&quot;</span>,<span class="hljs-string">&quot;cog&quot;</span>]
+&gt;输出：<span class="hljs-number">5</span>
+&gt;解释：一个最短转换序列是 <span class="hljs-string">&quot;hit&quot;</span> -&gt; <span class="hljs-string">&quot;hot&quot;</span> -&gt; <span class="hljs-string">&quot;dot&quot;</span> -&gt; <span class="hljs-string">&quot;dog&quot;</span> -&gt; <span class="hljs-string">&quot;cog&quot;</span>, 返回它的长度 <span class="hljs-number">5</span>。</code></pre>
+
+<pre><code class="hljs erlang">&gt;输入：<span class="hljs-keyword">begin</span>Word = <span class="hljs-string">&quot;hit&quot;</span>, <span class="hljs-keyword">end</span>Word = <span class="hljs-string">&quot;cog&quot;</span>, wordList = [<span class="hljs-string">&quot;hot&quot;</span>,<span class="hljs-string">&quot;dot&quot;</span>,<span class="hljs-string">&quot;dog&quot;</span>,<span class="hljs-string">&quot;lot&quot;</span>,<span class="hljs-string">&quot;log&quot;</span>]
+&gt;输出：<span class="hljs-number">0</span>
+&gt;解释：<span class="hljs-keyword">end</span>Word <span class="hljs-string">&quot;cog&quot;</span> 不在字典中，所以无法进行转换。</code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-keyword">import</span> java.util.LinkedList;
+<span class="hljs-keyword">import</span> java.util.List;
+<span class="hljs-keyword">import</span> java.util.Queue;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">ladderLength</span><span class="hljs-params">(<span class="hljs-keyword">String</span> beginWord, <span class="hljs-keyword">String</span> endWord, List&lt;<span class="hljs-keyword">String</span>&gt; wordList)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (!wordList.contains(endWord))
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">boolean</span>[] marked = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[wordList.<span class="hljs-built_in">size</span>()]; <span class="hljs-comment">// 可以set</span>
+        <span class="hljs-comment">//检验是否存在beginWord，如果存在，就置为访问过了,没必要访问</span>
+        <span class="hljs-keyword">int</span> idx = wordList.indexOf(beginWord);
+        <span class="hljs-keyword">if</span> (idx != <span class="hljs-number">-1</span>)
+            marked[idx] = <span class="hljs-literal">true</span>;
+        Queue&lt;<span class="hljs-keyword">String</span>&gt; q = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+        q.add(beginWord);
+        <span class="hljs-keyword">int</span> cnt = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (!q.isEmpty()) &#123;
+            <span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span> = q.<span class="hljs-built_in">size</span>();
+            cnt++;
+            <span class="hljs-keyword">while</span> (<span class="hljs-built_in">size</span>-- &gt; <span class="hljs-number">0</span>) &#123;
+                <span class="hljs-keyword">String</span> start = q.poll();
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; wordList.<span class="hljs-built_in">size</span>(); i++) &#123;
+                    <span class="hljs-comment">// 访问过了</span>
+                    <span class="hljs-keyword">if</span> (marked[i])
+                        <span class="hljs-keyword">continue</span>;
+                    <span class="hljs-keyword">String</span> s = wordList.<span class="hljs-built_in">get</span>(i);
+                    <span class="hljs-comment">//不满足和当前只差一个字符不同，跳过，访问下一个</span>
+                    <span class="hljs-keyword">if</span> (!isConnect(start, s))
+                        <span class="hljs-keyword">continue</span>;
+                    <span class="hljs-comment">//和endWord匹配上了，进行返回，因为是bfs，所以找到了直接返回就是最短的</span>
+                    <span class="hljs-keyword">if</span> (s.equals(endWord))
+                        <span class="hljs-keyword">return</span> cnt+<span class="hljs-number">1</span>;
+                    q.add(s);
+                    marked[i] = <span class="hljs-literal">true</span>;
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isConnect</span><span class="hljs-params">(<span class="hljs-keyword">String</span> s1, <span class="hljs-keyword">String</span> s2)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> diffCnt = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s1.length() &amp;&amp; diffCnt &lt;= <span class="hljs-number">1</span>; i++) &#123;
+            <span class="hljs-keyword">if</span> (s1.charAt(i) != s2.charAt(i)) &#123;
+                diffCnt++;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> diffCnt == <span class="hljs-number">1</span>;
+    &#125;
+&#125;</code></pre>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/java%E7%AE%97%E6%B3%95/">java算法</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B9%A0%E9%A2%98/">习题</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，大部分为学习心得，欢迎与博主联系讨论</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/20/DFS%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">DFS相关算法题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/19/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">
+                        <span class="hidden-mobile">动态规划相关算法题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+<b>此身此时此地</b>
+<i class="iconfont icon-love"></i>
+<b>所见所闻所想</b>
+
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

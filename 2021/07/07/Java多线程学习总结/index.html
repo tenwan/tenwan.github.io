@@ -1,0 +1,556 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="刘金博">
+  <meta name="keywords" content="">
+  <title>Java 多线程相关学习总结 - xiaoliu‘s sapce</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>xiaoliu's space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java 多线程相关学习总结">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-07 17:00" pubdate>
+        2021年7月7日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      815 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java 多线程相关学习总结</h1>
+            
+            <div class="markdown-body">
+              <h2 id="Java多线程学习总结"><a href="#Java多线程学习总结" class="headerlink" title="Java多线程学习总结"></a>Java多线程学习总结</h2><h2 id="线程和进程概念"><a href="#线程和进程概念" class="headerlink" title="线程和进程概念"></a>线程和进程概念</h2><blockquote>
+<p>多线程三大特性：原子性，可见性，有序性</p>
+</blockquote>
+<ul>
+<li>进程是独立的应用程序，进程中一般会有多个线程，进程是线程的集合。</li>
+<li>线程就是一条执行路径。</li>
+<li>多线程目的为了提高程序效率。</li>
+</ul>
+<blockquote>
+<p>并发：两个队伍交替使用一台CPU</p>
+<p>并行：两个队伍同时使用两台CPU</p>
+</blockquote>
+<h2 id="多线程创建方式"><a href="#多线程创建方式" class="headerlink" title="多线程创建方式"></a>多线程创建方式</h2><h3 id="继承Thread类"><a href="#继承Thread类" class="headerlink" title="继承Thread类"></a>继承Thread类</h3><pre><code class="hljs scala"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadDemo1</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Tread</span></span>&#123;
+  <span class="hljs-meta">@Override</span>
+  public run()&#123;
+      <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;
+          <span class="hljs-type">System</span>.out.println(<span class="hljs-string">&quot;TreadDemo1&quot;</span>);
+      &#125;
+  &#125;
+&#125;
+<span class="hljs-type">TreadDemo1</span> t = <span class="hljs-keyword">new</span> <span class="hljs-type">TreadDemo1</span>();
+t.start();</code></pre>
+
+<h3 id="实现runnable接口，重写run方法"><a href="#实现runnable接口，重写run方法" class="headerlink" title="实现runnable接口，重写run方法"></a>实现runnable接口，重写run方法</h3><pre><code class="hljs haxe"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadDemo2</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Runnable</span></span></span>&#123;
+  <span class="hljs-keyword">public</span> void run()&#123;
+      <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;
+          System.out.println(<span class="hljs-string">&quot;ThreadDemo2&quot;</span>);
+      &#125;
+  &#125;
+&#125;
+Thread t = <span class="hljs-keyword">new</span> <span class="hljs-type">Thread</span>(<span class="hljs-keyword">new</span> <span class="hljs-type">ThreadDemo2</span>());
+t.start();</code></pre>
+
+<h3 id="使用匿名内部类"><a href="#使用匿名内部类" class="headerlink" title="使用匿名内部类"></a>使用匿名内部类</h3><pre><code class="hljs typescript">Thread t = <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> <span class="hljs-function"><span class="hljs-title">Runnable</span>(<span class="hljs-params"></span>)</span>&#123;
+  <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">run</span>(<span class="hljs-params"></span>)</span>&#123;
+      <span class="hljs-keyword">while</span>(ture)&#123;
+          System.out.println(<span class="hljs-string">&quot;ThreadDemo3&quot;</span>);
+      &#125;
+  &#125;
+&#125;)
+t.start();</code></pre>
+
+
+
+<h2 id="多线程的状态类型"><a href="#多线程的状态类型" class="headerlink" title="多线程的状态类型"></a>多线程的状态类型</h2><p>多线程大致包含五个主要状态：</p>
+<ul>
+<li><code>新建状态</code>：创建好线程，没有调用start方法之前。</li>
+<li><code>就绪状态</code>：等待cpu分配执行权。</li>
+<li><code>运行状态</code>：执行run方法代码。</li>
+<li><code>死亡状态</code>：run方法执行完毕后，一个未捕获异常终止了run方法使线程猝死。</li>
+<li><code>阻塞状态</code>：wait、sleep方法,锁资源被其他线程抢断等。</li>
+</ul>
+<h2 id="join-方法使用示例"><a href="#join-方法使用示例" class="headerlink" title="join()方法使用示例"></a>join()方法使用示例</h2><p>join()让其他线程变为等待。把指定的线程加入当前线程，可以让两个交替执行的线程合并为顺序执行的线程。比如线程B调用了线程A的join()方法，直到线程A执行完毕后，才会执行线程B。</p>
+<pre><code class="hljs reasonml"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> *示例：子线程执行完毕后，主线程才能执行</span>
+<span class="hljs-comment"> */</span>
+Thread t1 = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Thread(<span class="hljs-params">new</span> Runnable()</span> &#123;
+
+          @Override
+          public void run<span class="hljs-literal">()</span> &#123;
+              <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;
+                  <span class="hljs-keyword">try</span> &#123;
+                      <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Thread</span>.</span></span>sleep(<span class="hljs-number">10</span>);
+                  &#125; catch (Exception e) &#123;
+
+                  &#125;
+                  <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Thread</span>.</span></span>current<span class="hljs-constructor">Thread()</span>.get<span class="hljs-constructor">Name()</span> + <span class="hljs-string">&quot;i:&quot;</span> + i);
+              &#125;
+          &#125;
+      &#125;);
+      t1.start<span class="hljs-literal">()</span>;
+      <span class="hljs-comment">// 当在主线程当中执行到t1.join()方法时，就认为主线程应该把执行权让给t1</span>
+      t1.join<span class="hljs-literal">()</span>;
+      <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;
+          <span class="hljs-keyword">try</span> &#123;
+              <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Thread</span>.</span></span>sleep(<span class="hljs-number">10</span>);
+          &#125; catch (Exception e) &#123;
+
+          &#125;
+          <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;main&quot;</span> + <span class="hljs-string">&quot;i:&quot;</span> + i);
+      &#125;</code></pre>
+
+<h2 id="线程优先级设置"><a href="#线程优先级设置" class="headerlink" title="线程优先级设置"></a>线程优先级设置</h2><p>在JAVA线程中，通过一个int priority来控制优先级，范围为1-10，其中10最高，默认值为5。</p>
+<pre><code class="hljs haxe">Thread t = <span class="hljs-keyword">new</span> <span class="hljs-type">Thread</span>(<span class="hljs-keyword">new</span> <span class="hljs-type">ThreadDemo</span>());<span class="hljs-comment">//创建线程t</span>
+t.setPriority(<span class="hljs-number">10</span>);<span class="hljs-comment">//将线程优先级设为10</span>
+t.start();<span class="hljs-comment">//执行线程</span></code></pre>
+
+<h2 id="线程安全相关"><a href="#线程安全相关" class="headerlink" title="线程安全相关"></a>线程安全相关</h2><h3 id="线程安全问题产生原因"><a href="#线程安全问题产生原因" class="headerlink" title="线程安全问题产生原因"></a>线程安全问题产生原因</h3><p>当多个线程共享同一个全局变量，在写的操作时，可能会受到其他线程的干扰。</p>
+<h3 id="线程安全问题解决办法"><a href="#线程安全问题解决办法" class="headerlink" title="线程安全问题解决办法"></a>线程安全问题解决办法</h3><ol>
+<li><strong>内置锁(Synchronized)</strong>:保证线程原子性，当线程进入方法时，自动获取锁，一旦锁被其他线程获取到后，其他的线程就会等待，只有一个线程进行使用。程序执行完毕后就会把锁释放。但是它会降低程序的运行效率(锁资源的竞争)。</li>
+<li><strong>显示锁(Lock锁)</strong></li>
+</ol>
+<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><ul>
+<li>CAS有3个操作数，内存值V，旧的预期值A，要修改的新值B。当且仅当预期值A和内存值V相同时，将内存值V修改为B，否则什么都不做。</li>
+<li>它是整个JUC的基础</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java%E7%9F%A5%E8%AF%86/">Java知识</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，大部分为学习心得，欢迎与博主联系讨论</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/07/%E5%8F%AA%E8%A8%80%E7%89%87%E8%AF%AD/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">只言片语</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/07/Java%20Map/">
+                        <span class="hidden-mobile">Java Map相关学习总结</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+<b>此身此时此地</b>
+<i class="iconfont icon-love"></i>
+<b>所见所闻所想</b>
+
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

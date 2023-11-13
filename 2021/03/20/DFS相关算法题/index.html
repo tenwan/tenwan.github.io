@@ -1,0 +1,1217 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="刘金博">
+  <meta name="keywords" content="">
+  <title>DFS相关算法题 - xiaoliu‘s sapce</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>xiaoliu's space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="DFS相关算法题">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-20 16:33" pubdate>
+        2021年3月20日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      86
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">DFS相关算法题</h1>
+            
+            <div class="markdown-body">
+              <h3 id="1-1、矩阵中的路径"><a href="#1-1、矩阵中的路径" class="headerlink" title="1.1、矩阵中的路径"></a>1.1、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/c61c6999eecb4b8f88a98f66b273a3cc?tpId=13&tqId=11218&tPage=4&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">矩阵中的路径</a></h3><blockquote>
+<p>设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一格开始，每一步可以在矩阵中向左、右、上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。</p>
+<pre><code class="hljs prolog">&gt;输入：board = [[<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-string">&quot;B&quot;</span>,<span class="hljs-string">&quot;C&quot;</span>,<span class="hljs-string">&quot;E&quot;</span>],[<span class="hljs-string">&quot;S&quot;</span>,<span class="hljs-string">&quot;F&quot;</span>,<span class="hljs-string">&quot;C&quot;</span>,<span class="hljs-string">&quot;S&quot;</span>],[<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-string">&quot;D&quot;</span>,<span class="hljs-string">&quot;E&quot;</span>,<span class="hljs-string">&quot;E&quot;</span>]], word = <span class="hljs-string">&quot;ABCCED&quot;</span>
+&gt;输出：true</code></pre>
+
+<pre><code class="hljs nix">&gt;输入：<span class="hljs-attr">board</span> = [[<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>],[<span class="hljs-string">&quot;c&quot;</span>,<span class="hljs-string">&quot;d&quot;</span>]], <span class="hljs-attr">word</span> = <span class="hljs-string">&quot;abcd&quot;</span>
+&gt;输出：<span class="hljs-literal">false</span></code></pre>
+</blockquote>
+<pre><code class="hljs axapta"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span>[][] <span class="hljs-keyword">next</span> = &#123;&#123;<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>&#125;, &#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>&#125;, &#123;<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;&#125;;
+<span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> rows;
+<span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> cols;
+
+<span class="hljs-keyword">public</span> <span class="hljs-built_in">boolean</span> hasPath(<span class="hljs-built_in">char</span>[] array, <span class="hljs-built_in">int</span> rows, <span class="hljs-built_in">int</span> cols, <span class="hljs-built_in">char</span>[] <span class="hljs-built_in">str</span>) &#123;
+    <span class="hljs-keyword">if</span> (rows == <span class="hljs-number">0</span> || cols == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">this</span>.rows = rows;
+    <span class="hljs-keyword">this</span>.cols = cols;
+    <span class="hljs-built_in">boolean</span>[][] marked = <span class="hljs-keyword">new</span> <span class="hljs-built_in">boolean</span>[rows][cols];
+    <span class="hljs-built_in">char</span>[][] matrix = buildMatrix(array);
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; rows; i++)
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> j = <span class="hljs-number">0</span>; j &lt; cols; j++)
+            <span class="hljs-keyword">if</span> (backtracking(matrix, <span class="hljs-built_in">str</span>, marked, <span class="hljs-number">0</span>, i, j))
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+&#125;
+
+<span class="hljs-keyword">private</span> <span class="hljs-built_in">boolean</span> backtracking(<span class="hljs-built_in">char</span>[][] matrix, <span class="hljs-built_in">char</span>[] <span class="hljs-built_in">str</span>,
+                             <span class="hljs-built_in">boolean</span>[][] marked, <span class="hljs-built_in">int</span> pathLen, <span class="hljs-built_in">int</span> r, <span class="hljs-built_in">int</span> c) &#123;
+     <span class="hljs-comment">// 如果长度满足，则为true：true的条件                           </span>
+    <span class="hljs-keyword">if</span> (pathLen == <span class="hljs-built_in">str</span>.length) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    <span class="hljs-comment">// 如果任意满足，则false：false的条件</span>
+    <span class="hljs-keyword">if</span> (r &lt; <span class="hljs-number">0</span> || r &gt;= rows || c &lt; <span class="hljs-number">0</span> || c &gt;= cols
+            || matrix[r][c] != <span class="hljs-built_in">str</span>[pathLen] || marked[r][c]) &#123;
+
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    &#125;
+    <span class="hljs-comment">// 我这个元素只能拿一次，递归的时候，你不能拿了</span>
+    marked[r][c] = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span>[] n : <span class="hljs-keyword">next</span>)
+        <span class="hljs-keyword">if</span> (backtracking(matrix, <span class="hljs-built_in">str</span>, marked, pathLen + <span class="hljs-number">1</span>, r + n[<span class="hljs-number">0</span>], c + n[<span class="hljs-number">1</span>]))
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    <span class="hljs-comment">// 递归结束，该元素为false，意味着，可以拿了，回溯嘛，就像线程切换一样</span>
+    marked[r][c] = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+&#125;
+
+<span class="hljs-keyword">private</span> <span class="hljs-built_in">char</span>[][] buildMatrix(<span class="hljs-built_in">char</span>[] array) &#123;
+    <span class="hljs-built_in">char</span>[][] matrix = <span class="hljs-keyword">new</span> <span class="hljs-built_in">char</span>[rows][cols];
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> r = <span class="hljs-number">0</span>, idx = <span class="hljs-number">0</span>; r &lt; rows; r++)
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> c = <span class="hljs-number">0</span>; c &lt; cols; c++)
+            matrix[r][c] = array[idx++];
+    <span class="hljs-keyword">return</span> matrix;
+&#125;</code></pre>
+
+<h3 id="1-2-单词搜索-420"><a href="#1-2-单词搜索-420" class="headerlink" title="1.2. 单词搜索(420)"></a>1.2. 单词搜索(420)</h3><blockquote>
+<p>给定一个二维网格和一个单词，找出该单词是否存在于网格中。</p>
+<p>board =<br>[<br> [‘A’,’B’,’C’,’E’],<br> [‘S’,’F’,’C’,’S’],<br> [‘A’,’D’,’E’,’E’]<br>]</p>
+<p>给定 word = “ABCCED”, 返回 true<br>给定 word = “SEE”, 返回 true<br>给定 word = “ABCB”, 返回 false</p>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span>[][] direction = &#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>&#125;&#125;;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> m;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> n;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">exist</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[][] board, <span class="hljs-keyword">String</span> <span class="hljs-keyword">word</span>)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">word</span> == null || <span class="hljs-keyword">word</span>.length() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">if</span> (board == null || board.length == <span class="hljs-number">0</span> || board[<span class="hljs-number">0</span>].length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        m = board.length;
+        n = board[<span class="hljs-number">0</span>].length;
+        <span class="hljs-keyword">boolean</span>[][] hasVisited = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[m][n];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> r = <span class="hljs-number">0</span>; r &lt; m; r++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> c = <span class="hljs-number">0</span>; c &lt; n; c++) &#123;
+                <span class="hljs-keyword">if</span> (backtracking(<span class="hljs-number">0</span>, r, c, hasVisited, board, <span class="hljs-keyword">word</span>)) &#123;
+                    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">backtracking</span><span class="hljs-params">(<span class="hljs-keyword">int</span> curLen, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> c, <span class="hljs-keyword">boolean</span>[][] visited, <span class="hljs-keyword">final</span> <span class="hljs-keyword">char</span>[][] board, <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> <span class="hljs-keyword">word</span>)</span> </span>&#123;
+        <span class="hljs-comment">// 符合条件</span>
+        <span class="hljs-keyword">if</span> (curLen == <span class="hljs-keyword">word</span>.length()) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        <span class="hljs-comment">// 不符合条件</span>
+        <span class="hljs-keyword">if</span> (r &lt; <span class="hljs-number">0</span> || r &gt;= m || c &lt; <span class="hljs-number">0</span> || c &gt;= n || board[r][c] != <span class="hljs-keyword">word</span>.charAt(curLen) || visited[r][c]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        <span class="hljs-comment">// 表面元素已用过</span>
+        visited[r][c] = <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span>[] d : direction) &#123;
+            <span class="hljs-keyword">if</span> (backtracking(curLen + <span class="hljs-number">1</span>, r + d[<span class="hljs-number">0</span>], c + d[<span class="hljs-number">1</span>], visited, board, <span class="hljs-keyword">word</span>)) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        &#125;
+        <span class="hljs-comment">// 可以重新使用</span>
+        visited[r][c] = <span class="hljs-literal">false</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="2-1、字符串的排列"><a href="#2-1、字符串的排列" class="headerlink" title="2.1、字符串的排列"></a>2.1、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/fe6b651b66ae47d7acce78ffdd9a96c7?tpId=13&tqId=11180&tPage=2&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">字符串的排列</a></h3><blockquote>
+<p>输入一个字符串，打印出该字符串中字符的所有排列。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：s = <span class="hljs-string">&quot;abc&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：[<span class="hljs-string">&quot;abc&quot;</span>,<span class="hljs-string">&quot;acb&quot;</span>,<span class="hljs-string">&quot;bac&quot;</span>,<span class="hljs-string">&quot;bca&quot;</span>,<span class="hljs-string">&quot;cab&quot;</span>,<span class="hljs-string">&quot;cba&quot;</span>]</span></code></pre>
+</blockquote>
+<pre><code class="hljs processing"><span class="hljs-keyword">private</span> ArrayList&lt;<span class="hljs-keyword">String</span>&gt; ret = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+
+<span class="hljs-keyword">public</span> ArrayList&lt;<span class="hljs-keyword">String</span>&gt; Permutation(<span class="hljs-keyword">String</span> <span class="hljs-built_in">str</span>) &#123;
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">str</span>.length() == <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">return</span> ret;
+    <span class="hljs-built_in">char</span>[] chars = <span class="hljs-built_in">str</span>.toCharArray();
+    <span class="hljs-comment">// 排序，过滤重复</span>
+    Arrays.<span class="hljs-built_in">sort</span>(chars);
+    backtracking(chars, <span class="hljs-keyword">new</span> <span class="hljs-built_in">boolean</span>[chars.length], <span class="hljs-keyword">new</span> StringBuilder());
+    <span class="hljs-keyword">return</span> ret;
+&#125;
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> backtracking(<span class="hljs-built_in">char</span>[] chars, <span class="hljs-built_in">boolean</span>[] hasUsed, StringBuilder s) &#123;
+    <span class="hljs-comment">// 满足条件</span>
+    <span class="hljs-keyword">if</span> (s.length() == chars.length) &#123;
+        ret.<span class="hljs-built_in">add</span>(s.toString());
+        <span class="hljs-keyword">return</span>;
+    &#125;
+    <span class="hljs-comment">// 遍历</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; chars.length; i++) &#123;
+        <span class="hljs-comment">// 我已经拿过了，不能在拿了。</span>
+        <span class="hljs-keyword">if</span> (hasUsed[i])
+            <span class="hljs-keyword">continue</span>;
+        <span class="hljs-comment">// 避免重复，实际上优化！ 注意后面那个条件，上一个元素没用过</span>
+        <span class="hljs-keyword">if</span> (i != <span class="hljs-number">0</span> &amp;&amp; chars[i] == chars[i - <span class="hljs-number">1</span>] &amp;&amp; !hasUsed[i - <span class="hljs-number">1</span>]) <span class="hljs-comment">/* 保证不重复 */</span>
+            <span class="hljs-keyword">continue</span>;
+        <span class="hljs-comment">// 标记只能取一次</span>
+        hasUsed[i] = <span class="hljs-keyword">true</span>;
+        s.<span class="hljs-built_in">append</span>(chars[i]);
+        backtracking(chars, hasUsed, s);
+        s.deleteCharAt(s.length() - <span class="hljs-number">1</span>);
+        hasUsed[i] = <span class="hljs-keyword">false</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="2-2-全排列-985"><a href="#2-2-全排列-985" class="headerlink" title="2.2. 全排列(985)"></a>2.2. 全排列(985)</h3><blockquote>
+<p>给定一个 <strong>没有重复</strong> 数字的序列，返回其所有可能的全排列。</p>
+<pre><code class="hljs inform7">&gt;输入: <span class="hljs-comment">[1,2,3]</span>
+&gt;输出:
+&gt;<span class="hljs-comment">[</span>
+<span class="hljs-comment"> <span class="hljs-comment">[1,2,3]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[1,3,2]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[2,1,3]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[2,3,1]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[3,1,2]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[3,2,1]</span></span>
+<span class="hljs-comment">&gt;]</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title">permute</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+        List&lt;List&lt;Integer&gt;&gt; permutes = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        List&lt;Integer&gt; permuteList = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        <span class="hljs-keyword">boolean</span>[] hasVisited = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[nums.length];
+        backtracking(permuteList, permutes, hasVisited, nums);
+        <span class="hljs-keyword">return</span> permutes;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">backtracking</span><span class="hljs-params">(List&lt;Integer&gt; permuteList, List&lt;List&lt;Integer&gt;&gt; permutes, <span class="hljs-keyword">boolean</span>[] visited, <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+        <span class="hljs-comment">// 满足条件</span>
+        <span class="hljs-keyword">if</span> (permuteList.<span class="hljs-built_in">size</span>() == nums.length) &#123;
+            permutes.add(<span class="hljs-keyword">new</span> ArrayList&lt;&gt;(permuteList)); <span class="hljs-comment">// 重新构造一个List</span>
+            <span class="hljs-keyword">return</span>;
+        &#125;
+        <span class="hljs-comment">// 遍历</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; visited.length; i++) &#123;
+            <span class="hljs-comment">// 已经拿过了，不能再拿了</span>
+            <span class="hljs-keyword">if</span> (visited[i]) 
+                <span class="hljs-keyword">continue</span>;
+            <span class="hljs-comment">// 标记</span>
+            visited[i] = <span class="hljs-literal">true</span>;
+            permuteList.add(nums[i]);
+            backtracking(permuteList, permutes, visited, nums);
+            <span class="hljs-comment">// 回溯</span>
+            permuteList.<span class="hljs-built_in">remove</span>(permuteList.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>);
+            visited[i] = <span class="hljs-literal">false</span>;
+        &#125;
+        
+    &#125;
+&#125;</code></pre>
+
+<h3 id="2-3-全排列-II-429"><a href="#2-3-全排列-II-429" class="headerlink" title="2.3. 全排列 II(429)"></a>2.3. 全排列 II(429)</h3><blockquote>
+<p>给定一个可包含重复数字的序列 <code>nums</code> ，<strong>按任意顺序</strong> 返回所有不重复的全排列。</p>
+<pre><code class="hljs inform7">&gt;输入：nums = <span class="hljs-comment">[1,1,2]</span>
+&gt;输出：
+&gt;<span class="hljs-comment">[<span class="hljs-comment">[1,1,2]</span>,</span>
+<span class="hljs-comment"><span class="hljs-comment">[1,2,1]</span>,</span>
+<span class="hljs-comment"><span class="hljs-comment">[2,1,1]</span>]</span></code></pre>
+
+<pre><code class="hljs inform7">&gt;输入：nums = <span class="hljs-comment">[1,2,3]</span>
+&gt;输出：<span class="hljs-comment">[<span class="hljs-comment">[1,2,3]</span>,<span class="hljs-comment">[1,3,2]</span>,<span class="hljs-comment">[2,1,3]</span>,<span class="hljs-comment">[2,3,1]</span>,<span class="hljs-comment">[3,1,2]</span>,<span class="hljs-comment">[3,2,1]</span>]</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title">permuteUnique</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+        List&lt;List&lt;Integer&gt;&gt; permutes = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        List&lt;Integer&gt; permuteList = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        Arrays.sort(nums); <span class="hljs-comment">// 排序，为了避免重复</span>
+        <span class="hljs-keyword">boolean</span>[] hasVisited = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[nums.length];
+        backtracking(permuteList, permutes, hasVisited, nums);
+        <span class="hljs-keyword">return</span> permutes;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">backtracking</span><span class="hljs-params">(List&lt;Integer&gt; permuteList, List&lt;List&lt;Integer&gt;&gt; permutes, <span class="hljs-keyword">boolean</span>[] visited, <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+        <span class="hljs-comment">// 满足条件</span>
+        <span class="hljs-keyword">if</span> (permuteList.<span class="hljs-built_in">size</span>() == nums.length) &#123;
+            permutes.add(<span class="hljs-keyword">new</span> ArrayList&lt;&gt;(permuteList));
+            <span class="hljs-keyword">return</span>;
+        &#125;
+        <span class="hljs-comment">// 遍历</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; visited.length; i++) &#123;
+            <span class="hljs-comment">// 避免重复</span>
+            <span class="hljs-keyword">if</span> (i != <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i <span class="hljs-number">-1</span>] &amp;&amp; !visited[i - <span class="hljs-number">1</span>]) &#123;
+                <span class="hljs-keyword">continue</span>; <span class="hljs-comment">// 防止重复</span>
+            &#125;
+            <span class="hljs-comment">// 表明已经拿了，退出</span>
+            <span class="hljs-keyword">if</span> (visited[i]) 
+                <span class="hljs-keyword">continue</span>;
+            <span class="hljs-comment">// 标记，只能拿一次</span>
+            visited[i] = <span class="hljs-literal">true</span>;
+            permuteList.add(nums[i]);
+            backtracking(permuteList, permutes, visited, nums);
+            <span class="hljs-comment">// 回溯</span>
+            permuteList.<span class="hljs-built_in">remove</span>(permuteList.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>);
+            visited[i] = <span class="hljs-literal">false</span>;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="2-4-组合总和-582"><a href="#2-4-组合总和-582" class="headerlink" title="2.4. 组合总和(582)"></a>2.4. 组合总和(582)</h3><blockquote>
+<p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的数字可以无限制重复被选取。</p>
+<pre><code class="hljs inform7">&gt;输入：candidates = <span class="hljs-comment">[2,3,6,7]</span>, target = 7,
+&gt;所求解集为：
+&gt;<span class="hljs-comment">[</span>
+<span class="hljs-comment"> <span class="hljs-comment">[7]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[2,2,3]</span></span>
+<span class="hljs-comment">&gt;]</span></code></pre>
+
+<pre><code class="hljs inform7">&gt;输入：candidates = <span class="hljs-comment">[2,3,5]</span>, target = 8,
+&gt;所求解集为：
+&gt;<span class="hljs-comment">[</span>
+<span class="hljs-comment"> <span class="hljs-comment">[2,2,2,2]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[2,3,3]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[3,5]</span></span>
+<span class="hljs-comment">&gt;]</span></code></pre>
+</blockquote>
+<pre><code class="hljs aspectj"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; combinationSum(<span class="hljs-keyword">int</span>[] candidates, <span class="hljs-keyword">int</span> <span class="hljs-keyword">target</span>) &#123;
+        List&lt;List&lt;Integer&gt;&gt; combinations = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        backtracking(<span class="hljs-keyword">new</span> ArrayList&lt;&gt;(), combinations, <span class="hljs-number">0</span>, <span class="hljs-keyword">target</span>, candidates);
+        <span class="hljs-keyword">return</span> combinations;
+    &#125;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> backtracking(List&lt;Integer&gt; tempCombination, List&lt;List&lt;Integer&gt;&gt; combinations,
+                            <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> <span class="hljs-keyword">target</span>, <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[] candidates) &#123;
+        <span class="hljs-comment">// target为0，则满足</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">target</span> == <span class="hljs-number">0</span>) &#123;
+            combinations.add(<span class="hljs-keyword">new</span> ArrayList&lt;&gt;(tempCombination));
+            <span class="hljs-keyword">return</span>;
+        &#125;
+        <span class="hljs-comment">// 遍历从start开始</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = start; i &lt; candidates.length; i++) &#123;
+            <span class="hljs-comment">// 注意这个骚条件，满足才行</span>
+            <span class="hljs-keyword">if</span> (candidates[i] &lt;= <span class="hljs-keyword">target</span>) &#123;
+                tempCombination.add(candidates[i]);
+                backtracking(tempCombination, combinations, i, <span class="hljs-keyword">target</span> - candidates[i], candidates);
+                <span class="hljs-comment">// 回溯</span>
+                tempCombination.remove(tempCombination.size() - <span class="hljs-number">1</span>);
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="2-5-组合总和-II-401"><a href="#2-5-组合总和-II-401" class="headerlink" title="2.5. 组合总和 II(401)"></a>2.5. 组合总和 II(401)</h3><blockquote>
+<p>给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的每个数字在每个组合中只能使用一次。</p>
+<pre><code class="hljs inform7">&gt;输入: candidates = <span class="hljs-comment">[10,1,2,7,6,1,5]</span>, target = 8,
+&gt;所求解集为:
+&gt;<span class="hljs-comment">[</span>
+<span class="hljs-comment"> <span class="hljs-comment">[1, 7]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[1, 2, 5]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[2, 6]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[1, 1, 6]</span></span>
+<span class="hljs-comment">&gt;]</span></code></pre>
+
+<pre><code class="hljs inform7">&gt;输入: candidates = <span class="hljs-comment">[2,5,2,1,2]</span>, target = 5,
+&gt;所求解集为:
+&gt;<span class="hljs-comment">[</span>
+<span class="hljs-comment"> <span class="hljs-comment">[1,2,2]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[5]</span></span>
+<span class="hljs-comment">&gt;]</span></code></pre>
+</blockquote>
+<pre><code class="hljs aspectj"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; combinationSum2(<span class="hljs-keyword">int</span>[] candidates, <span class="hljs-keyword">int</span> <span class="hljs-keyword">target</span>) &#123;
+        List&lt;List&lt;Integer&gt;&gt; combinations = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        Arrays.sort(candidates); <span class="hljs-comment">// 为了避免重复</span>
+        backtracking(<span class="hljs-keyword">new</span> ArrayList&lt;&gt;(), combinations, <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[candidates.length], <span class="hljs-number">0</span>, <span class="hljs-keyword">target</span>, candidates);
+        <span class="hljs-keyword">return</span> combinations;
+    &#125;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> backtracking(List&lt;Integer&gt; tempCombination, List&lt;List&lt;Integer&gt;&gt; combinations,
+                            <span class="hljs-keyword">boolean</span>[] hasVisited, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> <span class="hljs-keyword">target</span>, <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[] candidates) &#123;
+
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">target</span> == <span class="hljs-number">0</span>) &#123;
+            combinations.add(<span class="hljs-keyword">new</span> ArrayList&lt;&gt;(tempCombination));
+            <span class="hljs-keyword">return</span>;
+        &#125;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = start; i &lt; candidates.length; i++) &#123;
+            <span class="hljs-keyword">if</span>(hasVisited[i])
+                <span class="hljs-keyword">continue</span>;
+            <span class="hljs-comment">// 一样的道理</span>
+            <span class="hljs-keyword">if</span> (i != <span class="hljs-number">0</span> &amp;&amp; candidates[i] == candidates[i - <span class="hljs-number">1</span>] &amp;&amp; !hasVisited[i - <span class="hljs-number">1</span>]) &#123;
+                <span class="hljs-keyword">continue</span>;
+            &#125;
+            <span class="hljs-keyword">if</span> (candidates[i] &lt;= <span class="hljs-keyword">target</span>) &#123;
+                tempCombination.add(candidates[i]);
+                <span class="hljs-comment">// 只能拿一次</span>
+                hasVisited[i] = <span class="hljs-keyword">true</span>;
+                backtracking(tempCombination, combinations, hasVisited, i, <span class="hljs-keyword">target</span> - candidates[i], candidates);
+                hasVisited[i] = <span class="hljs-keyword">false</span>;
+                tempCombination.remove(tempCombination.size() - <span class="hljs-number">1</span>);
+            &#125;
+        &#125;
+    &#125;
+
+&#125;</code></pre>
+
+<h3 id="3-1-子集-633"><a href="#3-1-子集-633" class="headerlink" title="3.1. 子集(633)"></a>3.1. 子集(633)</h3><blockquote>
+<p>给你一个整数数组 <code>nums</code> ，数组中的元素 <strong>互不相同</strong> 。返回该数组所有可能的子集（幂集）。</p>
+<p>解集 <strong>不能</strong> 包含重复的子集。你可以按 <strong>任意顺序</strong> 返回解集。</p>
+<pre><code class="hljs inform7">&gt;输入：nums = <span class="hljs-comment">[1,2,3]</span>
+&gt;输出：<span class="hljs-comment">[<span class="hljs-comment">[]</span>,<span class="hljs-comment">[1]</span>,<span class="hljs-comment">[2]</span>,<span class="hljs-comment">[1,2]</span>,<span class="hljs-comment">[3]</span>,<span class="hljs-comment">[1,3]</span>,<span class="hljs-comment">[2,3]</span>,<span class="hljs-comment">[1,2,3]</span>]</span></code></pre>
+
+<pre><code class="hljs lua">&gt;输入：nums = [<span class="hljs-number">0</span>]
+&gt;输出：<span class="hljs-string">[[],[0]]</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title">subsets</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+        List&lt;List&lt;Integer&gt;&gt; subsets = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        List&lt;Integer&gt; tempSubset = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span> = <span class="hljs-number">0</span>; <span class="hljs-built_in">size</span> &lt;= nums.length; <span class="hljs-built_in">size</span>++) &#123;
+            backtracking(<span class="hljs-number">0</span>, tempSubset, subsets, <span class="hljs-built_in">size</span>, nums); <span class="hljs-comment">// 不同的子集大小</span>
+        &#125;
+        <span class="hljs-keyword">return</span> subsets;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">backtracking</span><span class="hljs-params">(<span class="hljs-keyword">int</span> start, List&lt;Integer&gt; tempSubset, List&lt;List&lt;Integer&gt;&gt; subsets,</span></span>
+<span class="hljs-function"><span class="hljs-params">                            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span>, <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+
+        <span class="hljs-keyword">if</span> (tempSubset.<span class="hljs-built_in">size</span>() == <span class="hljs-built_in">size</span>) &#123;
+            subsets.add(<span class="hljs-keyword">new</span> ArrayList&lt;&gt;(tempSubset));
+            <span class="hljs-keyword">return</span>;
+        &#125;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = start; i &lt; nums.length; i++) &#123;
+            tempSubset.add(nums[i]);
+            backtracking(i + <span class="hljs-number">1</span>, tempSubset, subsets, <span class="hljs-built_in">size</span>, nums);
+            tempSubset.<span class="hljs-built_in">remove</span>(tempSubset.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>);
+        &#125;
+    &#125;
+
+&#125;</code></pre>
+
+<h3 id="3-2-子集-II-304"><a href="#3-2-子集-II-304" class="headerlink" title="3.2. 子集 II(304)"></a>3.2. 子集 II(304)</h3><blockquote>
+<p>给定一个可能包含重复元素的整数数组 <strong><em>nums</em></strong>，返回该数组所有可能的子集（幂集）。</p>
+<pre><code class="hljs inform7">&gt;输入: <span class="hljs-comment">[1,2,2]</span>
+&gt;输出:
+&gt;<span class="hljs-comment">[</span>
+<span class="hljs-comment"> <span class="hljs-comment">[2]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[1]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[1,2,2]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[2,2]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[1,2]</span>,</span>
+<span class="hljs-comment"> <span class="hljs-comment">[]</span></span>
+<span class="hljs-comment">&gt;]</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title">subsetsWithDup</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+        Arrays.sort(nums); <span class="hljs-comment">// 注意</span>
+        List&lt;List&lt;Integer&gt;&gt; subsets = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        List&lt;Integer&gt; tempSubset = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        <span class="hljs-keyword">boolean</span>[] hasVisited = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[nums.length];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span> = <span class="hljs-number">0</span>; <span class="hljs-built_in">size</span> &lt;= nums.length; <span class="hljs-built_in">size</span>++) &#123;
+            backtracking(<span class="hljs-number">0</span>, tempSubset, subsets, hasVisited, <span class="hljs-built_in">size</span>, nums); <span class="hljs-comment">// 不同的子集大小</span>
+        &#125;
+        <span class="hljs-keyword">return</span> subsets;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">backtracking</span><span class="hljs-params">(<span class="hljs-keyword">int</span> start, List&lt;Integer&gt; tempSubset, List&lt;List&lt;Integer&gt;&gt; subsets, <span class="hljs-keyword">boolean</span>[] hasVisited,</span></span>
+<span class="hljs-function"><span class="hljs-params">                            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span>, <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+
+        <span class="hljs-keyword">if</span> (tempSubset.<span class="hljs-built_in">size</span>() == <span class="hljs-built_in">size</span>) &#123;
+            subsets.add(<span class="hljs-keyword">new</span> ArrayList&lt;&gt;(tempSubset));
+            <span class="hljs-keyword">return</span>;
+        &#125;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = start; i &lt; nums.length; i++) &#123;
+            <span class="hljs-comment">// 注意</span>
+            <span class="hljs-keyword">if</span> (i != <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i - <span class="hljs-number">1</span>] &amp;&amp; !hasVisited[i - <span class="hljs-number">1</span>]) &#123;
+                <span class="hljs-keyword">continue</span>;
+            &#125;
+            tempSubset.add(nums[i]);
+            hasVisited[i] = <span class="hljs-literal">true</span>;
+            backtracking(i + <span class="hljs-number">1</span>, tempSubset, subsets, hasVisited, <span class="hljs-built_in">size</span>, nums);
+            hasVisited[i] = <span class="hljs-literal">false</span>;
+            tempSubset.<span class="hljs-built_in">remove</span>(tempSubset.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>);
+        &#125;
+    &#125;
+
+&#125;</code></pre>
+
+<h3 id="4-1-岛屿数量-853"><a href="#4-1-岛屿数量-853" class="headerlink" title="4.1. 岛屿数量(853)"></a>4.1. 岛屿数量(853)</h3><blockquote>
+<p>给你一个由 <code>&#39;1&#39;</code>（陆地）和 <code>&#39;0&#39;</code>（水）组成的的二维网格，请你计算网格中岛屿的数量。</p>
+<pre><code class="hljs prolog">&gt;输入：grid = [
+ [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],
+ [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],
+ [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],
+ [<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>]
+&gt;]
+&gt;输出：<span class="hljs-number">1</span></code></pre>
+
+<pre><code class="hljs prolog">&gt;输入：grid = [
+ [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],
+ [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],
+ [<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],
+ [<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>]
+&gt;]
+&gt;输出：<span class="hljs-number">3</span></code></pre>
+</blockquote>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-comment">// 像这种二维， 定义四个全局方向</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> m, n;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[][] direaction = &#123;&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;&#125;;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">numIslands</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[][] grid)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (grid == <span class="hljs-keyword">null</span> || grid.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        m = grid.length;
+        n = grid[<span class="hljs-number">0</span>].length;
+        <span class="hljs-keyword">int</span> islandsNum = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;
+                <span class="hljs-comment">// 不等于0，才能dfs</span>
+                <span class="hljs-keyword">if</span> (grid[i][j] != <span class="hljs-string">&#x27;0&#x27;</span>) &#123;
+                    dfs(grid, i, j);
+                    <span class="hljs-comment">// 成功一次，加一次</span>
+                    islandsNum++;
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> islandsNum;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[][] grid, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j)</span> </span>&#123;
+        <span class="hljs-comment">// 失败条件</span>
+        <span class="hljs-keyword">if</span> (i &lt; <span class="hljs-number">0</span> || i &gt;= m || j &lt; <span class="hljs-number">0</span> || j &gt;=n || grid[i][j] == <span class="hljs-string">&#x27;0&#x27;</span>) &#123;
+            <span class="hljs-keyword">return</span>;
+        &#125;
+        <span class="hljs-comment">// 标记，已走过</span>
+        grid[i][j] = <span class="hljs-string">&#x27;0&#x27;</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span>[] d : direaction) &#123;
+            dfs(grid, i + d[<span class="hljs-number">0</span>], j + d[<span class="hljs-number">1</span>]);
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="4-2-岛屿的最大面积-648"><a href="#4-2-岛屿的最大面积-648" class="headerlink" title="4.2. 岛屿的最大面积(648)"></a>4.2. 岛屿的最大面积(648)</h3><blockquote>
+<p>给定一个包含了一些 <code>0</code> 和 <code>1</code> 的非空二维数组 <code>grid</code> 。</p>
+<p>找到给定的二维数组中最大的岛屿面积。(如果没有岛屿，则返回面积为 <code>0</code> 。)</p>
+<pre><code class="hljs dns">&gt;[[<span class="hljs-number">0,0,1,0</span>,<span class="hljs-number">0,0,0,1</span>,<span class="hljs-number">0,0,0,0</span>,<span class="hljs-number">0</span>],
+[<span class="hljs-number">0,0,0,0</span>,<span class="hljs-number">0,0,0,1</span>,<span class="hljs-number">1,1,0,0</span>,<span class="hljs-number">0</span>],
+[<span class="hljs-number">0,1,1,0</span>,<span class="hljs-number">1,0,0,0</span>,<span class="hljs-number">0,0,0,0</span>,<span class="hljs-number">0</span>],
+[<span class="hljs-number">0,1,0,0</span>,<span class="hljs-number">1,1,0,0</span>,<span class="hljs-number">1,0,1,0</span>,<span class="hljs-number">0</span>],
+[<span class="hljs-number">0,1,0,0</span>,<span class="hljs-number">1,1,0,0</span>,<span class="hljs-number">1,1,1,0</span>,<span class="hljs-number">0</span>],
+[<span class="hljs-number">0,0,0,0</span>,<span class="hljs-number">0,0,0,0</span>,<span class="hljs-number">0,0,1,0</span>,<span class="hljs-number">0</span>],
+[<span class="hljs-number">0,0,0,0</span>,<span class="hljs-number">0,0,0,1</span>,<span class="hljs-number">1,1,0,0</span>,<span class="hljs-number">0</span>],
+[<span class="hljs-number">0,0,0,0</span>,<span class="hljs-number">0,0,0,1</span>,<span class="hljs-number">1,0,0,0</span>,<span class="hljs-number">0</span>]]</code></pre>
+</blockquote>
+<pre><code class="hljs mel">class Solution &#123;
+    private <span class="hljs-keyword">int</span> m, n;
+    private <span class="hljs-keyword">int</span>[][] direaction = &#123;&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>&#125;,&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>&#125;&#125;;
+    public <span class="hljs-keyword">int</span> maxAreaOfIsland(<span class="hljs-keyword">int</span>[][] <span class="hljs-keyword">grid</span>) &#123;
+        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">grid</span> == null || <span class="hljs-keyword">grid</span>.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        m = <span class="hljs-keyword">grid</span>.length;
+        n = <span class="hljs-keyword">grid</span>[<span class="hljs-number">0</span>].length;
+        <span class="hljs-keyword">int</span> maxArea = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;
+                <span class="hljs-comment">// 这里可以加个条件，不等于0进来</span>
+                <span class="hljs-comment">// 每次取最大面积</span>
+                maxArea = Math.<span class="hljs-keyword">max</span>(maxArea, dfs(<span class="hljs-keyword">grid</span>, i, j));
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> maxArea;
+    &#125;   
+    private <span class="hljs-keyword">int</span> dfs(<span class="hljs-keyword">int</span>[][] <span class="hljs-keyword">grid</span>, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> c) &#123;
+        <span class="hljs-comment">// 失败条件</span>
+        <span class="hljs-keyword">if</span> (r &lt; <span class="hljs-number">0</span> || r &gt;= m || c &lt; <span class="hljs-number">0</span> || c &gt;= n || <span class="hljs-keyword">grid</span>[r][c] == <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        &#125;
+        <span class="hljs-comment">// 标记走过</span>
+        <span class="hljs-keyword">grid</span>[r][c] = <span class="hljs-number">0</span>;
+        <span class="hljs-comment">// 开始dfs</span>
+        <span class="hljs-keyword">int</span> area = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span>[] d : direaction) &#123;
+            area += dfs(<span class="hljs-keyword">grid</span>, r + d[<span class="hljs-number">0</span>], c + d[<span class="hljs-number">1</span>]);
+        &#125;
+        <span class="hljs-keyword">return</span> area;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="5-电话号码的字母组合-1085"><a href="#5-电话号码的字母组合-1085" class="headerlink" title="5. 电话号码的字母组合(1085)"></a>5. 电话号码的字母组合(1085)</h3><blockquote>
+<p>给定一个仅包含数字 <code>2-9</code> 的字符串，返回所有它能表示的字母组合。答案可以按 <strong>任意顺序</strong> 返回。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：digits = <span class="hljs-string">&quot;23&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：[<span class="hljs-string">&quot;ad&quot;</span>,<span class="hljs-string">&quot;ae&quot;</span>,<span class="hljs-string">&quot;af&quot;</span>,<span class="hljs-string">&quot;bd&quot;</span>,<span class="hljs-string">&quot;be&quot;</span>,<span class="hljs-string">&quot;bf&quot;</span>,<span class="hljs-string">&quot;cd&quot;</span>,<span class="hljs-string">&quot;ce&quot;</span>,<span class="hljs-string">&quot;cf&quot;</span>]</span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：digits = <span class="hljs-string">&quot;2&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：[<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>,<span class="hljs-string">&quot;c&quot;</span>]</span></code></pre>
+
+<p>在电话键盘上的对应顺序为：</p>
+<p>2-abc，3-def，4-ghi，5-jkl，6-mno，7-pqrs，8-tuv，9-wxyz。</p>
+</blockquote>
+<pre><code class="hljs reasonml"><span class="hljs-keyword">class</span> Solution &#123;
+    <span class="hljs-keyword">private</span> static final String<span class="hljs-literal">[]</span> KEYS = &#123;<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;def&quot;</span>, <span class="hljs-string">&quot;ghi&quot;</span>, <span class="hljs-string">&quot;jkl&quot;</span>, <span class="hljs-string">&quot;mno&quot;</span>, <span class="hljs-string">&quot;pqrs&quot;</span>, <span class="hljs-string">&quot;tuv&quot;</span>, <span class="hljs-string">&quot;wxyz&quot;</span>&#125;;
+    public List&lt;String&gt; letter<span class="hljs-constructor">Combinations(String <span class="hljs-params">digits</span>)</span> &#123;
+        List&lt;String&gt; combinnations = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;<span class="hljs-literal">()</span>;
+        <span class="hljs-keyword">if</span> (digits<span class="hljs-operator"> == </span>null<span class="hljs-operator"> || </span>digits.length<span class="hljs-literal">()</span><span class="hljs-operator"> == </span><span class="hljs-number">0</span>) return combinnations;
+        <span class="hljs-keyword">do</span><span class="hljs-constructor">Combination(<span class="hljs-params">new</span> StringBuilder()</span>, combinnations, digits);
+        return combinnations;
+    &#125;
+    
+    <span class="hljs-keyword">private</span> void <span class="hljs-keyword">do</span><span class="hljs-constructor">Combination(StringBuilder <span class="hljs-params">prefix</span>, List&lt;String&gt; <span class="hljs-params">combinnations</span>, <span class="hljs-params">final</span> String <span class="hljs-params">digits</span>)</span> &#123;
+        <span class="hljs-keyword">if</span> (prefix.length<span class="hljs-literal">()</span><span class="hljs-operator"> == </span>digits.length<span class="hljs-literal">()</span>) &#123;
+            combinnations.add(prefix.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>);
+            return;
+        &#125;
+        <span class="hljs-built_in">int</span> curDigits = digits.<span class="hljs-built_in">char</span><span class="hljs-constructor">At(<span class="hljs-params">prefix</span>.<span class="hljs-params">length</span>()</span>) - <span class="hljs-character">&#x27;0&#x27;</span>;
+        String letters = KEYS<span class="hljs-literal">[<span class="hljs-identifier">curDigits</span>]</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">char</span> c : letters.<span class="hljs-keyword">to</span><span class="hljs-constructor">CharArray()</span>) &#123;
+            prefix.append(c);
+            <span class="hljs-keyword">do</span><span class="hljs-constructor">Combination(<span class="hljs-params">prefix</span>, <span class="hljs-params">combinnations</span>, <span class="hljs-params">digits</span>)</span>;
+            prefix.delete<span class="hljs-constructor">CharAt(<span class="hljs-params">prefix</span>.<span class="hljs-params">length</span>()</span> - <span class="hljs-number">1</span>);
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="6-被围绕的区域-328"><a href="#6-被围绕的区域-328" class="headerlink" title="6. 被围绕的区域(328)"></a>6. 被围绕的区域(328)</h3><blockquote>
+<p>给你一个 m x n 的矩阵 board ，由若干字符 ‘X’ 和 ‘O’ ，找到所有被 ‘X’ 围绕的区域，并将这些区域里所有的 ‘O’ 用 ‘X’ 填充。</p>
+<pre><code class="hljs prolog">&gt;输入：board = [[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>],[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;O&quot;</span>,<span class="hljs-string">&quot;O&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>],[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;O&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>],[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;O&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>]]
+&gt;输出：[[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>],[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>],[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>],[<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;O&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>,<span class="hljs-string">&quot;X&quot;</span>]]
+&gt;解释：被围绕的区间不会存在于边界上，换句话说，任何边界上的 <span class="hljs-string">&#x27;O&#x27;</span> 都不会被填充为 <span class="hljs-string">&#x27;X&#x27;</span>。 任何不在边界上，或不与边界上的 <span class="hljs-string">&#x27;O&#x27;</span> 相连的 <span class="hljs-string">&#x27;O&#x27;</span> 最终都会被填充为 <span class="hljs-string">&#x27;X&#x27;</span>。如果两个元素在水平或垂直方向相邻，则称它们是“相连”的。</code></pre>
+</blockquote>
+<pre><code class="hljs aspectj"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[][] direction = &#123;&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>&#125;,&#123;<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,&#123;<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>&#125;&#125;;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> m, n;
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[][] board)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (board == <span class="hljs-keyword">null</span> || board.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;
+        m = board.length;
+        n = board[<span class="hljs-number">0</span>].length;
+        <span class="hljs-comment">// 边缘两列</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            dfs(board, i, <span class="hljs-number">0</span>);
+            dfs(board, i, n - <span class="hljs-number">1</span>);
+        &#125;
+        <span class="hljs-comment">// 上下两行</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;
+            dfs(board, <span class="hljs-number">0</span>, i);
+            dfs(board, m - <span class="hljs-number">1</span>, i);
+        &#125;
+
+        <span class="hljs-comment">// 再走全部走一遍</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;
+                <span class="hljs-comment">// 遇见T标记O</span>
+                <span class="hljs-keyword">if</span> (board[i][j] == <span class="hljs-string">&#x27;T&#x27;</span>) &#123;
+                    board[i][j] = <span class="hljs-string">&#x27;O&#x27;</span>;
+                    <span class="hljs-comment">// 遇见O标记X</span>
+                &#125; <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> <span class="hljs-params">(board[i][j] == <span class="hljs-string">&#x27;O&#x27;</span>)</span> </span>&#123;
+                    board[i][j] = <span class="hljs-string">&#x27;X&#x27;</span>;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[][] board, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> c)</span> </span>&#123;
+        <span class="hljs-keyword">if</span>(r &lt; <span class="hljs-number">0</span> || r &gt;= m || c &lt; <span class="hljs-number">0</span> || c &gt;= n || board[r][c] != <span class="hljs-string">&#x27;O&#x27;</span>) &#123;
+            <span class="hljs-keyword">return</span>;
+        &#125;
+        board[r][c] = <span class="hljs-string">&#x27;T&#x27;</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span>[] d : direction) &#123;
+            dfs(board, r + d[<span class="hljs-number">0</span>], c + d[<span class="hljs-number">1</span>]);
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="7-求-1-n-这-n-个数字的排列组合有多少个"><a href="#7-求-1-n-这-n-个数字的排列组合有多少个" class="headerlink" title="7. 求 [1,n] 这 n 个数字的排列组合有多少个"></a>7. 求 [1,n] 这 n 个数字的排列组合有多少个</h3><p>条件：相邻的两个数字的绝对值不能等于1. 例如： 4 [2, 4, 1, 3] [3, 1, 4, 2]</p>
+<pre><code class="hljs arduino"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> List&lt;List&lt;Integer&gt;&gt; ret = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> n = <span class="hljs-number">0</span>;
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span></span>&#123;
+    Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);
+    n = sc.nextInt();
+    <span class="hljs-keyword">boolean</span>[] marked = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[n + <span class="hljs-number">1</span>];
+    dfs(<span class="hljs-number">0</span>, marked, <span class="hljs-keyword">new</span> ArrayList&lt;&gt;());
+    <span class="hljs-keyword">for</span> (List&lt;Integer&gt; <span class="hljs-built_in">list</span> : ret) &#123;
+        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-built_in">list</span>.toString());
+    &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">boolean</span>[] marked, ArrayList&lt;Integer&gt; <span class="hljs-built_in">list</span>)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">list</span>.<span class="hljs-built_in">size</span>() == n) &#123;
+        ret.add(<span class="hljs-keyword">new</span> ArrayList&lt;&gt;(<span class="hljs-built_in">list</span>));
+        <span class="hljs-keyword">return</span>;
+    &#125;
+    <span class="hljs-comment">// 开始遍历</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;
+        <span class="hljs-comment">// 关键是这个条件</span>
+        <span class="hljs-keyword">if</span> (!marked[i] &amp;&amp; (<span class="hljs-built_in">list</span>.isEmpty() || Math.<span class="hljs-built_in">abs</span>(<span class="hljs-built_in">list</span>.<span class="hljs-built_in">get</span>(<span class="hljs-built_in">list</span>.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>) - i) != <span class="hljs-number">1</span>))&#123;
+            <span class="hljs-built_in">list</span>.add(i);
+            marked[i] = <span class="hljs-literal">true</span>;
+            dfs(x+<span class="hljs-number">1</span>, marked, <span class="hljs-built_in">list</span>);
+            <span class="hljs-built_in">list</span>.<span class="hljs-built_in">remove</span>(<span class="hljs-built_in">list</span>.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>);
+            marked[i] = <span class="hljs-literal">false</span>;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="51-N皇后"><a href="#51-N皇后" class="headerlink" title="51. N皇后"></a>51. N皇后</h3><blockquote>
+<p>n 皇后问题 研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。</p>
+<p>给你一个整数 n ，返回所有不同的 n 皇后问题 的解决方案。</p>
+<p>皇后攻击范围为横线，竖线，斜线。</p>
+<pre><code class="hljs prolog">&gt;输入：n = <span class="hljs-number">4</span>
+&gt;输出：[[<span class="hljs-string">&quot;.Q..&quot;</span>,<span class="hljs-string">&quot;...Q&quot;</span>,<span class="hljs-string">&quot;Q...&quot;</span>,<span class="hljs-string">&quot;..Q.&quot;</span>],[<span class="hljs-string">&quot;..Q.&quot;</span>,<span class="hljs-string">&quot;Q...&quot;</span>,<span class="hljs-string">&quot;...Q&quot;</span>,<span class="hljs-string">&quot;.Q..&quot;</span>]]
+&gt;解释：如上图所示，<span class="hljs-number">4</span> 皇后问题存在两个不同的解法。</code></pre>
+
+<pre><code class="hljs lua">&gt;输入：n = <span class="hljs-number">1</span>
+&gt;输出：<span class="hljs-string">[[&quot;Q&quot;]]</span></code></pre>
+</blockquote>
+<pre><code class="hljs processing">class Solution &#123;
+    <span class="hljs-built_in">boolean</span>[] col = <span class="hljs-keyword">null</span>;
+    <span class="hljs-built_in">boolean</span>[] left = <span class="hljs-keyword">null</span>;
+    <span class="hljs-built_in">boolean</span>[] right = <span class="hljs-keyword">null</span>;
+    List&lt;List&lt;<span class="hljs-keyword">String</span>&gt;&gt; res = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+    <span class="hljs-keyword">public</span> List&lt;List&lt;<span class="hljs-keyword">String</span>&gt;&gt; solveNQueens(<span class="hljs-built_in">int</span> n) &#123;
+        col = <span class="hljs-keyword">new</span> <span class="hljs-built_in">boolean</span>[n];
+        left = <span class="hljs-keyword">new</span> <span class="hljs-built_in">boolean</span>[<span class="hljs-number">2</span> * n - <span class="hljs-number">1</span>];
+        right = <span class="hljs-keyword">new</span> <span class="hljs-built_in">boolean</span>[<span class="hljs-number">2</span> * n - <span class="hljs-number">1</span>];
+        <span class="hljs-built_in">char</span>[][] board = <span class="hljs-keyword">new</span> <span class="hljs-built_in">char</span>[n][n];
+        dfs(board, <span class="hljs-number">0</span>, n);
+        <span class="hljs-keyword">return</span> res;
+    &#125;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> dfs(<span class="hljs-built_in">char</span>[][] board, <span class="hljs-built_in">int</span> r, <span class="hljs-built_in">int</span> n) &#123;
+        <span class="hljs-keyword">if</span> (r &gt;= n) &#123;
+            List&lt;<span class="hljs-keyword">String</span>&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+                list.<span class="hljs-built_in">add</span>(<span class="hljs-keyword">new</span> <span class="hljs-keyword">String</span>(board[i]));
+            res.<span class="hljs-built_in">add</span>(list);
+            <span class="hljs-keyword">return</span>;
+        &#125;
+        Arrays.<span class="hljs-built_in">fill</span>(board[r], <span class="hljs-string">&#x27;.&#x27;</span>);
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;
+            <span class="hljs-keyword">if</span> (!col[i] &amp;&amp; !left[r + i] &amp;&amp; !right[r - i + n - <span class="hljs-number">1</span>]) &#123;
+                board[r][i] = <span class="hljs-string">&#x27;Q&#x27;</span>;
+                col[i] = <span class="hljs-keyword">true</span>;
+                left[r + i] = <span class="hljs-keyword">true</span>;
+                right[r - i + n - <span class="hljs-number">1</span>] = <span class="hljs-keyword">true</span>;
+                dfs(board, r + <span class="hljs-number">1</span>, n);
+                board[r][i] = <span class="hljs-string">&#x27;.&#x27;</span>;
+                col[i] = <span class="hljs-keyword">false</span>;
+                left[r + i] = <span class="hljs-keyword">false</span>;
+                right[r - i + n - <span class="hljs-number">1</span>] = <span class="hljs-keyword">false</span>;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="329-矩阵中的最长递增路径"><a href="#329-矩阵中的最长递增路径" class="headerlink" title="329. 矩阵中的最长递增路径"></a>329. 矩阵中的最长递增路径</h3><blockquote>
+<p>给定一个 <code>m x n</code> 整数矩阵 <code>matrix</code> ，找出其中 <strong>最长递增路径</strong> 的长度。</p>
+<pre><code class="hljs inform7">&gt;输入：matrix = <span class="hljs-comment">[<span class="hljs-comment">[9,9,4]</span>,<span class="hljs-comment">[6,6,8]</span>,<span class="hljs-comment">[2,1,1]</span>]</span>
+&gt;输出：4 
+&gt;解释：最长递增路径为 <span class="hljs-comment">[1, 2, 6, 9]</span>。</code></pre>
+
+<pre><code class="hljs inform7">&gt;输入：matrix = <span class="hljs-comment">[<span class="hljs-comment">[3,4,5]</span>,<span class="hljs-comment">[3,2,6]</span>,<span class="hljs-comment">[2,2,1]</span>]</span>
+&gt;输出：4 
+&gt;解释：最长递增路径是 <span class="hljs-comment">[3, 4, 5, 6]</span>。注意不允许在对角线方向上移动。</code></pre>
+</blockquote>
+<pre><code class="hljs stan">class Solution &#123;
+    <span class="hljs-keyword">int</span>[][] next = &#123;&#123;-<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>&#125;, &#123;<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>&#125;&#125;;
+    <span class="hljs-keyword">int</span> <span class="hljs-built_in">rows</span> = <span class="hljs-number">0</span>, <span class="hljs-built_in">cols</span> = <span class="hljs-number">0</span>;
+    boolean[][] marked = null;
+    <span class="hljs-keyword">int</span>[][] res = null;
+    public <span class="hljs-keyword">int</span> longestIncreasingPath(<span class="hljs-keyword">int</span>[][] <span class="hljs-keyword">matrix</span>) &#123;
+        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">matrix</span> == null || <span class="hljs-keyword">matrix</span>.length == <span class="hljs-number">0</span> || <span class="hljs-keyword">matrix</span>[<span class="hljs-number">0</span>].length == <span class="hljs-number">0</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">int</span> <span class="hljs-built_in">max</span> = <span class="hljs-number">0</span>;
+        this.<span class="hljs-built_in">rows</span> = <span class="hljs-keyword">matrix</span>.length;
+        this.<span class="hljs-built_in">cols</span> = <span class="hljs-keyword">matrix</span>[<span class="hljs-number">0</span>].length;
+        this.marked = new boolean[<span class="hljs-built_in">rows</span>][<span class="hljs-built_in">cols</span>];
+        this.res = new <span class="hljs-keyword">int</span>[<span class="hljs-built_in">rows</span>][<span class="hljs-built_in">cols</span>];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">rows</span>; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-built_in">cols</span>; j++) &#123;
+                <span class="hljs-built_in">max</span> = Math.<span class="hljs-built_in">max</span>(<span class="hljs-built_in">max</span>, dfs(<span class="hljs-keyword">matrix</span>, i, j));
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>;
+    &#125;
+
+    public <span class="hljs-keyword">int</span> dfs(<span class="hljs-keyword">int</span>[][] <span class="hljs-keyword">matrix</span>, <span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y) &#123;
+        <span class="hljs-keyword">if</span>(res[x][y] != <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">return</span> res[x][y];
+        &#125;
+        marked[x][y] = true;
+        <span class="hljs-keyword">int</span> len = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span>[] n : next) &#123;
+            <span class="hljs-keyword">int</span> nx = x + n[<span class="hljs-number">0</span>];
+            <span class="hljs-keyword">int</span> ny = y + n[<span class="hljs-number">1</span>];
+            <span class="hljs-keyword">if</span> (nx &gt;= <span class="hljs-number">0</span> &amp;&amp; nx &lt; <span class="hljs-built_in">rows</span> &amp;&amp; ny &gt;= <span class="hljs-number">0</span> &amp;&amp; ny &lt; <span class="hljs-built_in">cols</span> &amp;&amp; <span class="hljs-keyword">matrix</span>[x][y] &lt; <span class="hljs-keyword">matrix</span>[nx][ny] &amp;&amp; !marked[nx][ny])
+                len = Math.<span class="hljs-built_in">max</span>(len, dfs(<span class="hljs-keyword">matrix</span>, nx, ny));
+        &#125;
+        marked[x][y] = false;
+        res[x][y] = len + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">return</span> res[x][y];
+    &#125;
+&#125;</code></pre>
+
+<h3 id="93-复原IP地址"><a href="#93-复原IP地址" class="headerlink" title="93. 复原IP地址"></a>93. 复原IP地址</h3><blockquote>
+<p>给定一个只包含数字的字符串，用以表示一个 IP 地址，返回所有可能从 s 获得的 有效 IP 地址 。你可以按任何顺序返回答案。</p>
+<p>有效 IP 地址 正好由四个整数（每个整数位于 0 到 255 之间组成，且不能含有前导 0），整数之间用 ‘.’ 分隔。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：s = <span class="hljs-string">&quot;25525511135&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：[<span class="hljs-string">&quot;255.255.11.135&quot;</span>,<span class="hljs-string">&quot;255.255.111.35&quot;</span>]</span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：s = <span class="hljs-string">&quot;010010&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：[<span class="hljs-string">&quot;0.10.0.10&quot;</span>,<span class="hljs-string">&quot;0.100.1.0&quot;</span>]</span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：s = <span class="hljs-string">&quot;101023&quot;</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：[<span class="hljs-string">&quot;1.0.10.23&quot;</span>,<span class="hljs-string">&quot;1.0.102.3&quot;</span>,<span class="hljs-string">&quot;10.1.0.23&quot;</span>,<span class="hljs-string">&quot;10.10.2.3&quot;</span>,<span class="hljs-string">&quot;101.0.2.3&quot;</span>]</span></code></pre>
+</blockquote>
+<pre><code class="hljs typescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    List&lt;<span class="hljs-built_in">String</span>&gt; addresses = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+    <span class="hljs-keyword">public</span> List&lt;<span class="hljs-built_in">String</span>&gt; <span class="hljs-function"><span class="hljs-title">restoreIpAddresses</span>(<span class="hljs-params"><span class="hljs-built_in">String</span> s</span>)</span> &#123;
+        
+        StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder();
+        dfs(<span class="hljs-number">0</span>, sb, s);
+        <span class="hljs-keyword">return</span> addresses;
+    &#125;
+    <span class="hljs-keyword">private</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">dfs</span>(<span class="hljs-params">int k, StringBuilder sb, <span class="hljs-built_in">String</span> s</span>)</span> &#123;
+        <span class="hljs-keyword">if</span> (k == <span class="hljs-number">4</span> || s.length() == <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">if</span> (k == <span class="hljs-number">4</span> &amp;&amp; s.length() == <span class="hljs-number">0</span>) &#123;
+                addresses.add(sb.toString());
+            &#125;
+            <span class="hljs-keyword">return</span>;
+        &#125;
+        <span class="hljs-keyword">for</span> (int i = <span class="hljs-number">0</span>; i &lt; s.length() &amp;&amp; i &lt;= <span class="hljs-number">2</span>; i++) &#123;
+            <span class="hljs-keyword">if</span> (i != <span class="hljs-number">0</span> &amp;&amp; s.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&#x27;0&#x27;</span>) <span class="hljs-keyword">break</span>;
+            <span class="hljs-built_in">String</span> part = s.substring(<span class="hljs-number">0</span>, i + <span class="hljs-number">1</span>);
+            <span class="hljs-keyword">if</span> (Integer.valueOf(part) &lt;= <span class="hljs-number">255</span>) &#123;
+                <span class="hljs-keyword">if</span> (sb.length() != <span class="hljs-number">0</span>) &#123;
+                    part = <span class="hljs-string">&quot;.&quot;</span> + part;
+                &#125;
+                sb.append(part);
+                dfs(k + <span class="hljs-number">1</span>, sb, s.substring(i + <span class="hljs-number">1</span>));
+                sb.delete(sb.length() - part.length(),sb.length());
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/java%E7%AE%97%E6%B3%95/">java算法</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B9%A0%E9%A2%98/">习题</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，大部分为学习心得，欢迎与博主联系讨论</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/21/%E9%AB%98%E7%83%AD%E5%BA%A6%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">高热度题参要</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/20/BFS%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">
+                        <span class="hidden-mobile">BFS相关算法题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+<b>此身此时此地</b>
+<i class="iconfont icon-love"></i>
+<b>所见所闻所想</b>
+
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

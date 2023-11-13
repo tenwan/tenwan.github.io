@@ -1,0 +1,1012 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="刘金博">
+  <meta name="keywords" content="">
+  <title>背包问题相关算法题 - xiaoliu‘s sapce</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>xiaoliu's space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="背包问题相关算法题">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-26 17:58" pubdate>
+        2021年3月26日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      64
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">背包问题相关算法题</h1>
+            
+            <div class="markdown-body">
+              <h3 id="0-1"><a href="#0-1" class="headerlink" title="0/1"></a>0/1</h3><h4 id="P1048-采药"><a href="#P1048-采药" class="headerlink" title="P1048 采药"></a>P1048 采药</h4><blockquote>
+<p>辰辰是个天资聪颖的孩子，他的梦想是成为世界上最伟大的医师。为此，他想拜附近最有威望的医师为师。医师为了判断他的资质，给他出了一个难题。医师把他带到一个到处都是草药的山洞里对他说：“孩子，这个山洞里有一些不同的草药，采每一株都需要一些时间，每一株也有它自身的价值。我会给你一段时间，在这段时间里，你可以采到一些草药。如果你是一个聪明的孩子，你应该可以让采到的草药的总价值最大。”</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行有 2 个整数 T和 M，用一个空格隔开，T代表总共能够用来采药的时间，M代表山洞里的草药的数目。</p>
+<p>接下来的 M行每行包括两个在 1到 100之间（包括 11和 100）的整数，分别表示采摘某株草药的时间和这株草药的价值。</p>
+<p>求规定时间内采到药物的最大总价值。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">70 3</span>
+<span class="hljs-meta">&gt;</span><span class="bash">71 100</span>
+<span class="hljs-meta">&gt;</span><span class="bash">69 1</span>
+<span class="hljs-meta">&gt;</span><span class="bash">1 2</span>
+
+<span class="hljs-meta">&gt;</span><span class="bash">输出：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">3</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-keyword">import</span> java.util.Scanner;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> </span>&#123;
+        Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);
+        <span class="hljs-keyword">int</span> T = sc.nextInt();
+        <span class="hljs-keyword">int</span> m = sc.nextInt();
+        <span class="hljs-keyword">int</span>[] a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m];
+        <span class="hljs-keyword">int</span>[] b = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            a[i] = sc.nextInt();
+            b[i] = sc.nextInt();
+        &#125;
+        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-built_in">max</span>(T, a, b));
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> T, <span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span> [] b)</span> </span>&#123;
+        <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[T + <span class="hljs-number">1</span>];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; a.length; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = T; j &gt;= a[i]; j--) &#123;
+                dp[j] = Math.<span class="hljs-built_in">max</span>(dp[j], dp[j - a[i]] + b[i]);
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[T];
+    &#125;
+&#125;</code></pre>
+
+<h4 id="P1060-开心的金明"><a href="#P1060-开心的金明" class="headerlink" title="P1060 开心的金明"></a>P1060 开心的金明</h4><blockquote>
+<p>金明今天很开心，家里购置的新房就要领钥匙了，新房里有一间他自己专用的很宽敞的房间。更让他高兴的是，妈妈昨天对他说：“你的房间需要购买哪些物品，怎么布置，你说了算，只要不超过N<em>N</em>元钱就行”。今天一早金明就开始做预算，但是他想买的东西太多了，肯定会超过妈妈限定的N<em>N</em>元。于是，他把每件物品规定了一个重要度，分为55等：用整数1-51−5表示，第55等最重要。他还从因特网上查到了每件物品的价格（都是整数元）。他希望在不超过N<em>N</em>元（可以等于N<em>N</em>元）的前提下，使每件物品的价格与重要度的乘积的总和最大。</p>
+<p>设第j<em>j</em>件物品的价格为v[j]<em>v</em>[<em>j</em>]，重要度为w[j]<em>w</em>[<em>j</em>]，共选中了k<em>k</em>件物品，编号依次为j_1,j_2,…,j_k<em>j</em>1,<em>j</em>2,…,<em>j**k</em>，则所求的总和为：</p>
+<p>v[j_1] \times w[j_1]+v[j_2] \times w[j_2]+ …+v[j_k] \times w[j_k]<em>v</em>[<em>j</em>1]×<em>w</em>[<em>j</em>1]+<em>v</em>[<em>j</em>2]×<em>w</em>[<em>j</em>2]+…+<em>v</em>[<em>j**k</em>]×<em>w</em>[<em>j**k</em>]。</p>
+<p>请你帮助金明设计一个满足要求的购物单。</p>
+<h2 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行，为2个正整数，用一个空格隔开：n,m（其中N(&lt;30000)表示总钱数，m(&lt;25)为希望购买物品的个数。）</p>
+<p>从第2行到第m+1行，第j行给出了编号为j-1的物品的基本数据，每行有2个非负整数v p（其中v*表示该物品的价格v≤10000)，p表示该物品的重要度(1-5)</p>
+<p>输出不超过总钱数的物品的价格与重要度乘积的总和的最大值(&lt;100000000)</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入</span> 
+<span class="hljs-meta">&gt;</span><span class="bash">1000 5</span>
+<span class="hljs-meta">&gt;</span><span class="bash">800 2</span>
+<span class="hljs-meta">&gt;</span><span class="bash">400 5</span>
+<span class="hljs-meta">&gt;</span><span class="bash">300 5</span>
+<span class="hljs-meta">&gt;</span><span class="bash">400 3</span>
+<span class="hljs-meta">&gt;</span><span class="bash">200 2</span>
+
+<span class="hljs-meta">&gt;</span><span class="bash">输出：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">3900</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-keyword">import</span> java.util.Scanner;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> </span>&#123;
+        Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);
+        <span class="hljs-keyword">int</span> T = sc.nextInt(); <span class="hljs-comment">// 总钱数</span>
+        <span class="hljs-keyword">int</span> m = sc.nextInt(); <span class="hljs-comment">// 种类</span>
+        <span class="hljs-keyword">int</span>[] a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m];
+        <span class="hljs-keyword">int</span>[] b = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            a[i] = sc.nextInt();
+            b[i] = prices[i] * sc.nextInt();
+        &#125;
+        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-built_in">max</span>(T, a, a));
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> T, <span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span> [] a)</span> </span>&#123;
+        <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[T + <span class="hljs-number">1</span>];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; a.length; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = T; j &gt;= a[i]; j--) &#123;
+                dp[j] = Math.<span class="hljs-built_in">max</span>(dp[j], dp[j - a[i]] + b[i]);
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[T];
+    &#125;
+&#125;</code></pre>
+
+<h4 id="P1049-装箱问题"><a href="#P1049-装箱问题" class="headerlink" title="P1049 装箱问题"></a>P1049 装箱问题</h4><blockquote>
+<p>有一个箱子容量为V正整数，0≤<em>V</em>≤20000），同时有n个物品（0&lt;<em>n</em>≤30，每个物品有一个体积（正整数）。</p>
+<p>要求n个物品中，任取若干个装入箱内，使箱子的剩余空间为最小。</p>
+<h2 id="输入格式-2"><a href="#输入格式-2" class="headerlink" title="输入格式"></a>输入格式</h2><p>1个整数，表示箱子容量</p>
+<p>1个整数，表示有n个物品</p>
+<p>接下来n行，分别表示这n个物品的各自体积</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>1个整数，表示箱子剩余空间。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">24</span>
+<span class="hljs-meta">&gt;</span><span class="bash">6</span>
+<span class="hljs-meta">&gt;</span><span class="bash">8</span>
+<span class="hljs-meta">&gt;</span><span class="bash">3</span>
+<span class="hljs-meta">&gt;</span><span class="bash">12</span>
+<span class="hljs-meta">&gt;</span><span class="bash">7</span>
+<span class="hljs-meta">&gt;</span><span class="bash">9</span>
+<span class="hljs-meta">&gt;</span><span class="bash">7</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">0</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-keyword">import</span> java.util.Scanner;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> </span>&#123;
+        Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);
+        <span class="hljs-keyword">int</span> T = sc.nextInt(); <span class="hljs-comment">// 箱子容量</span>
+        <span class="hljs-keyword">int</span> m = sc.nextInt(); <span class="hljs-comment">// m个物品</span>
+        <span class="hljs-keyword">int</span>[] a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            a[i] = sc.nextInt();
+        &#125;
+        System.out.<span class="hljs-built_in">println</span>(T - <span class="hljs-built_in">max</span>(T, a, a));
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> T, <span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span> [] a)</span> </span>&#123;
+        <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[T + <span class="hljs-number">1</span>];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; prices.length; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = T; j &gt;= a[i]; j--) &#123;
+                dp[j] = Math.<span class="hljs-built_in">max</span>(dp[j], dp[j - a[i]] + a[i]);
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[n];
+    &#125;
+&#125;</code></pre>
+
+<h4 id="P1164-小A点菜"><a href="#P1164-小A点菜" class="headerlink" title="P1164 小A点菜"></a>P1164 小A点菜</h4><blockquote>
+<p>A身上有M元，去餐馆点菜。餐馆有N种，第i种卖ai元。每种菜只有一份。A想要点菜，正好吧身上钱花完，问一共有多少种点菜方法。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入格式</span>
+<span class="hljs-meta">&gt;</span><span class="bash">第一行是两个数字，表示N和M。</span>
+<span class="hljs-meta">&gt;</span><span class="bash">第二行起N个正数ai</span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入</span>
+<span class="hljs-meta">&gt;</span><span class="bash">4 4</span>
+<span class="hljs-meta">&gt;</span><span class="bash">1 1 2 2</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出</span>
+<span class="hljs-meta">&gt;</span><span class="bash">3</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-keyword">import</span> java.util.Scanner;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> </span>&#123;
+        Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);
+        <span class="hljs-keyword">int</span> n = sc.nextInt(); <span class="hljs-comment">// 种类</span>
+        <span class="hljs-keyword">int</span> T = sc.nextInt(); <span class="hljs-comment">// 总钱</span>
+        <span class="hljs-keyword">int</span>[] a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n + <span class="hljs-number">1</span>]; <span class="hljs-comment">// 多算一种</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;
+            a[i] = sc.nextInt();
+        &#125;
+        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-built_in">max</span>(T, a));
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> T, <span class="hljs-keyword">int</span>[] a)</span> </span>&#123;
+        <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[T + <span class="hljs-number">1</span>];
+        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; a.length; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = T; j &gt;= a[i]; j--) &#123;
+                dp[j] += dp[j - a[i]]; <span class="hljs-comment">// 转移 求方案数 累加</span>
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[T];
+    &#125;
+&#125;</code></pre>
+
+<h4 id="P1510-精卫填海"><a href="#P1510-精卫填海" class="headerlink" title="P1510 精卫填海"></a>P1510 精卫填海</h4><blockquote>
+<p>东海未填平的区域还需要至少体积为v的木石才可以填平，而西山上的木石还剩下n块，每块的体积和把它衔到东海需要的体力分别为k和m。精卫已经填海填了这么长时间了，她也很累了，她还剩下的体力为c。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入格式</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输入文件的第一行是三个整数：v、n、c。</span>
+<span class="hljs-meta">&gt;</span><span class="bash">从第二行到第n+1行分别为每块木石的体积和把它衔到东海需要的体力。</span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入</span>
+<span class="hljs-meta">&gt;</span><span class="bash">100 2 10</span>
+<span class="hljs-meta">&gt;</span><span class="bash">50 5</span>
+<span class="hljs-meta">&gt;</span><span class="bash">50 5</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出</span>
+<span class="hljs-meta">&gt;</span><span class="bash">0</span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入</span>
+<span class="hljs-meta">&gt;</span><span class="bash">10 2 1</span>
+<span class="hljs-meta">&gt;</span><span class="bash">50 5</span>
+<span class="hljs-meta">&gt;</span><span class="bash">10 2</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出</span>
+<span class="hljs-meta">&gt;</span><span class="bash">Impossible</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-keyword">import</span> java.util.Scanner;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> </span>&#123;
+        Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);
+        <span class="hljs-keyword">int</span> T = sc.nextInt(); <span class="hljs-comment">// 还剩T体积填完</span>
+        <span class="hljs-keyword">int</span> n = sc.nextInt(); <span class="hljs-comment">// n块石头</span>
+        <span class="hljs-keyword">int</span> c = sc.nextInt(); <span class="hljs-comment">// 体力</span>
+        <span class="hljs-keyword">int</span>[] a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
+        <span class="hljs-keyword">int</span>[] b = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;
+            a[i] = sc.nextInt();
+            b[i] = sc.nextInt();
+        &#125;
+        <span class="hljs-keyword">int</span> k = <span class="hljs-built_in">max</span>(T, a, b, c);
+        <span class="hljs-keyword">if</span> (k == <span class="hljs-number">-1</span>)
+            System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;Impossible&quot;</span>);
+        <span class="hljs-keyword">else</span>
+            System.out.<span class="hljs-built_in">println</span>(k);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> T, <span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span>[] b, <span class="hljs-keyword">int</span> c)</span> </span>&#123;
+        <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[c + <span class="hljs-number">1</span>];
+        <span class="hljs-keyword">int</span> ans = <span class="hljs-number">-1</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; a.length; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = c; j &gt;= b[i]; j--) &#123;
+                dp[j] = Math.<span class="hljs-built_in">max</span>(dp[j], dp[j - b[i]] + a[i]);
+                <span class="hljs-keyword">if</span> (dp[j] &gt;= T) <span class="hljs-comment">// 填完判断</span>
+                    ans = Math.<span class="hljs-built_in">max</span>(ans, c - j);
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> ans;
+    &#125;
+&#125;</code></pre>
+
+<h4 id="找零钱的硬币数组合"><a href="#找零钱的硬币数组合" class="headerlink" title="找零钱的硬币数组合"></a>找零钱的硬币数组合</h4><blockquote>
+<p>给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。 </p>
+<pre><code class="hljs subunit">&gt;输入: amount = 5, coins = [1, 2, 5]
+&gt;输出: 4
+&gt;解释: 有四种方式可以凑成总金额:
+&gt;5=5
+&gt;5=2<span class="hljs-string">+2</span><span class="hljs-string">+1</span>
+&gt;5=2<span class="hljs-string">+1</span><span class="hljs-string">+1</span><span class="hljs-string">+1</span>
+&gt;5=1<span class="hljs-string">+1</span><span class="hljs-string">+1</span><span class="hljs-string">+1</span><span class="hljs-string">+1</span></code></pre>
+
+<pre><code class="hljs makefile"><span class="hljs-section">&gt;输入: amount = 3, coins = [2]</span>
+<span class="hljs-section">&gt;输出: 0</span>
+<span class="hljs-section">&gt;解释: 只用面额2的硬币不能凑成总金额3。</span></code></pre>
+
+<pre><code class="hljs makefile"><span class="hljs-section">&gt;输入: amount = 10, coins = [10] </span>
+<span class="hljs-section">&gt;输出: 1</span></code></pre>
+</blockquote>
+<pre><code class="hljs groovy"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> change(<span class="hljs-keyword">int</span> amount, <span class="hljs-keyword">int</span>[] coins) &#123;
+        <span class="hljs-keyword">if</span> (coins == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[amount + <span class="hljs-number">1</span>];
+        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> <span class="hljs-attr">coin :</span> coins) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = coin; i &lt;= amount; i++) &#123;
+                dp[i] += dp[i - coin];
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[amount];
+    &#125;
+&#125;</code></pre>
+
+<h4 id="分割等和子集"><a href="#分割等和子集" class="headerlink" title="分割等和子集"></a>分割等和子集</h4><blockquote>
+<p>给定一个<strong>只包含正整数</strong>的<strong>非空</strong>数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。</p>
+<pre><code class="hljs prolog">&gt;输入: [<span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">11</span>, <span class="hljs-number">5</span>]
+
+&gt;输出: true
+
+&gt;解释: 数组可以分割成 [<span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>] 和 [<span class="hljs-number">11</span>].</code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入: [1, 2, 3, 5]</span>
+
+<span class="hljs-meta">&gt;</span><span class="bash">输出: <span class="hljs-literal">false</span></span>
+
+<span class="hljs-meta">&gt;</span><span class="bash">解释: 数组不能分割成两个元素和相等的子集</span></code></pre>
+</blockquote>
+<p>0/1背包</p>
+<pre><code class="hljs axapta"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">boolean</span> canPartition(<span class="hljs-built_in">int</span>[] nums) &#123;
+        <span class="hljs-built_in">int</span> <span class="hljs-keyword">sum</span> = computeArraySum(nums);
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">sum</span> % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        <span class="hljs-built_in">int</span> w = <span class="hljs-keyword">sum</span> / <span class="hljs-number">2</span>;
+        <span class="hljs-built_in">boolean</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">boolean</span>[w + <span class="hljs-number">1</span>];
+        dp[<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> num : nums) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = w; i &gt;= num; i--) &#123;
+                dp[i] = dp[i] || dp[i - num];
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[w];
+    &#125;
+    <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> computeArraySum(<span class="hljs-built_in">int</span>[] nums) &#123;
+        <span class="hljs-built_in">int</span> <span class="hljs-keyword">sum</span> = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> num : nums) &#123;
+            <span class="hljs-keyword">sum</span> += num;
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">sum</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h3><h4 id="P1616-疯狂的采药"><a href="#P1616-疯狂的采药" class="headerlink" title="P1616 疯狂的采药"></a>P1616 疯狂的采药</h4><blockquote>
+<p>输入第一行有两个整数，分别代表总共能够用来采药的时间 t和代表山洞里的草药的数目 m。</p>
+<p>第 2到第 (m + 1) 行，每行两个整数，第 (i + 1)行的整数 ai, bi 分别表示采摘第 i 种草药的时间和该草药的价值。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入</span>
+<span class="hljs-meta">&gt;</span><span class="bash">70 3</span>
+<span class="hljs-meta">&gt;</span><span class="bash">71 100</span>
+<span class="hljs-meta">&gt;</span><span class="bash">69 1</span>
+<span class="hljs-meta">&gt;</span><span class="bash">1 2</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出</span>
+<span class="hljs-meta">&gt;</span><span class="bash">140</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-keyword">import</span> java.util.Scanner;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> </span>&#123;
+        Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);
+        <span class="hljs-keyword">int</span> T = sc.nextInt();
+        <span class="hljs-keyword">int</span> n = sc.nextInt();
+        <span class="hljs-keyword">int</span>[] a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
+        <span class="hljs-keyword">int</span>[] b = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;
+            a[i] = sc.nextInt();
+            b[i] = sc.nextInt();
+        &#125;
+        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-built_in">max</span>(T, a, b));
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> T, <span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span>[] b)</span> </span>&#123;
+        <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[T + <span class="hljs-number">1</span>];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; a.length; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = a[i]; j &lt;= T; j++) &#123;
+                dp[j] = Math.<span class="hljs-built_in">max</span>(dp[j], dp[j - a[i]] + b[i]);
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[T];
+    &#125;
+&#125;</code></pre>
+
+<h4 id="零钱兑换"><a href="#零钱兑换" class="headerlink" title="零钱兑换"></a>零钱兑换</h4><blockquote>
+<p>给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。</p>
+<p>你可以认为每种硬币的数量是无限的。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：coins = [1, 2, 5], amount = 11</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：3</span> 
+<span class="hljs-meta">&gt;</span><span class="bash">解释：11 = 5 + 5 + 1</span></code></pre>
+
+<pre><code class="hljs nix">&gt;输入：<span class="hljs-attr">coins</span> = [<span class="hljs-number">2</span>], <span class="hljs-attr">amount</span> = <span class="hljs-number">3</span>
+&gt;输出：-<span class="hljs-number">1</span></code></pre>
+
+<pre><code class="hljs nix">&gt;输入：<span class="hljs-attr">coins</span> = [<span class="hljs-number">1</span>], <span class="hljs-attr">amount</span> = <span class="hljs-number">0</span>
+&gt;输出：<span class="hljs-number">0</span></code></pre>
+
+<pre><code class="hljs nix">&gt;输入：<span class="hljs-attr">coins</span> = [<span class="hljs-number">1</span>], <span class="hljs-attr">amount</span> = <span class="hljs-number">1</span>
+&gt;输出：<span class="hljs-number">1</span></code></pre>
+
+<pre><code class="hljs nix">&gt;输入：<span class="hljs-attr">coins</span> = [<span class="hljs-number">1</span>], <span class="hljs-attr">amount</span> = <span class="hljs-number">2</span>
+&gt;输出：<span class="hljs-number">2</span></code></pre>
+</blockquote>
+<p>完全背包问题</p>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">coinChange</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] coins, <span class="hljs-keyword">int</span> amount)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (amount == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[amount + <span class="hljs-number">1</span>];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> coin : coins) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = coin; i &lt;= amount; i++) &#123; <span class="hljs-comment">//将逆序遍历改为正序遍历</span>
+            <span class="hljs-comment">// 三种情况</span>
+                <span class="hljs-keyword">if</span> (i == coin) &#123;
+                    dp[i] = <span class="hljs-number">1</span>;
+                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dp[i] == <span class="hljs-number">0</span> &amp;&amp; dp[i - coin] != <span class="hljs-number">0</span>) &#123;
+                    dp[i] = dp[i - coin] + <span class="hljs-number">1</span>;
+
+                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dp[i - coin] != <span class="hljs-number">0</span>) &#123;
+                    dp[i] = Math.<span class="hljs-built_in">min</span>(dp[i], dp[i - coin] + <span class="hljs-number">1</span>);
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[amount] == <span class="hljs-number">0</span> ? <span class="hljs-number">-1</span> : dp[amount];
+    &#125;
+
+&#125;</code></pre>
+
+<h4 id="单词拆分"><a href="#单词拆分" class="headerlink" title="单词拆分"></a>单词拆分</h4><blockquote>
+<p>给定一个非空字符串 s 和一个包含非空单词的列表 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。</p>
+<p>说明：拆分时可以重复使用字典中的单词。<br>你可以假设字典中没有重复的单词。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入: s = <span class="hljs-string">&quot;leetcode&quot;</span>, wordDict = [<span class="hljs-string">&quot;leet&quot;</span>, <span class="hljs-string">&quot;code&quot;</span>]</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出: <span class="hljs-literal">true</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释: 返回 <span class="hljs-literal">true</span> 因为 <span class="hljs-string">&quot;leetcode&quot;</span> 可以被拆分成 <span class="hljs-string">&quot;leet code&quot;</span>。</span></code></pre>
+
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入: s = <span class="hljs-string">&quot;applepenapple&quot;</span>, wordDict = [<span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;pen&quot;</span>]</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出: <span class="hljs-literal">true</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释: 返回 <span class="hljs-literal">true</span> 因为 <span class="hljs-string">&quot;applepenapple&quot;</span> 可以被拆分成 <span class="hljs-string">&quot;apple pen apple&quot;</span>。</span>
+    注意你可以重复使用字典中的单词。</code></pre>
+
+<pre><code class="hljs nix">&gt;输入: <span class="hljs-attr">s</span> = <span class="hljs-string">&quot;catsandog&quot;</span>, <span class="hljs-attr">wordDict</span> = [<span class="hljs-string">&quot;cats&quot;</span>, <span class="hljs-string">&quot;dog&quot;</span>, <span class="hljs-string">&quot;sand&quot;</span>, <span class="hljs-string">&quot;and&quot;</span>, <span class="hljs-string">&quot;cat&quot;</span>]
+&gt;输出: <span class="hljs-literal">false</span></code></pre>
+</blockquote>
+<p>求解顺序的完全背包问题</p>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">wordBreak</span><span class="hljs-params">(<span class="hljs-keyword">String</span> s, List&lt;<span class="hljs-keyword">String</span>&gt; wordDict)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> n = s.length();
+        <span class="hljs-keyword">boolean</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[n + <span class="hljs-number">1</span>];
+        dp[<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">String</span> <span class="hljs-keyword">word</span>: wordDict) &#123;
+                <span class="hljs-comment">// 对物品的迭代应该放在最里层</span>
+                <span class="hljs-keyword">int</span> len = <span class="hljs-keyword">word</span>.length();
+                <span class="hljs-keyword">if</span> (len &lt;= i &amp;&amp; <span class="hljs-keyword">word</span>.equals(s.substring(i - len , i))) &#123;
+                    dp[i] = dp[i] || dp[i - len];
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[n];
+    &#125;
+&#125;</code></pre>
+
+<h3 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h3><blockquote>
+<p>输入数据首先包含一个正整数C，表示有C组测试用例，每组测试用例的第一行是两个整数n和m(1&lt;=n&lt;=100, 1&lt;=m&lt;=100),分别表示经费的金额和大米的种类，然后是m行数据，每行包含3个数p，h和c(1&lt;=p&lt;=20,1&lt;=h&lt;=200,1&lt;=c&lt;=20)，分别表示每袋的价格、每袋的重量以及对应种类大米的袋数。</p>
+<p>输出为：对于每组测试数据，请输出能够购买大米的最多重量，你可以假设经费买不光所有的大米，并且经费你可以不用完。每个实例的输出占一行。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">1</span>
+<span class="hljs-meta">&gt;</span><span class="bash">8 2</span>
+<span class="hljs-meta">&gt;</span><span class="bash">2 100 4</span>
+<span class="hljs-meta">&gt;</span><span class="bash">4 100 2</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">400</span></code></pre>
+</blockquote>
+<blockquote>
+<p>有一个体积为V的背包，有m种物品，每种物品有体积和价值，且数量一定。求背包能装下的最大价值。</p>
+<p>输入为第一行两个整数V和m。接下来m行，每行3个整数，表示第i种物品的数量、体积和价值。</p>
+<p>输出为一个整数，表示背包能装下的最大价值。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">10 4</span>
+<span class="hljs-meta">&gt;</span><span class="bash">2 3 2</span>
+<span class="hljs-meta">&gt;</span><span class="bash">2 4 3</span>
+<span class="hljs-meta">&gt;</span><span class="bash">1 2 2</span>
+<span class="hljs-meta">&gt;</span><span class="bash">4 5 3</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">8</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-keyword">import</span> java.util.Scanner;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> </span>&#123;
+        Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);
+        <span class="hljs-keyword">int</span> n = sc.nextInt(); <span class="hljs-comment">// money</span>
+        <span class="hljs-keyword">int</span> m = sc.nextInt(); <span class="hljs-comment">// m种类</span>
+        <span class="hljs-keyword">int</span>[] prices = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m];
+        <span class="hljs-keyword">int</span>[] weights = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m];
+        <span class="hljs-keyword">int</span>[] nums = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            prices[i] = sc.nextInt();
+            weights[i] = sc.nextInt();
+            nums[i] = sc.nextInt();
+        &#125;
+        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-built_in">max</span>(n, prices, weights, nums));
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span>[] prices, <span class="hljs-keyword">int</span>[] weights, <span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+        <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n + <span class="hljs-number">1</span>];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; prices.length; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = n; j &gt;= prices[i]; j--) &#123;
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span>; k &lt;= nums[i] &amp;&amp; k * prices[i] &lt;= j; k++) &#123;
+                    dp[j] = Math.<span class="hljs-built_in">max</span>(dp[j], dp[j - k * prices[i]] + k * weights[i]);
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[n];
+    &#125;
+&#125;</code></pre>
+
+<h3 id="多维费用背包"><a href="#多维费用背包" class="headerlink" title="多维费用背包"></a>多维费用背包</h3><h4 id="P1507-NASA的食物计划"><a href="#P1507-NASA的食物计划" class="headerlink" title="P1507 NASA的食物计划"></a>P1507 NASA的食物计划</h4><blockquote>
+<p>航天飞机的体积有限,当然如果载过重的物品,燃料会浪费很多钱,每件食品都有各自的体积、质量以及所含卡路里,在告诉你体积和质量的最大值的情况下,请输出能达到的食品方案所含卡路里的最大值,当然每个食品只能使用一次.</p>
+<p>输入为：</p>
+<p>第一行 两个数 体积最大值(&lt;400)和质量最大值(&lt;400)</p>
+<p>第二行 一个数 食品总数N(&lt;50).</p>
+<p>第三行－第3+N行</p>
+<p>每行三个数 体积(&lt;400) 质量(&lt;400) 所含卡路里(&lt;500)</p>
+<p>输出为：</p>
+<p>一个数 所能达到的最大卡路里(int范围内)</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">320 350</span>
+<span class="hljs-meta">&gt;</span><span class="bash">4</span>
+<span class="hljs-meta">&gt;</span><span class="bash">160 40 120</span>
+<span class="hljs-meta">&gt;</span><span class="bash">80 110 240</span>
+<span class="hljs-meta">&gt;</span><span class="bash">220 70 310</span>
+<span class="hljs-meta">&gt;</span><span class="bash">40 400 220</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：</span>
+<span class="hljs-meta">&gt;</span><span class="bash">550</span></code></pre>
+</blockquote>
+<pre><code class="hljs arduino"><span class="hljs-keyword">import</span> java.util.Scanner;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> </span>&#123;
+        Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);
+        <span class="hljs-keyword">int</span> vMax = sc.nextInt();
+        <span class="hljs-keyword">int</span> mMax = sc.nextInt();
+        <span class="hljs-keyword">int</span> m = sc.nextInt();
+        <span class="hljs-keyword">int</span>[] vs = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m];
+        <span class="hljs-keyword">int</span>[] ms = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m];
+        <span class="hljs-keyword">int</span>[] kas = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;
+            vs[i] = sc.nextInt();
+            ms[i] = sc.nextInt();
+            kas[i] = sc.nextInt();
+        &#125;
+        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-built_in">max</span>(vMax, mMax, vs, ms, kas));
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> vMax, <span class="hljs-keyword">int</span> mMax, <span class="hljs-keyword">int</span>[] vs, <span class="hljs-keyword">int</span>[] ms, <span class="hljs-keyword">int</span>[] kas)</span> </span>&#123;
+        <span class="hljs-keyword">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[vMax + <span class="hljs-number">1</span>][mMax + <span class="hljs-number">1</span>];
+        <span class="hljs-comment">// 种类</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; vs.length; i++) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = vMax; j &gt;= vs[i]; j--) &#123;
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = mMax; k &gt;= ms[i]; k--) &#123;
+                    dp[j][k] = Math.<span class="hljs-built_in">max</span>(dp[j][k], dp[j - vs[i]][k - ms[i]] + kas[i]);
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[vMax][mMax];
+    &#125;
+&#125;</code></pre>
+
+<h4 id="1和0"><a href="#1和0" class="headerlink" title="1和0"></a>1和0</h4><blockquote>
+<p>给你一个二进制字符串数组 strs 和两个整数 m 和 n 。</p>
+<p>请你找出并返回 strs 的最大子集的大小，该子集中 最多 有 m 个 0 和 n 个 1 。</p>
+<p>如果 x 的所有元素也是 y 的元素，集合 x 是集合 y 的 子集 。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">输入：strs = [<span class="hljs-string">&quot;10&quot;</span>, <span class="hljs-string">&quot;0001&quot;</span>, <span class="hljs-string">&quot;111001&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;0&quot;</span>], m = 5, n = 3</span>
+<span class="hljs-meta">&gt;</span><span class="bash">输出：4</span>
+<span class="hljs-meta">&gt;</span><span class="bash">解释：最多有 5 个 0 和 3 个 1 的最大子集是 &#123;<span class="hljs-string">&quot;10&quot;</span>,<span class="hljs-string">&quot;0001&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>&#125; ，因此答案是 4 。</span>
+<span class="hljs-meta">&gt;</span><span class="bash">其他满足题意但较小的子集包括 &#123;<span class="hljs-string">&quot;0001&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>&#125; 和 &#123;<span class="hljs-string">&quot;10&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>&#125; 。&#123;<span class="hljs-string">&quot;111001&quot;</span>&#125; 不满足题意，因为它含 4 个 1 ，大于 n 的值 3 。</span></code></pre>
+
+<pre><code class="hljs nix">&gt;输入：<span class="hljs-attr">strs</span> = [<span class="hljs-string">&quot;10&quot;</span>, <span class="hljs-string">&quot;0&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>], <span class="hljs-attr">m</span> = <span class="hljs-number">1</span>, <span class="hljs-attr">n</span> = <span class="hljs-number">1</span>
+&gt;输出：<span class="hljs-number">2</span>
+&gt;解释：最大的子集是 &#123;<span class="hljs-string">&quot;0&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>&#125; ，所以答案是 <span class="hljs-number">2</span> 。</code></pre>
+</blockquote>
+<p>这是一个多维费用的 0-1 背包问题，有两个背包大小，0 的数量和 1 的数量。</p>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findMaxForm</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] strs, <span class="hljs-keyword">int</span> m, <span class="hljs-keyword">int</span> n)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (strs == null || strs.length == <span class="hljs-number">0</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+        <span class="hljs-comment">// 俩包， 0 1</span>
+        <span class="hljs-keyword">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m + <span class="hljs-number">1</span>][n + <span class="hljs-number">1</span>];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">String</span> s : strs)&#123;
+            <span class="hljs-keyword">int</span> zeros = <span class="hljs-number">0</span>, ones = <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : s.toCharArray())&#123;
+                <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;0&#x27;</span>)
+                    zeros++; <span class="hljs-comment">// 统计数量</span>
+                <span class="hljs-keyword">else</span> 
+                    ones++; <span class="hljs-comment">// 统计数量</span>
+            &#125;
+            <span class="hljs-comment">// 开始dp</span>
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = m; i &gt;= zeros; i--)&#123;
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = n; j &gt;= ones; j--)&#123;
+                    <span class="hljs-comment">// 优化过后的dp</span>
+                    dp[i][j] = Math.<span class="hljs-built_in">max</span>(dp[i][j], dp[i - zeros][j - ones] + <span class="hljs-number">1</span>);
+                &#125;
+            &#125;
+        &#125; 
+        <span class="hljs-keyword">return</span> dp[m][n];
+    &#125;
+&#125;</code></pre>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/java%E7%AE%97%E6%B3%95/">java算法</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B9%A0%E9%A2%98/">习题</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，大部分为学习心得，欢迎与博主联系讨论</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/26/%E5%92%8C%E6%95%B0%E5%AD%97%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">和数字相关算法题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/22/%E6%8E%92%E5%BA%8F%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98/">
+                        <span class="hidden-mobile">排序相关算法题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+<b>此身此时此地</b>
+<i class="iconfont icon-love"></i>
+<b>所见所闻所想</b>
+
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

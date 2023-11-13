@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="刘金博">
+  <meta name="keywords" content="">
+  <title>2021阅读 - xiaoliu‘s sapce</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>xiaoliu's space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="2021阅读">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-06 20:25" pubdate>
+        2021年7月6日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">2021阅读</h1>
+            
+            <div class="markdown-body">
+              <h1 id="2021阅读"><a href="#2021阅读" class="headerlink" title="2021阅读"></a>2021阅读</h1><h2 id="一月"><a href="#一月" class="headerlink" title="一月"></a>一月</h2><p>《夜晚的潜水艇》</p>
+<p>陈春成/上海三联书店</p>
+<p>1.23 都是错配，比如我决定做一件事，但为它配置的资源有问题，或多或少或方向完全错了，每个人所从事的工作，很多时候也是一种错配，他以为他可以胜任，其实不能，或者只是部分胜任，某种程度的胜任。错配可是人生一辈子的事情。有些事，只有我知道。</p>
+<p>《人间草木》</p>
+<p>汪曾祺/人民文学出版社</p>
+<p>1.25 多识鸟兽草木之名</p>
+<p>《第七天》</p>
+<p>余华/新星出版社</p>
+<p>怕的不是单个声音的收效甚微，怕的是，所有人都习以为常的麻木不仁。</p>
+<p>有人书评“就如同上个世纪在饿殍之间坐着的你翻开《活着》，于是笑。这不就是流水账，有什么好写的”，此书书评如是。</p>
+<h2 id="二月"><a href="#二月" class="headerlink" title="二月"></a>二月</h2><p>《圣女的救济》</p>
+<p>东野圭吾/南海出版公司</p>
+<p>就像已知是一个深爱丈夫却惨遭背叛的妻子复仇故事，看完还是唏嘘深情唤不回回应，迷恋就该早早断绝。</p>
+<p>“它厌恶真柴义孝的冷漠，厌恶若山红美的不拒绝，也厌恶自己的故作不知，粉饰太平”</p>
+<p>“可我千挑万选，千等万等，等来的也只是一个教训，他们都有错。而我或许，也是不知悔改”</p>
+<p>道貌岸然干不可告人的勾当，最为恐怖。。</p>
+<h2 id="三月"><a href="#三月" class="headerlink" title="三月"></a>三月</h2><blockquote>
+<p>返校开始技术路线（笑</p>
+</blockquote>
+<p>《Java程序员面试算法宝典》</p>
+<p>猿媛之家/机械工业出版社</p>
+<h2 id="四月"><a href="#四月" class="headerlink" title="四月"></a>四月</h2><p>《MySQL性能优化和高可用架构实践》</p>
+<p>宋立恒/清华大学出版社</p>
+<h2 id="五月"><a href="#五月" class="headerlink" title="五月"></a>五月</h2><p>论文月，记录下杂文《读库》</p>
+<ul>
+<li>《上海浮生》<ul>
+<li>讲述作者从2003年至2012年近十年在上海漂泊的日子。生活气息很生动，作者和媳妇一开始为了生计打算投靠老乡，一起去浙江打工，在火车上，言语之间，感觉到老乡生怕自己被沾光，于是赌气改道上海，才有了后来的十年漂泊。</li>
+<li>十年漂泊，这对夫妇因湖南房价便宜且宜居，便在湖南买了房，但因那边无依无靠，后来还是回了老家贵州。</li>
+</ul>
+</li>
+</ul>
+<h2 id="六月"><a href="#六月" class="headerlink" title="六月"></a>六月</h2><p>论文月，记录杂文《读库》</p>
+<ul>
+<li>《从“深蓝”到“深思”》<ul>
+<li>讲述了阿尔法狗的发展历程</li>
+<li>正如聪明人早晚会超越只懂得玩耍的年纪，人工只能也并非只能玩游戏。</li>
+<li>一项竞技运动在社会上能获得多少关注，大致取决于两个因素：一是它在特定的历史文化环境中对社会情绪的影响；二是这项运动本身所包含的技巧和观赏性。</li>
+</ul>
+</li>
+<li>《今人重建黄鹤楼》<ul>
+<li>关于1981年黄鹤楼的重建工作记录</li>
+<li>设计师为中南设计院向欣然</li>
+<li>万古河山，胜迹常留，叹百年时运维坚，三楚名楼曾付火；</li>
+<li>千秋邦国，韶华永驻，看一代英雄谋略，九霄仙鹤又乘风。</li>
+</ul>
+</li>
+<li>《我在北京派快件》&amp;《我在上海开出租》<ul>
+<li>两篇都是贴近大城市小人物浮沉的短文，人物虽小，但生活都有奔头</li>
+</ul>
+</li>
+</ul>
+<h2 id="七月"><a href="#七月" class="headerlink" title="七月"></a>七月</h2><p>《labuladong的算法小抄》</p>
+<p>付东来/中国工信出版集团</p>
+<h2 id="八月"><a href="#八月" class="headerlink" title="八月"></a>八月</h2><ul>
+<li><p>《草枕》</p>
+<p>夏目漱石/陈德文（译)</p>
+<ul>
+<li>发挥才智，则锋芒毕露；</li>
+<li></li>
+</ul>
+</li>
+<li><p>《赛博与朋克》</p>
+<ul>
+<li>未来已来，只是分布在不同的现在而已。</li>
+</ul>
+</li>
+</ul>
+<h2 id="九月"><a href="#九月" class="headerlink" title="九月"></a>九月</h2><p>未读</p>
+<h2 id="十月"><a href="#十月" class="headerlink" title="十月"></a>十月</h2><p>未读</p>
+<h2 id="十一月"><a href="#十一月" class="headerlink" title="十一月"></a>十一月</h2><ul>
+<li><p>《深入浅出图神经网络：GNN原理解析》</p>
+</li>
+<li><p>《垄断的困境》</p>
+</li>
+<li><p>《疑似神仙眷侣》</p>
+<p>记录了秋芙与蒋坦神仙眷侣的诗意人生。从中知晓关锳字秋芙，为《秋灯琐忆》中的女主人公，看到时代局限下爱情的难能可贵。</p>
+</li>
+</ul>
+<h2 id="十二月"><a href="#十二月" class="headerlink" title="十二月"></a>十二月</h2><p>未读</p>
+<h2 id="年度总结"><a href="#年度总结" class="headerlink" title="年度总结"></a>年度总结</h2><ul>
+<li><strong>所谓成长，是我们认识世界和世界相处的方式发生变化的过程</strong></li>
+<li><strong>从最简单的事情开始，从真实发生的事情开始</strong></li>
+<li>并不是你有了一个宏大的计划才开始行动，而是随着行动的累积开始逐渐呈现出一个计划。你想成为什么样的人，就开始分享什么样的内容； 你想过上什么样的生活，就开始分享什么样的生活。</li>
+<li>做有长期收益的事情，输出是高效的信任货币，比如写作。</li>
+<li>做一个生产者，一个积极影响别人的人：不要只读文章，去写文章；不要只看短视频，去做短视频；不要只去培训班听课，去培训班讲课。</li>
+<li>我们接触到的人或者说朋友圈好友90%（甚至更多）应该都是旁观者，大家彼此存在的意义主要是凑凑热闹。不要因为别人的夸奖和吐槽而受到太多影响，因为很可能他就是路过的时候给你加把劲或者朝你翻个白眼，你对于大多数人都不重要。有两三个可以交心的朋友很重要。</li>
+<li>尝试研究自己的产品，不受平台约束的东西。</li>
+<li>最后姜汤时间：收获可能不会立刻发生，但它确实会发生</li>
+<li>网络为你呈现的世界并不是真实的世界，而是别人的世界，精英眼中的世界。</li>
+<li>人生冒险家</li>
+<li>这个网络飞速发展的时代，不止经济，大家都很浮躁。他人的成功背后一定有无数我们看不到的努力，也有人习惯弱化自己曾经遇到的挫折。每个选择，都是人生的岔路口。</li>
+<li>词境一说，不言自明，若自身境界不及于此，却强硬使用此境之文造境，所有字里行间的伪装，遣词造句的粉饰，都是装逼。</li>
+</ul>
+<p>不藏拙的人生</p>
+<p>年少的我有一个心结，那便是惧怕活得放肆的人，因自己的日子太过苍白。无故事可讲的我，怕自己羡慕这些过得声色十足的生活家。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%96%87%E5%AD%A6/">文学</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，大部分为学习心得，欢迎与博主联系讨论</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/07/Java%20Map/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java Map相关学习总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/06/Collections.sort()%E7%94%A8%E6%B3%95/">
+                        <span class="hidden-mobile">Collections.sort()用法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+<b>此身此时此地</b>
+<i class="iconfont icon-love"></i>
+<b>所见所闻所想</b>
+
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
